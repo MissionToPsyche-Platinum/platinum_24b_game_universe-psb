@@ -1,74 +1,110 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class PlayCard : MonoBehaviour
+public class PlayCard : MonoBehaviour,
+    IPointerDownHandler,
+    IDragHandler,
+    IPointerUpHandler,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     private bool isDragging = false;
     private Vector3 offset;
     private Vector3 targetPosition;
-    private float hoverScale = 1.2f;
-    private float normalScale = 1f;
+    private Vector3 baseScale;
+    private float hoverMultiplier = 1.2f;
     private float moveSpeed = 10f;
 
     private HandManager handManager;
     private Camera mainCam;
+    private int originalSortingOrder;
+    private SpriteRenderer spriteRenderer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCam = Camera.main;
-        handManager = FindObjectOfType<HandManager>();
+        handManager = FindAnyObjectByType<HandManager>();
         targetPosition = transform.position;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            originalSortingOrder = spriteRenderer.sortingOrder;
+        
+        baseScale = transform.localScale; // store actual prefab scale
+
+        if (handManager != null)
+            handManager.RegisterCard(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isDragging)
         {
-            // Smoothly move to target position (gravitating to hand)
+            // Smoothly move toward target position (gravitating to hand)
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * moveSpeed);
         }
     }
 
-    void OnMouseEnter()
-    {
-        // Enlarge slightly on hover
-        StopAllCoroutines();
-        StartCoroutine(ScaleTo(hoverScale, 0.1f));
-        transform.localPosition += Vector3.up * 0.2f; // move up slightly
-    }
+    // ---------- Pointer Events (New Input System compatible) ----------
 
-    void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         StopAllCoroutines();
-        StartCoroutine(ScaleTo(normalScale, 0.1f));
-        transform.localPosition -= Vector3.up * 0.2f;
+        StartCoroutine(ScaleTo(baseScale.x * hoverMultiplier, 0.1f));
+        transform.localPosition += Vector3.up * (0.2f * baseScale.y);
     }
 
-    void OnMouseDown()
+    public void OnPointerExit(PointerEventData eventData)
     {
+        StopAllCoroutines();
+        StartCoroutine(ScaleTo(baseScale.x, 0.1f));
+        transform.localPosition -= Vector3.up * (0.2f * baseScale.y);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Card clicked: " + name);
         isDragging = true;
-        offset = transform.position - GetMouseWorldPos();
+
+        if (spriteRenderer != null)
+            spriteRenderer.sortingOrder = 100;
+
+        if (handManager != null)
+            handManager.SetDraggingCard(this);
+
+        offset = transform.position - GetMouseWorldPos(eventData);
     }
 
-    void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        // Snap back to hand layout
+
+        if (spriteRenderer != null)
+            spriteRenderer.sortingOrder = originalSortingOrder;
+
         if (handManager != null)
+        {
+            handManager.ReorderCard(this, transform.position.x);
+            handManager.ClearDraggingCard();
             targetPosition = handManager.GetCardTargetPosition(this);
+        }
     }
 
-    void OnMouseDrag()
+
+    public void OnDrag(PointerEventData eventData)
     {
-        transform.position = GetMouseWorldPos() + offset;
+        transform.position = GetMouseWorldPos(eventData) + offset;
     }
 
-    Vector3 GetMouseWorldPos()
+
+    // ---------- Helpers ----------
+
+    Vector3 GetMouseWorldPos(PointerEventData eventData)
     {
-        Vector3 mousePoint = Input.mousePosition;
-        mousePoint.z = 10f; // distance from camera
+        Vector3 mousePoint = eventData.position;
+        float distance = Mathf.Abs(mainCam.transform.position.z - transform.position.z);
+        mousePoint.z = distance;
         return mainCam.ScreenToWorldPoint(mousePoint);
     }
 
