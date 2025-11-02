@@ -15,7 +15,8 @@ public class PlayerDropdownLoader : MonoBehaviour
 {
     public TMP_Dropdown Dropdown;
     public string filepath = "Assets/Player_Avatar_Names.txt";
-    public TMP_Text PlayerNameTextdisp;
+   // public TMP_Text PlayerNameTextdisp;
+    public TMP_Text PlayText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,7 +51,8 @@ public class PlayerDropdownLoader : MonoBehaviour
     {
         if (index >= 0 && index < Dropdown.options.Count)
         {
-            PlayerNameTextdisp.text = Dropdown.options[index].text;
+          //  PlayerNameTextdisp.text = Dropdown.options[index].text;
+            PlayText.text = Dropdown.options[index].text; 
         }
     }
     // Update is called once per frame
