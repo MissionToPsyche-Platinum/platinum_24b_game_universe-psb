@@ -1,6 +1,7 @@
 // Creates the answer cards deck
 // Version 1.0 by Abdur-Rahman Igram
 
+/*
 using System;
 using System.Collections.Generic;
 
@@ -31,3 +32,4 @@ public class AnswerDeck {
         return acard;
     }
 }
+*/
