@@ -1,6 +1,6 @@
 // This script is in charge of dealing 6 initial cards to the players at the begining of the game
 // Version 1.0 by Abdur-Rahman Igram
-
+/*
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -36,3 +36,4 @@ public class AnswerDeckDealer : MonoBehaviour {
     // add section for player to draw an answer card after each turn
 
 }
+*/
