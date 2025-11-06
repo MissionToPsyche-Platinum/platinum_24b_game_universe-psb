@@ -45,8 +45,8 @@ public class CPUPlayManager : MonoBehaviour
         //convert our dropdown value into a integer for iteration and create a player list
         //This player list of CPUPlayer objects will be used to create the player queue for the game loop
         int count = int.Parse(NumOfPlayersDD.options[NumOfPlayersDD.value].text);
-        List<CPUPlayer> cpuPlayers = new List<CPUPlayer>();
-
+        //List<CPUPlayer> cpuPlayers = new List<CPUPlayer>();
+        List<IPlayerCommon> cpuPlayers = new List<IPlayerCommon>();
         //clear the text field
         CPUNameText.text = "";
 
@@ -57,8 +57,8 @@ public class CPUPlayManager : MonoBehaviour
             cpuPlayers.Add(player);                     //add to the list
 
             
-            CPUNameText.text += player.Name + "\n";
-            Debug.Log(player.Name);
+            CPUNameText.text += player.Avatar_Name + "\n";
+            Debug.Log(player.Avatar_Name);
         }
     }
     // Update is called once per frame

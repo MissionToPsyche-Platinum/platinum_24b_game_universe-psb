@@ -27,7 +27,7 @@ public class CPUPlayDirector
      * actions if needed. Only the generic build is active
      */
 
-    public CPUPlayer BuildCPUPlayer()
+    public IPlayerCommon BuildCPUPlayer()
     {
         _builder.SetCPUname("TestName");            //This will be where the method calls to the randomly pull the names from and
                                                     //personality list. For now set to default names
