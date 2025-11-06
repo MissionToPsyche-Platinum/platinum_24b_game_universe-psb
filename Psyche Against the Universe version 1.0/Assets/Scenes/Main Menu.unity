@@ -1938,7 +1938,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sudden Death
+  m_Text: Sudden Win
 --- !u!222 &573341887
 CanvasRenderer:
   m_ObjectHideFlags: 0

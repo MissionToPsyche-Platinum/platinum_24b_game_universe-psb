@@ -15,10 +15,12 @@ public class CPUBuilder : ICPUBuilder
 {
     private CPUPlayer _cpuPlayer = new CPUPlayer();
    
-    public CPUPlayer Build()                        //When called by the director, method will create CPU character class.
+    public IPlayerCommon Build()                        //When called by the director, method will create CPU character class.
     {
         return _cpuPlayer;                          
     }
+
+    
 
     /// <summary>
     /// Loads the names from an asset file and then parse them 
@@ -49,11 +51,16 @@ public class CPUBuilder : ICPUBuilder
         cpuNameList.RemoveAt(index);
 
         //assign it to the CPU
-        _cpuPlayer.Name = nameAtRandom;                     //TODO: modify to pull from the name file at random
+        _cpuPlayer.Avatar_Name = nameAtRandom;                     //TODO: modify to pull from the name file at random
     }
 
     public void SetCPUpersonality(string personality)   //Will generate a CPU personality set from a stored enumeration.
     {
         _cpuPlayer.Personality = personality;           
+    }
+
+    IPlayerCommon ICPUBuilder.Build()
+    {
+        return Build();
     }
 }
