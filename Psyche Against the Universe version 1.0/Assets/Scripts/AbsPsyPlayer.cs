@@ -8,7 +8,7 @@ using UnityEngine;
  */
 public class AbsPsyPlayer : IPsyPlayer
 {
-    public string Avatar_Name { get; private set; }
+    public string Avatar_Name { get;  set; }
 
     public int score { get; set; }
 

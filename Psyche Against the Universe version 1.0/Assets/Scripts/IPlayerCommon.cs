@@ -16,7 +16,7 @@ using UnityEngine;
 
 public interface IPlayerCommon 
 {
-    string Avatar_Name { get; }
+    string Avatar_Name { get; set; }
     int score { get; set; }
 
     List<AnswerCard> Hand { get; set; }

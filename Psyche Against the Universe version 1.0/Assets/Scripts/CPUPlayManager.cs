@@ -31,6 +31,10 @@ public class CPUPlayManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Force initialization of the singleton object to hold the player list
+        var _ = CPUPlayerSingleton.instance;
+
+
         //initialize our CPU Builder pattern to create our CPU players
         CPUPlayerBuilder = new CPUBuilder();
         theDirector = new CPUPlayDirector(CPUPlayerBuilder);
@@ -59,11 +63,11 @@ public class CPUPlayManager : MonoBehaviour
             
             CPUNameText.text += player.Avatar_Name + "\n";
             Debug.Log(player.Avatar_Name);
+            
+
         }
+        //store CPU player list in a common location using the singleton object
+        CPUPlayerSingleton.instance.RegisterCPUPlayers(cpuPlayers);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
