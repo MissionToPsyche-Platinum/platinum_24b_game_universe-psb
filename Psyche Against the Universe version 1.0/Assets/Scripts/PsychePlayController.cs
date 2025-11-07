@@ -9,14 +9,14 @@ using UnityEngine;
 public class PsychePlayerController
 {
 
-    private IPsyPlayer _player;  //allows for a connection to the player object. 
+    private IPlayerCommon _player;  //allows for a connection to the player object. 
 
     /// <summary>
     /// Constructor for controller object initialized when the game object is created
     /// when user presses the start button.
     /// </summary>
     /// <param name="player"></param>
-    public PsychePlayerController(IPsyPlayer player)
+    public PsychePlayerController(IPlayerCommon player)
     {
         _player = player;       
 

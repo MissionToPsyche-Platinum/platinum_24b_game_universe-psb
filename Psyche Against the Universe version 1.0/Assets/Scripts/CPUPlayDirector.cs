@@ -29,6 +29,7 @@ public class CPUPlayDirector
 
     public IPlayerCommon BuildCPUPlayer()
     {
+        _builder.Reset();                           //ensures a new CPUPlayer object is built each iteration of the builder class
         _builder.SetCPUname("TestName");            //This will be where the method calls to the randomly pull the names from and
                                                     //personality list. For now set to default names
         _builder.SetCPUpersonality("Chaotic");

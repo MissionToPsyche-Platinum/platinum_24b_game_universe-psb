@@ -10,6 +10,7 @@ using UnityEngine;
  */
 public interface ICPUBuilder
 {
+    void Reset();
     void SetCPUname( string name);
     void SetCPUpersonality(string personality);
 

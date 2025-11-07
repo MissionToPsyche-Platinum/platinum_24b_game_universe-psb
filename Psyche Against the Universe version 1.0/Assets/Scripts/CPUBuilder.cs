@@ -20,7 +20,10 @@ public class CPUBuilder : ICPUBuilder
         return _cpuPlayer;                          
     }
 
-    
+    public void Reset()
+    {
+        _cpuPlayer = new CPUPlayer();   //ensures a new instance is created each time
+    }
 
     /// <summary>
     /// Loads the names from an asset file and then parse them 
