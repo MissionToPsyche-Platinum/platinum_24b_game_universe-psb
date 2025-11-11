@@ -204,11 +204,12 @@ public class GameManager : MonoBehaviour
     }
     /// <summary>
     /// Initializes the suddenwin mode flag to true or false
+    /// 
     /// </summary>
     /// <returns></returns>
     private bool CheckSudWinMode()
     {
-        bool SWCk = NormalCkBox.isOn;
+        bool SWCk = SDeathCkBox.isOn;
         if (SWCk)
         {
             Debug.Log("Sudden Win mode selected.");
