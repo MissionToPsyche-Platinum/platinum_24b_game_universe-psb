@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using DG.Tweening;
 
 public class PlayCard : MonoBehaviour,
     IPointerDownHandler,
@@ -20,6 +21,13 @@ public class PlayCard : MonoBehaviour,
     private Camera mainCam;
     private int originalSortingOrder;
     private SpriteRenderer spriteRenderer;
+
+    // Sway variables
+    private Vector3 previousMousePos;
+    private Vector3 currentMouseVelocity;
+    private float maxSwayRotation = 30f;
+    private float swaySmoothing = 0.1f;
+    private Tween swayTween;
 
     void Start()
     {
@@ -43,6 +51,14 @@ public class PlayCard : MonoBehaviour,
         {
             // Smoothly move toward target position (gravitating to hand)
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * moveSpeed);
+        }
+        else
+        {
+            // While dragging, decay velocity when mouse stops moving
+            currentMouseVelocity = Vector3.Lerp(currentMouseVelocity, Vector3.zero, Time.deltaTime * 5f);
+            
+            // Apply sway rotation based on velocity
+            ApplySway();
         }
     }
 
@@ -74,6 +90,11 @@ public class PlayCard : MonoBehaviour,
             handManager.SetDraggingCard(this);
 
         offset = transform.position - GetMouseWorldPos(eventData);
+        previousMousePos = GetMouseWorldPos(eventData);
+        
+        // Kill any existing sway tween
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -89,12 +110,22 @@ public class PlayCard : MonoBehaviour,
             handManager.ClearDraggingCard();
             targetPosition = handManager.GetCardTargetPosition(this);
         }
+
+        // Reset rotation with DOTween
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
+        swayTween = transform.DOLocalRotate(Vector3.zero, 0.5f);
     }
 
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = GetMouseWorldPos(eventData) + offset;
+        Vector3 currentMousePos = GetMouseWorldPos(eventData);
+        transform.position = currentMousePos + offset;
+
+        // Calculate velocity
+        currentMouseVelocity = (currentMousePos - previousMousePos) / Time.deltaTime;
+        previousMousePos = currentMousePos;
     }
 
 
@@ -125,5 +156,21 @@ public class PlayCard : MonoBehaviour,
     public void SetTargetPosition(Vector3 pos)
     {
         targetPosition = pos;
+    }
+
+    void ApplySway()
+    {
+        // Calculate sway angle based on horizontal velocity
+        float swayAmount = Mathf.Clamp(-currentMouseVelocity.x * 0.5f, -maxSwayRotation, maxSwayRotation);
+        
+        // If velocity is very small, reset to 0
+        if (Mathf.Abs(currentMouseVelocity.x) < 0.1f)
+            swayAmount = 0f;
+        
+        // Kill existing tween and create new smooth sway
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
+        
+        swayTween = transform.DOLocalRotate(new Vector3(0, 0, swayAmount), swaySmoothing);
     }
 }

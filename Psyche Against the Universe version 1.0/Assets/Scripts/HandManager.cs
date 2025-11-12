@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class HandManager : MonoBehaviour
 {
     public List<PlayCard> cards = new List<PlayCard>();
-    public float cardSpacing = 1.5f;
-    public float yOffset = -3f;
+    public float cardSpacing = 2f;
+    public float yOffset = -4f;
     public float moveSpeed = 10f;
 
     private PlayCard draggingCard;
