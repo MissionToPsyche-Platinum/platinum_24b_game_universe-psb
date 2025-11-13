@@ -114,7 +114,7 @@ public class PlayCard : MonoBehaviour,
         // Reset rotation with DOTween
         if (swayTween != null && swayTween.IsActive())
             swayTween.Kill();
-        swayTween = transform.DOLocalRotate(Vector3.zero, 0.5f);
+        swayTween = transform.DOLocalRotate(Vector3.zero, 0.8f);
     }
 
 
@@ -161,7 +161,7 @@ public class PlayCard : MonoBehaviour,
     void ApplySway()
     {
         // Calculate sway angle based on horizontal velocity
-        float swayAmount = Mathf.Clamp(-currentMouseVelocity.x * 0.5f, -maxSwayRotation, maxSwayRotation);
+        float swayAmount = Mathf.Clamp(-currentMouseVelocity.x * 0.8f, -maxSwayRotation, maxSwayRotation);
         
         // If velocity is very small, reset to 0
         if (Mathf.Abs(currentMouseVelocity.x) < 0.1f)
