@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //Version 1.0 By Timothy Burke
 //Defines the Game manager that will compile and collect all of the setup menu information and perform the following:
@@ -17,7 +19,7 @@ using UnityEngine.UI;
 /* 
  * 11/5/25 - Initial class build with initial fields and methods. 
  *  11/6/25 - 
- *  11/7/25 - 
+ *  11/14/25 - Updated the debug statement to display the full personality array. With no 
  */
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
     public bool enableTTSpeech;         //True if test to speech is set
     public bool CheckPlayerName = false;        //checks if the player name field is filled in. Set to false to force validation
     public bool CheckCPUChars = false;          //checks if the CPU players is blank. Set to false to force validation
+
+    public float GameModeTransition = 3f;
 
     //create the player controller and view object. TODO move to seperate methods
     public PsychePlayerController playerController;
@@ -88,6 +92,7 @@ public class GameManager : MonoBehaviour
         CreatePlayerController(HumanPlayer);
         CreatePlayerView();
         CreateCPUPlayerView();
+        StartCoroutine(loadGame());
     }
 
     /// <summary>
@@ -153,14 +158,15 @@ public class GameManager : MonoBehaviour
         //debug check statement
         Debug.Log($" Queue initialized with {GamePlayerQueue.Count} players");
 
-        //Debug: log each player in the queue
+        //Debug: log each player in the queue.
         int index = 1;
         foreach (IPlayerCommon player in GamePlayerQueue)
         {
             Debug.Log($"Player {index}: {player.Avatar_Name}");
             if (player is CPUPlayer cpu)
             {
-                Debug.Log($"CPU Player: {cpu.Avatar_Name}, Personality: {cpu.Personality}");
+                string personalityList = string.Join(", ", cpu.Personality);
+                Debug.Log($"CPU Player: {cpu.Avatar_Name}, Personality: [{personalityList}]");
             }
 
             index++;
@@ -277,6 +283,11 @@ public class GameManager : MonoBehaviour
         return Check; 
     }
 
+    IEnumerator loadGame()
+    {
+        yield return new WaitForSeconds(GameModeTransition);
+        SceneManager.LoadScene("Gameboard");
+    }
     // Update is called once per frame
     void Update()
     {
