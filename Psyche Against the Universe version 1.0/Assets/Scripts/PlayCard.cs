@@ -16,11 +16,14 @@ public class PlayCard : MonoBehaviour,
     private Vector3 baseScale;
     private float hoverMultiplier = 1.2f;
     private float moveSpeed = 10f;
+    private bool isLockedToPlayPile = false;
 
     private HandManager handManager;
     private Camera mainCam;
     private int originalSortingOrder;
     private SpriteRenderer spriteRenderer;
+    private PlayPileDropZone playPileZone;
+    private Rigidbody2D rb2d;
 
     // Sway variables
     private Vector3 previousMousePos;
@@ -33,6 +36,7 @@ public class PlayCard : MonoBehaviour,
     {
         mainCam = Camera.main;
         handManager = FindAnyObjectByType<HandManager>();
+        playPileZone = FindAnyObjectByType<PlayPileDropZone>();
         targetPosition = transform.position;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,12 +45,31 @@ public class PlayCard : MonoBehaviour,
         
         baseScale = transform.localScale; // store actual prefab scale
 
+        // Get or add Rigidbody2D for collision detection
+        rb2d = GetComponent<Rigidbody2D>();
+        if (rb2d == null)
+        {
+            rb2d = gameObject.AddComponent<Rigidbody2D>();
+        }
+        rb2d.bodyType = RigidbodyType2D.Kinematic; // Kinematic so it doesn't fall or rotate from physics
+        rb2d.gravityScale = 0;
+        rb2d.linearVelocity = Vector2.zero;
+        rb2d.angularVelocity = 0;
+        
+        Debug.Log("Card " + name + " has Rigidbody2D: " + (rb2d != null));
+
         if (handManager != null)
             handManager.RegisterCard(this);
     }
 
     void Update()
     {
+        if (isLockedToPlayPile)
+        {
+            // Card is locked to the play pile, don't move it
+            return;
+        }
+
         if (!isDragging)
         {
             // Smoothly move toward target position (gravitating to hand)
@@ -83,6 +106,9 @@ public class PlayCard : MonoBehaviour,
         Debug.Log("Card clicked: " + name);
         isDragging = true;
 
+        if (playPileZone != null)
+            playPileZone.ShowZone();
+
         if (spriteRenderer != null)
             spriteRenderer.sortingOrder = 100;
 
@@ -109,6 +135,27 @@ public class PlayCard : MonoBehaviour,
             handManager.ReorderCard(this, transform.position.x);
             handManager.ClearDraggingCard();
             targetPosition = handManager.GetCardTargetPosition(this);
+        }
+
+        if (playPileZone != null)
+        {
+            if (playPileZone.isCardInside)
+            {
+                // Lock card in place in the pile
+                transform.position = playPileZone.transform.position;
+                handManager.UnregisterCard(this);
+                isLockedToPlayPile = true;
+
+                // Show confirm button and pass this card
+                UIPlayConfirm.Instance.ShowButton(this);
+
+                return; // STOP normal hand repositioning
+            }
+
+            // Hide confirm button
+            UIPlayConfirm.Instance.HideButton();
+            playPileZone.HideZone();
+            isLockedToPlayPile = false;
         }
 
         // Reset rotation with DOTween
@@ -156,6 +203,11 @@ public class PlayCard : MonoBehaviour,
     public void SetTargetPosition(Vector3 pos)
     {
         targetPosition = pos;
+    }
+
+    public bool IsBeingDragged()
+    {
+        return isDragging;
     }
 
     void ApplySway()
