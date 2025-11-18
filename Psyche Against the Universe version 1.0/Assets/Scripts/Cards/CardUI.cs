@@ -40,7 +40,7 @@ public class CardUI : MonoBehaviour
         Awake();
     }
 
-    private void SetCardUI()
+    public void SetCardUI()
     {
         if (_card != null && _card.CardData != null)
         {
