@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,12 +10,28 @@ using UnityEngine;
 /* 
  * 10/30/25 - Initial class build with initial fields and methods
  * 10/31/2025 - intial pattern build refinement. 
+ * 11/14/25 - added an Enumeration that defines the personality types as strings. This will allow the CPU logic
+ *            to iterate through the array and play a strategy defined in the strategy pattern by matching the name
+ *            to the object type.
+ *          - Modified the setCPUPersonality method to randomly shuffle and load the personality array
  */
 public class CPUBuilder : ICPUBuilder
 
 {
+
     private CPUPlayer _cpuPlayer = new CPUPlayer();
    
+    //Define the enumeration of personality types
+    //Note: The builder pattern will need to be modified across the whole pattern if more personality types 
+    //      are added.
+    public enum CPUPersonalityTypes
+    {
+        Funny, 
+        Sci_Fy,  //This is to mean a "nerdy" persona
+        Chaotic,
+        Serious
+    }
+
     public IPlayerCommon Build()                        //When called by the director, method will create CPU character class.
     {
         return _cpuPlayer;                          
@@ -57,11 +74,38 @@ public class CPUBuilder : ICPUBuilder
         _cpuPlayer.Avatar_Name = nameAtRandom;                     //TODO: modify to pull from the name file at random
     }
 
-    public void SetCPUpersonality(string personality)   //Will generate a CPU personality set from a stored enumeration.
+    /// <summary>
+    /// Builds the personality matrix at random using the personality enumeration contained
+    /// in this script. The method should overide the default values in the matrix.
+    /// method is designed to provide no repeated values
+    /// </summary>
+    /// <param name="personality"></param>
+    public void SetCPUpersonality(string[] personality)   //Will generate a CPU personality set from a stored enumeration.
     {
+        //get all of the personalities from the enum
+        List<string> allTypes = Enum.GetNames(typeof(CPUPersonalityTypes)).ToList();
+
+        //perform a basic shuffle and then load linearly
+        for (int i = allTypes.Count -1; i>0; i--)
+        {
+            int j = UnityEngine.Random.Range(0, i + 1);
+            (allTypes[i], allTypes[j]) = (allTypes[j], allTypes[i]);
+        }
+
+        //fill the personality matrix
+        for (int i = 0; i < personality.Length && i < allTypes.Count; i++)
+        {
+            personality[i] = allTypes[i];
+        }
+
         _cpuPlayer.Personality = personality;           
     }
 
+
+    /// <summary>
+    /// Invokes the CPU builder pattern build method to create the player
+    /// </summary>
+    /// <returns></returns>
     IPlayerCommon ICPUBuilder.Build()
     {
         return Build();

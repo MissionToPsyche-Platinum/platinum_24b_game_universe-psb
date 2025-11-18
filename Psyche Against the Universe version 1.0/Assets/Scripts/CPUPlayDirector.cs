@@ -8,6 +8,7 @@ using UnityEngine;
  *
  * 10/31/25 - Initial class build to the initial builder pattern. removed generalization and added
  * associations and dependency relations.
+ * 11/14/25- Updated the default personality to a string of 4 default personality types
  */
 public class CPUPlayDirector
 {
@@ -32,7 +33,7 @@ public class CPUPlayDirector
         _builder.Reset();                           //ensures a new CPUPlayer object is built each iteration of the builder class
         _builder.SetCPUname("TestName");            //This will be where the method calls to the randomly pull the names from and
                                                     //personality list. For now set to default names
-        _builder.SetCPUpersonality("Chaotic");
+        _builder.SetCPUpersonality(new string[] { "DefaultA", "DefaultB", "DefaultC", "DefaultD" });
         return _builder.Build();                    //TODO modify this to accept a list of personality order
                                                     //Returns a CPUPlayer object with the name and personality
     }

@@ -7,12 +7,13 @@ using UnityEngine;
  * 10/30/25 - Initial class build with initial fields and methods
  * 11/5/25 - Added method to call applicable strategy from the strategy pattern
  *           more details added to the CPU builder class
+ * 11/14/25 Updated Set Personality to accept a string array
  */
 public interface ICPUBuilder
 {
     void Reset();
     void SetCPUname( string name);
-    void SetCPUpersonality(string personality);
+    void SetCPUpersonality(string [] personality);
 
 
     //methods 

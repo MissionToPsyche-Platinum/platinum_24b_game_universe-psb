@@ -11,11 +11,12 @@ using UnityEngine;
  * 10/31/25 - refinements to the initial builder pattern. removed generalization and added
  * associations and dependency relations.
  * 11/5/25 - Added player hand object to hold answer card objects.
+ * 11/14/25 - changed the personality field to an array
  */
 public class CPUPlayer : IPlayerCommon
 {
     //public string Name { get;  set; }
-    public string Personality { get;  set; }
+    public string[] Personality { get; set; } = new string[4];
 
     public string Avatar_Name { get; set; }
 
