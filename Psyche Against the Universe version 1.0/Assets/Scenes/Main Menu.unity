@@ -4472,6 +4472,7 @@ GameObject:
   - component: {fileID: 1013318533}
   - component: {fileID: 1013318532}
   - component: {fileID: 1013318531}
+  - component: {fileID: 1013318534}
   m_Layer: 5
   m_Name: BtnAbout
   m_TagString: Untagged
@@ -4581,6 +4582,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013318529}
   m_CullTransparentMesh: 1
+--- !u!114 &1013318534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013318529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdd827a79c12194a9d7ba10a275335f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnDriver
+  banterUI: {fileID: 0}
 --- !u!1 &1019410081
 GameObject:
   m_ObjectHideFlags: 0
