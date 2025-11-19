@@ -14,7 +14,7 @@ using System.Diagnostics; // If using TextMeshPro Dropdown
 public class PlayerDropdownLoader : MonoBehaviour
 {
     public TMP_Dropdown Dropdown;
-    public string filepath = "Assets/Player_Avatar_Names.txt";
+    public string filepath = "Assets/Resources/Player_Avatar_Names.txt";
    // public TMP_Text PlayerNameTextdisp;
     public TMP_Text PlayText;
 
