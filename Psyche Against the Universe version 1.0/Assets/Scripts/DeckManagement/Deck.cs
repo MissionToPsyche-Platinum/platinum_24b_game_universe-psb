@@ -16,8 +16,8 @@ public class Deck : MonoBehaviour
     [SerializeField] private Canvas _cardCanvas;
 
     // Instantiated cards:
-    private List<Card> deckPile;
-    private List<Card> discardPile = new(); // Rijul, this may conflict with your discard logic, we can pick the one that works best
+    private List<Card> _deckPile;
+    private List<Card> _discardPile = new(); // Rijul, this may conflict with your discard logic, we can pick the one that works best
 
     public List<Card> HandCards {get; private set;} = new();// this is public, for potential future Hand classes to make a visually nice hand, if needed
 
@@ -44,12 +44,12 @@ public class Deck : MonoBehaviour
 
     private void InstantiateDeck()
     {
-        for (int i = 0; i < _playerDeck.CardsInCollection.count; i++)
+        for (int i = 0; i < _answerDeck.CardsInCollection.Count; i++)
         {
             Card card = Instantiate(_cardPefab, _cardCanvas.transform); //instantiates card prefab as child of card canvas
-            card.SetUp(_playerDeck.CardsInCollection[i]);
+            card.SetUp(_answerDeck.CardsInCollection[i]);
             _deckPile.Add(card); // all cards in deck at the start, none in hand or discard
-            card.GameObject.SetActive(false); // cards need to be activated after drawing
+            card.gameObject.SetActive(false); // cards need to be activated after drawing
         }
 
         ShuffleDeck();
@@ -58,7 +58,7 @@ public class Deck : MonoBehaviour
     // call shuffle at start and if deck is emptied, uses Fisher-Yates algorithm
     private void ShuffleDeck()
     {
-        for (int i = deckPile.count - 1; i > 0; i--)
+        for (int i = _deckPile.Count - 1; i > 0; i--)
         {
             int j = Random.Range(0, i + 1);
             var temp = _deckPile[i];
@@ -67,27 +67,33 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void DrawHand(int amount = 6) //hand is 6 cards right?
+    public void DrawHand(int amount = 5) //hand is 5 cards 
     {
         for (int i = 0; i < amount; i++)
         {
             // if draw pile runs out, discard pile is shuffled and becomes draw pile
-            if (deckPile.Count <= 0)
+            if (_deckPile.Count <= 0)
             {
                 _discardPile = _deckPile;
                 _discardPile.Clear();
                 ShuffleDeck();
             }
 
-            HandCards.Add(_discardPile[0]);
-            _discardPile.RemoveAt(0);
+            HandCards.Add(_deckPile[0]);
+            _deckPile[0].gameObject.SetActive(true);
+            _deckPile.RemoveAt(0);
         }
     }
 
     // below may not be neccessary if we can use Rijul's instead
     public void DiscardCard(Card card)
     {
-        
+        if (HandCards.Contains(card))
+        {
+            HandCards.Remove(card);
+            _discardPile.Add(card);
+            card.gameObject.SetActive(false);
+        }
     }
 
     #endregion

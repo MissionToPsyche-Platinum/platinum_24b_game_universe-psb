@@ -7,13 +7,14 @@ using UnityEngine;
 // Version 1.0 by Abdur-Rahman Igram
 
 [RequireComponent(typeof(CardUI))] // attatches CardUI script to all card objects
+[RequireComponent(typeof(CardMovement))] // handles percieved card movement
 public class Card : MonoBehaviour
 {
     #region Fields and Properties
 
-    //[field: SerializeField] public ScriptableCard CardData {get; private set;}
-    [SerializeField] private ScriptableCard _cardData;
-    public ScriptableCard CardData => _cardData;
+    [field: SerializeField] public ScriptableCard CardData {get; private set;}
+    //[SerializeField] private ScriptableCard _cardData;
+    //public ScriptableCard CardData => _cardData;
 
     #endregion
 

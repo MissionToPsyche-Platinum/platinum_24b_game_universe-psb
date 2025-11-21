@@ -9,7 +9,7 @@ public class CardCollection : ScriptableObject
 {
     [field: SerializeField] public List<ScriptableCard> CardsInCollection {get; private set;}
 
-    public void RemoveCardFromCollection(Scriptable card)
+    public void RemoveCardFromCollection(ScriptableCard card)
     {
         if (CardsInCollection.Contains(card))
         {
@@ -21,7 +21,7 @@ public class CardCollection : ScriptableObject
         }
     }
 
-    public void AddCardToCollection(Scriptable card) //make sure this works, I modified the if statement to remove duplicates
+    public void AddCardToCollection(ScriptableCard card) //make sure this works, I modified the if statement to remove duplicates
     {
         if (CardsInCollection.Contains(card))
         {
