@@ -13,13 +13,15 @@ public class CPUPlayView : MonoBehaviour
 
     public void UpdateScore(int score)
     {
+        //Tie this to the strategy pattern
     }
     public void UpdateHand(List<AnswerCard> cards)
     {
+        //this is tied to the CPU player object in the queue
     }
     public void PlayBanter()
     {
-
+        // Tie this to the strategy pattern
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

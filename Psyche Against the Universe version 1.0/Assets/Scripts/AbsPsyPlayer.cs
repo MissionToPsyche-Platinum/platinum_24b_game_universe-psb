@@ -14,10 +14,16 @@ public class AbsPsyPlayer : IPsyPlayer
 
     // basic list structure to act as the players hand. 
     public List<AnswerCard> Hand { get; set; } = new List<AnswerCard>();
+    public bool judge { get; set; }
 
     public void DrawCard()
     {
       //define operation here as this will be common to the player  
+    }
+
+    public bool isJudge()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void PlayCard()
