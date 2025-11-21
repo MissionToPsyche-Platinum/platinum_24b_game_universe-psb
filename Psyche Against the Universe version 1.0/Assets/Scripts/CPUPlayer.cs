@@ -25,10 +25,12 @@ public class CPUPlayer : IPlayerCommon
     //Basic list structure to hold the CPU players answer cards.
    
     public List<AnswerCard> Hand { get ; set ; } = new List<AnswerCard>();
+    public bool judge { get; set; }
+
     /*
-     * This is a general debug method for this class, however it can be 
-     * adapted for extensibility.
-     */
+* This is a general debug method for this class, however it can be 
+* adapted for extensibility.
+*/
     public override string ToString()
     {
         return $"Name: {Avatar_Name}, Personality: {Personality}";
@@ -48,6 +50,11 @@ public class CPUPlayer : IPlayerCommon
     public void PlayCard()
     {
         
+    }
+
+    public bool isJudge()
+    {
+        throw new System.NotImplementedException();
     }
     //Add additional game play methods below for judge and card play selection
     // such as judge()

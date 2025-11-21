@@ -4186,7 +4186,6 @@ GameObject:
   - component: {fileID: 988273672}
   - component: {fileID: 988273671}
   - component: {fileID: 988273670}
-  - component: {fileID: 988273673}
   m_Layer: 5
   m_Name: BtnStart
   m_TagString: Untagged
@@ -4296,34 +4295,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988273668}
   m_CullTransparentMesh: 1
---- !u!114 &988273673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988273668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97531af3ff11d3540b958687796e4adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  PlayText: {fileID: 1200737551}
-  noplayermessage: {fileID: 753066590}
-  nocpuplayermessage: {fileID: 1430133628}
-  NormalCkBox: {fileID: 234720148}
-  SDeathCkBox: {fileID: 1416584478}
-  HighContrastCkBox: {fileID: 1362881089}
-  TxttoSpeechCkBx: {fileID: 63247001}
-  CPUNameText: {fileID: 183454386}
-  BtnStart: {fileID: 988273670}
-  enableNormMode: 0
-  enableSuddenWinMode: 0
-  enableHighContrast: 0
-  enableTTSpeech: 0
-  CheckPlayerName: 0
-  CheckCPUChars: 0
-  GameModeTransition: 3
 --- !u!1 &1006045950
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,7 +4560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013318529}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cdd827a79c12194a9d7ba10a275335f, type: 3}
   m_Name: 
