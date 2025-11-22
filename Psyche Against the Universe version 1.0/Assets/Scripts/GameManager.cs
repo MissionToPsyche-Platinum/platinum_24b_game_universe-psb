@@ -397,6 +397,21 @@ public class GameManager : MonoBehaviour
         return GamePlayerQueue;
     }
 
+    /// <summary>
+    /// Method makes the playerview visible to the game script
+    /// </summary>
+    public PyschePlayerView getPlayerView()
+    {
+        return playerView;
+    }
+
+    /// <summary>
+    /// Method makes the CPU View visible
+    /// </summary>
+    public CPUPlayView getCPUView()
+    {
+        return cpuPlayView;
+    }
     // Update is called once per frame
     void Update()
     {

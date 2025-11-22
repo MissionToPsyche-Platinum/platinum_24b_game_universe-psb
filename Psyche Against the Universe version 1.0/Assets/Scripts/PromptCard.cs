@@ -5,5 +5,9 @@
 [System.Serializable]
 public class PromptCard {
     public string prompt;
+    public PromptCard()
+    {
+        this.prompt = "A prompt";
+    }
     // this will be filled in as the cards are developed
 }

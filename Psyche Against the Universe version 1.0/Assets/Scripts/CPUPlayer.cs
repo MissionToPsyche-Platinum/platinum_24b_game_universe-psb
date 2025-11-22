@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -38,8 +39,8 @@ public class CPUPlayer : IPlayerCommon
 
    public void RunStrategy(string personality)
     {
-        //connect to the strategy pattern
-
+        Debug.Log("Judging based on: "+ personality);
+        //insert logic here
     }
 
     public void DrawCard()
@@ -49,12 +50,16 @@ public class CPUPlayer : IPlayerCommon
 
     public void PlayCard()
     {
-        
+        if (Hand.Count > 0)
+        {
+            Debug.Log("Card Played " + Hand[0].title + "Persona " + Hand[0].personality + "weight " + Hand[0].weight);
+            Hand.RemoveAt(0); //top card is sufficent
+        }
     }
 
     public bool isJudge()
     {
-        throw new System.NotImplementedException();
+        return this.judge;
     }
     //Add additional game play methods below for judge and card play selection
     // such as judge()

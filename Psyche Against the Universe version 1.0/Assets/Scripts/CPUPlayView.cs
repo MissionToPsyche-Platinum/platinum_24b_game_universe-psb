@@ -17,7 +17,9 @@ public class CPUPlayView : MonoBehaviour
     }
     public void UpdateHand(List<AnswerCard> cards)
     {
-        //this is tied to the CPU player object in the queue
+        //for now it just affects the count
+        Debug.Log("hand Updated: "+ cards.Count + "cards remaining");
+        //expand later affect UI elements as required
     }
     public void PlayBanter()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 //Version 1.0 By Timothy Burke
@@ -22,12 +23,20 @@ public class AbsPsyPlayer : IPsyPlayer
     }
 
     public bool isJudge()
+
     {
-        throw new System.NotImplementedException();
+        return this.judge;
     }
 
     public void PlayCard()
     {
-        //define operation here as this will be common to the player
+        //for now it just displays the relevant objects from its hand.
+        // logic required as the human plays the card
+        //with U/I element, this activates when a card is selected and played
+        if(Hand.Count > 0)
+        {
+            Debug.Log("Card Played " + Hand[0].title + "Persona " + Hand[0].personality + "weight " + Hand[0].weight);
+            Hand.RemoveAt(0); //top card is sufficent
+        }
     }
 }
