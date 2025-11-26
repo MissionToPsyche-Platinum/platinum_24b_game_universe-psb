@@ -213,6 +213,13 @@ public class PlayCard : MonoBehaviour,
     public void UnlockFromPlayPile()
     {
         isLockedToPlayPile = false;
+        handManager.ReorderCard(this, transform.position.x);
+        handManager.ClearDraggingCard();
+        targetPosition = handManager.GetCardTargetPosition(this);
+        // Reset rotation with DOTween
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
+        swayTween = transform.DOLocalRotate(Vector3.zero, 0.8f);
     }
 
     void ApplySway()
