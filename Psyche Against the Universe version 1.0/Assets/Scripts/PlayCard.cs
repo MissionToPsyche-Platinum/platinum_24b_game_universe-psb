@@ -139,7 +139,7 @@ public class PlayCard : MonoBehaviour,
 
         if (playPileZone != null)
         {
-            if (playPileZone.isCardInside)
+            if (playPileZone.isCardInside && playPileZone.currentCard == this)
             {
                 // Lock card in place in the pile
                 transform.position = playPileZone.transform.position;
@@ -208,6 +208,18 @@ public class PlayCard : MonoBehaviour,
     public bool IsBeingDragged()
     {
         return isDragging;
+    }
+
+    public void UnlockFromPlayPile()
+    {
+        isLockedToPlayPile = false;
+        handManager.ReorderCard(this, transform.position.x);
+        handManager.ClearDraggingCard();
+        targetPosition = handManager.GetCardTargetPosition(this);
+        // Reset rotation with DOTween
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
+        swayTween = transform.DOLocalRotate(Vector3.zero, 0.8f);
     }
 
     void ApplySway()
