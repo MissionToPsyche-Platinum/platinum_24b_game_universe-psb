@@ -34,6 +34,11 @@ public class PlayPileDropZone : MonoBehaviour
     {
         sr.enabled = false;
         isCardInside = false;
+        if (currentCard != null)
+        {
+            Debug.Log("Hiding play pile zone, removing current card: " + currentCard.name);
+            currentCard.UnlockFromPlayPile();
+        }
         currentCard = null;
         Debug.Log("Play pile zone hidden");
     }
