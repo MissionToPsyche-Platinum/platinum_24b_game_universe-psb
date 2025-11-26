@@ -73,6 +73,7 @@ public class PlayPileDropZone : MonoBehaviour
                 currentCard = card;
                 ShowZone();
                 currentCard = newCard;
+                Highlight();
                 Debug.Log("Card switched!");
             }
 
