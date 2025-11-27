@@ -41,8 +41,14 @@ public class GameLoop : MonoBehaviour
     int NormWin = 6;
     int SudWin = 3;
     int wincon;             //This gets set based on the activated norm or sudden win flag
-   // bool isWin = false;     //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
+                            // bool isWin = false;     //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
                             //the end routine
+
+    //Relevant objects for the game loop
+    List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
+    public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();  //holds the answer cards during the game round.
+                                                                     //emptied at the end of round. 
+    string banterLine;
 
     //Create strategy objects for use by the CPU Players during thier respective turns
     //The objects are called when required by thier personality
@@ -120,7 +126,7 @@ public class GameLoop : MonoBehaviour
         /**************************************************************************************************************************/
         //TEST OBJECTS TO DEVELOP GAME LOOP
         //Deal cards. Currently simulated as a means to fill the list
-        List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
+       // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
         testDeck = getTestCards();
         List <PromptCard> testPromptDeck = new List<PromptCard>();              //this is a test deck. Comment out when final
         testPromptDeck = getTestPrompts();
@@ -152,8 +158,10 @@ public class GameLoop : MonoBehaviour
         //Testing general game loop using the Test Console object. Disable object and remark out test code when final
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Deal a Prompt Card");
+
         yield return new WaitForSeconds(1f);
-        TestConsoleLog("Start a single Game Loop");
+        TestConsoleLog("Start Proto Game Loop");
+
         int i = 0;                                  //temp counter for testing
 
         while ( i < 2)
@@ -167,13 +175,14 @@ public class GameLoop : MonoBehaviour
                     case PsychePlayer humanPlayer:
                         if (!humanPlayer.isJudge())
                         {
-                            Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
-                            humanPlayer.PlayCard();
+                            //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
+                            TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
+                            humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
                         }
                         else
                         {
-                            TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judge cards");
+                            TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
                             //judge logic goes here
                         }
                         break;
@@ -181,9 +190,13 @@ public class GameLoop : MonoBehaviour
                     case CPUPlayer CPUPlayer:
                         if (!CPUPlayer.isJudge())
                         {
-                            Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
-                            //Play Banter at this point
-                            CPUPlayer.PlayCard();
+                            //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
+                            TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
+                            banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
+                            DisplayBanter(banterLine, CPUPlayer);
+                            yield return new WaitForSeconds(2f);
+                            DisplayBanter("", CPUPlayer);
+                            CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
                             
                         }
@@ -195,18 +208,22 @@ public class GameLoop : MonoBehaviour
                         break;
 
                 }
-                yield return new WaitForSeconds(1f); // pause for observation
+                
+
+                    Debug.Log("PlayedCards: " + string.Join(", ", PlayedCards.Select(c => c.PlayedBy)));
+                
+                yield return new WaitForSeconds(3f); // pause for observation
             }
             //Assume that score gets updated and a winner is chosen, 
             //judge is last player in the round. Therefore after judgement, the queue gets cycled
             //first turn off the judge labels for all
-            TestConsoleLog("Turning off Judge");
+            //TestConsoleLog("Turning off Judge");
             yield return new WaitForSeconds(1f);
 
             TurnOffJudge();
             yield return new WaitForSeconds(1f);
 
-            TestConsoleLog("Rotating queue");
+            //TestConsoleLog("Rotating queue");
             RotatePlayerQueue(playerQueue);
             yield return new WaitForSeconds(1f);
 
@@ -214,20 +231,95 @@ public class GameLoop : MonoBehaviour
             TestConsoleLog("Set new judge");
             TurnOnJudge(playerQueue);
 
-            //at this point deal a new answer card to all players less than 5 cards, 
+            //discard all played answer cards (return to the test deck or answer card deck
+            TestConsoleLog("returning answer cards to answer deck");
+            returnPlayedCards();
+            yield return new WaitForSeconds(1f);
+
+            //at this point deal a new answer card to all players less than 5 cards
+            ReloadPlayerHands(playerQueue, playerview, CpuView);
+            yield return new WaitForSeconds(1f);
+
             //discard and draw a new prompt card
+            TestConsoleLog("discard and draw a new prompt card");
+
             i++;
             
         }
 
         
-        Debug.Log("Begin asset loading and game loop.");
+        //Debug.Log("End protoloop test");
+        TestConsoleLog("End Protoloop test");
     }
+
+    /// <summary>
+    /// Helper method that ensures the correct banter display field is updated.
+    /// Will need to get expanded to support additional players
+    /// </summary>
+    /// <param name="banterLine"></param>
+    
+    private void DisplayBanter(string banterLine, CPUPlayer cPUPlayer)
+    {
+        if (cPUPlayer.Avatar_Name == CPU1Name.text)
+        {
+            CPUPlay1Banter.text = banterLine;
+            
+        }
+        else if (cPUPlayer.Avatar_Name == CPU2Name.text)
+        {
+            CPUPlay2Banter.text = banterLine;
+        }
+        //add additional players later for expanded game
+    }
+
+    /// <summary>
+    /// Reloads all players with less than 5 answer cards in thier hand object. 
+    /// </summary>
+    /// <param name="playerQueue"></param>
+
+    public void ReloadPlayerHands(Queue<IPlayerCommon> playerQueue, PyschePlayerView playerview, CPUPlayView cpuView)
+    {
+        foreach (var player in playerQueue)
+        {
+            while (player.Hand.Count < 5 && testDeck.Count > 0)
+            {
+                AnswerCard drawn = testDeck[0];         //pull from the top
+                testDeck.RemoveAt(0);
+
+                player.Hand.Add(drawn);
+                switch (player)
+                {
+                    case PsychePlayer humanPlayer:
+                        playerview.UpdateHand(humanPlayer.Hand);
+                        break;
+
+                    case CPUPlayer CPUplayer:
+                        cpuView.UpdateHand(CPUplayer.Hand);
+                        break;
+                }
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// Returns all the played cards to the answer card deck. 
+    /// For development of the protoloop, this uses the testdeck list
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    public void returnPlayedCards()
+    {
+        testDeck.AddRange(PlayedCards);
+        PlayedCards.Clear();
+        Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
+        TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="playerQueue"></param>
-  
+
     private void TurnOnJudge(Queue<IPlayerCommon> playerQueue)
     {
         if(playerQueue.Last().Avatar_Name == CPU1Name.text)
@@ -277,7 +369,11 @@ public class GameLoop : MonoBehaviour
         var newJudge = playerQueue.Last();
         newJudge.judge = true;
     }
-
+    /// <summary>
+    /// This is a diagonostic method for use during development testing. 
+    /// Turn off all calls to this method prior to final release.
+    /// </summary>
+    /// <param name="message"></param>
     private void TestConsoleLog( string message)
     {
         //Append a line to the console
@@ -325,20 +421,35 @@ public class GameLoop : MonoBehaviour
     /// 
     private List<AnswerCard> getTestCards()
     {
-        string[] personalities = { "Chaotic", "Funny", "Serious", "Scify" };
-        int[] weights = { 3, 5, 7, 2 };
+        string[] titles = { "Card", "CardB", "CardC", "CardD" };
+       // string[] personalities = { "Chaotic", "Funny", "Serious", "Scify" };
+        //int[] weights = { 3, 5, 7, 2, 10, 12, 15, 1 };
         var cards = new List<AnswerCard>();
 
         for (int i = 0; i < 20; i++)
         {
-            string personality = personalities[i % personalities.Length];
-            int weight = weights[i % weights.Length];
-           
+            string title = titles[i % titles.Length];
+           // string personality = personalities[i % personalities.Length];
+            int weightchao = UnityEngine.Random.Range(1, 21);
+            int weightSer = UnityEngine.Random.Range(1, 21);
+            int weightsci = UnityEngine.Random.Range(1, 21);
+            int weightfun = UnityEngine.Random.Range(1, 21);
 
-            cards.Add(new AnswerCard(personality, weight));
+
+            cards.Add(new AnswerCard(title, weightSer,weightsci,weightfun, weightchao));
         }
 
         return cards;
+    }
+
+    /// <summary>
+    /// Allows for player objects to interact and store thier played cards into the holding queue
+    /// </summary>
+    /// <param name="card"></param>
+    public void RegisterPlayedCard(AnswerCard card)
+    {
+        PlayedCards.Add(card);
+        //Debug.Log($"Registered card: {card.title}");
     }
 
 }
