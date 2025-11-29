@@ -9,7 +9,7 @@ public class AnswerCard {
     public string title;
     public string description;
     //public string personality;
-    public int weight;
+    public int weight;    //we can remove this since we have the trait scores
 
     public PersonalityParse PersonalityTag; // For Answer cards; Scenario can ignore
 

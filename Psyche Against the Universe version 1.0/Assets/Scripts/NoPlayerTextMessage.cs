@@ -2,6 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// These are possibly going to be replaced by an exception handling routine. 
+/// Save for now and we can remove later
+/// </summary>
+/// 
 public class NoPlayerTextMessage : MonoBehaviour
 {
     public GameObject NoPlayerNameAlert;
