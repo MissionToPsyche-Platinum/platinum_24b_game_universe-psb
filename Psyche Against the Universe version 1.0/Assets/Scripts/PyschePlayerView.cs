@@ -9,9 +9,10 @@ using UnityEngine;
  */
 public class PyschePlayerView : MonoBehaviour
 {
+    
     public void UpdateScore(int score)
     {
-        //Add score logic here to interact with the player controller or class object
+       
     }
     public void UpdateHand(List<AnswerCard> cards)
     {

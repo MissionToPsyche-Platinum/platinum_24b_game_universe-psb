@@ -17,7 +17,7 @@ public abstract class AbsPsyPlayer : IPsyPlayer
     public List<AnswerCard> Hand { get; set; } = new List<AnswerCard>();
    // public GameLoop gL;
     public bool judge { get; set; }
-    
+
     public void DrawCard()
     {
       //define operation here as this will be common to the player  
@@ -45,6 +45,16 @@ public abstract class AbsPsyPlayer : IPsyPlayer
         }*/
     }
 
-    public abstract void PlayCard(GameLoop gameLoop);
-    
+   // public abstract void PlayCard(GameLoop gameLoop);
+    public abstract void PlayCard(GameLoop gameLoop, int Index);
+
+    public void PlayCard(GameLoop gameLoop)
+    {
+       
+    }
+
+    public void PLayCard(GameLoop gameLoop, int Index)
+    {
+        
+    }
 }

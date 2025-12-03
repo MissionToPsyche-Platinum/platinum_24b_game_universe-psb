@@ -41,10 +41,32 @@ public class CPUPlayer : IPlayerCommon
         return $"Name: {Avatar_Name}, Personality: {Personality}";
     }
 
-   public void RunStrategy(string personality)
+   public AnswerCard RunStrategy(string[] personality, IReadOnlyList<AnswerCard> playedCards)
     {
-        Debug.Log("Judging based on: "+ personality);
-        //insert logic here
+        Debug.Log("Judging based on: " + string.Join(",", personality));
+
+        // Convert string[] personality into PersonalityParse[]
+        PersonalityPriority = personality
+            .Select(p => PersonalityParseextention.FromString(p))
+            .ToArray();
+        // Pick the first bias in the priority list (you can extend this later)
+        PersonalityParse judgeBias = PersonalityPriority.FirstOrDefault();
+
+        // Use StrategyCommon to judge the best card
+        AnswerCard winningCard = StrategyCommon.JudgeBest(playedCards, judgeBias);
+
+        if (winningCard != null)
+        {
+            Debug.Log($"CPU {Avatar_Name} chose winning card: {winningCard.title} played by {winningCard.PlayedBy}");
+        }
+        else
+        {
+            Debug.LogWarning("No winning card found.");
+        }
+
+        return winningCard;
+
+
     }
 
     public void DrawCard()
@@ -121,8 +143,8 @@ public class CPUPlayer : IPlayerCommon
             );
             //**********************************************************************************************************************
 
-            //Debug.Log("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
-            // " chao  " + choice.WeightChaotic);
+            gameLoop.TestConsoleLog("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
+             " chao  " + choice.WeightChaotic);
 
             choice.PlayedBy = this.Avatar_Name;  //this way we know who played the card
 
@@ -131,6 +153,11 @@ public class CPUPlayer : IPlayerCommon
 
             Hand.Remove(choice); //top card is sufficent
         }
+    }
+
+    public void PLayCard(GameLoop gameLoop, int Index)
+    {
+        throw new NotImplementedException();
     }
     //Add additional game play methods below for judge and card play selection
     // such as judge()

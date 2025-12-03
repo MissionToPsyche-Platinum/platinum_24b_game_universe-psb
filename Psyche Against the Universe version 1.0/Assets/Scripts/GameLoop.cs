@@ -36,6 +36,11 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPUPlay1Banter;
     public TMP_Text CPUPlay2Banter;
     //add additional boxes for exapnded gameboards
+    //score boxes
+    public TMP_Text CPU2ScoreField;
+    public TMP_Text CPU1ScoreField;
+    public TMP_Text HumanScoreField;
+    //add additional for expanded
 
     //win conditions
     int NormWin = 6;
@@ -145,13 +150,13 @@ public class GameLoop : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             TestConsoleLog("Normal Mode is set");
-            wincon = SudWin;
+            wincon = NormWin;
         }
         if (gm.SDeathCkbox.isOn)
         {
             yield return new WaitForSeconds(1f);
             TestConsoleLog("Sudden Win Mode is set");
-            wincon = NormWin;
+            wincon = SudWin;
         }
 
         /***************************************************************************************************************************/
@@ -164,7 +169,7 @@ public class GameLoop : MonoBehaviour
 
         int i = 0;                                  //temp counter for testing
 
-        while ( i < 2)
+        while ( i < 3)
         {
             yield return new WaitForSeconds(1f);
 
@@ -177,14 +182,27 @@ public class GameLoop : MonoBehaviour
                         {
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
-                            humanPlayer.PlayCard(this);
+
+                            // Enable confirm button for this player’s turn
+                            UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
+
+                            // Verify the confirm button was clicked before proceeding.
+                            yield return new WaitUntil(() => UIPlayConfirm.Instance.HasConfirmed);
+
+                            //humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
                         }
                         else
                         {
                             TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
-                            //judge logic goes here
+                            //judge logic goes here. UI should display the played cards list as UI elements
+                            //and select the same way a card is played. For now, this will be auto 
+                            TestConsoleLog($"{PlayedCards[0].title} was chosen. {PlayedCards[0].PlayedBy} scores a point");
+                            // Find the player in the queue by matching Avatar_Name
+                            FindWinner(playerQueue, PlayedCards[0].PlayedBy);
                         }
+
+                        
                         break;
 
                     case CPUPlayer CPUPlayer:
@@ -202,14 +220,18 @@ public class GameLoop : MonoBehaviour
                         }
                         else
                         {
+                            AnswerCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judge cards.");
-                            CPUPlayer.RunStrategy(CPUPlayer.Personality[0]);  //CPU logic will define this further later
+                            TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
+                            chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );  //CPU logic will define this further later
+                            TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
+                            // Find the player in the queue by matching Avatar_Name
+                            FindWinner(playerQueue, chosenCard.PlayedBy);
                         }
                         break;
 
                 }
                 
-
                     Debug.Log("PlayedCards: " + string.Join(", ", PlayedCards.Select(c => c.PlayedBy)));
                 
                 yield return new WaitForSeconds(3f); // pause for observation
@@ -242,9 +264,9 @@ public class GameLoop : MonoBehaviour
 
             //discard and draw a new prompt card
             TestConsoleLog("discard and draw a new prompt card");
-
-            i++;
             
+            i++;
+            if(i == 2) { TestConsoleLog("CLEAR"); } //forces and auto clear to make more room
         }
 
         
@@ -252,12 +274,39 @@ public class GameLoop : MonoBehaviour
         TestConsoleLog("End Protoloop test");
     }
 
+    private void FindWinner(Queue<IPlayerCommon> playerQueue, string playedBy)
+    {
+       foreach(var player in playerQueue) {
+        if (player.Avatar_Name == playedBy)
+        {
+
+            // Update the correct view
+            switch (player)
+            {
+                case PsychePlayer psychePlayer:
+                    psychePlayer.score++;
+                        HumanScoreField.text = psychePlayer.score.ToString();
+                    break;
+
+                case CPUPlayer cpuPlayer:
+                    cpuPlayer.score++;
+                    if (player.Avatar_Name == CPU1Name.text) { CPU1ScoreField.text = cpuPlayer.score.ToString();}
+                    else if (player.Avatar_Name==CPU2Name.text) {CPU2ScoreField.text = cpuPlayer.score.ToString();}
+
+                    break;
+            }
+        }
+    }
+}
+
+
+
     /// <summary>
     /// Helper method that ensures the correct banter display field is updated.
     /// Will need to get expanded to support additional players
     /// </summary>
     /// <param name="banterLine"></param>
-    
+
     private void DisplayBanter(string banterLine, CPUPlayer cPUPlayer)
     {
         if (cPUPlayer.Avatar_Name == CPU1Name.text)
@@ -374,10 +423,17 @@ public class GameLoop : MonoBehaviour
     /// Turn off all calls to this method prior to final release.
     /// </summary>
     /// <param name="message"></param>
-    private void TestConsoleLog( string message)
+    public void TestConsoleLog( string message)
     {
         //Append a line to the console
         TestConsole.text += "\n" + message;
+
+         if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
+            {
+                TestConsole.text = string.Empty;
+                return;
+            }
+
     }
 
     /// <summary>
@@ -395,6 +451,8 @@ public class GameLoop : MonoBehaviour
             {
                 player.Hand.Add(testDeck[0]);
                 testDeck.RemoveAt(0);
+
+     
             }
         }
     }

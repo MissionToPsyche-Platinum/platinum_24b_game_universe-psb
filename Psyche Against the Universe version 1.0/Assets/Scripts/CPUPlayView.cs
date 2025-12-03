@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 //Version 1.0 By Timothy Burke
@@ -10,10 +11,12 @@ using UnityEngine;
  */
 public class CPUPlayView : MonoBehaviour
 {
-
+   
     public void UpdateScore(int score)
     {
+        
 
+        
     }
     public void UpdateHand(List<AnswerCard> cards)
     {

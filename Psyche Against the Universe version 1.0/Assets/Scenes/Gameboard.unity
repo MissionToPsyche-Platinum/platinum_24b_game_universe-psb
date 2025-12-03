@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 134843398}
   - component: {fileID: 134843400}
   - component: {fileID: 134843399}
+  - component: {fileID: 134843401}
   m_Layer: 5
   m_Name: Score1Text
   m_TagString: Untagged
@@ -255,6 +256,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134843397}
   m_CullTransparentMesh: 1
+--- !u!114 &134843401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134843397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd713bbecea4c842afaf8e315165e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CPUPlayView
 --- !u!1 &334167598
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +647,7 @@ GameObject:
   - component: {fileID: 346942548}
   - component: {fileID: 346942550}
   - component: {fileID: 346942549}
+  - component: {fileID: 346942551}
   m_Layer: 5
   m_Name: CPU2ScoreField
   m_TagString: Untagged
@@ -759,6 +773,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346942547}
   m_CullTransparentMesh: 1
+--- !u!114 &346942551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346942547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd713bbecea4c842afaf8e315165e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CPUPlayView
 --- !u!1 &381266997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,6 +1437,7 @@ GameObject:
   - component: {fileID: 997929438}
   - component: {fileID: 997929440}
   - component: {fileID: 997929439}
+  - component: {fileID: 997929441}
   m_Layer: 5
   m_Name: CPU1ScoreField
   m_TagString: Untagged
@@ -1536,6 +1563,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997929437}
   m_CullTransparentMesh: 1
+--- !u!114 &997929441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997929437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd713bbecea4c842afaf8e315165e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CPUPlayView
 --- !u!1 &1021715201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,6 +3024,9 @@ MonoBehaviour:
   TestConsole: {fileID: 1845191501}
   CPUPlay1Banter: {fileID: 1435987510}
   CPUPlay2Banter: {fileID: 1860701405}
+  CPU2ScoreField: {fileID: 346942549}
+  CPU1ScoreField: {fileID: 997929439}
+  HumanScoreField: {fileID: 1603762360}
   PlayedCards: []
 --- !u!4 &1741683130
 Transform:
@@ -3220,8 +3262,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -300, y: 300}
-  m_SizeDelta: {x: 600, y: 400}
+  m_AnchoredPosition: {x: -200, y: 300}
+  m_SizeDelta: {x: 900, y: 530}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1845191501
 MonoBehaviour:
@@ -3270,8 +3312,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
