@@ -7,12 +7,12 @@ public class Player
     public bool IsHuman;
 
     // Personality priority, e.g. { Serious, Funny, SciFi, Chaotic }
-    public Personality[] PersonalityPriority;
+    public PersonalityParse[] PersonalityPriority;
 
     // Simple hand of cards (Answer cards for now)
     public List<Card> Hand = new();
 
-    public Player(string name, bool isHuman, Personality[] priority)
+    public Player(string name, bool isHuman, PersonalityParse[] priority)
     {
         Name = name;
         IsHuman = isHuman;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 //Version 1.0 By Timothy Burke
@@ -6,7 +7,7 @@ using UnityEngine;
  * 10/30/25 - Initial class build with initial fields and methods
  * 11/5/25 - Added the hand structure to hold answer cards.
  */
-public class AbsPsyPlayer : IPsyPlayer
+public abstract class AbsPsyPlayer : IPsyPlayer
 {
     public string Avatar_Name { get;  set; }
 
@@ -14,6 +15,7 @@ public class AbsPsyPlayer : IPsyPlayer
 
     // basic list structure to act as the players hand. 
     public List<AnswerCard> Hand { get; set; } = new List<AnswerCard>();
+   // public GameLoop gL;
     public bool judge { get; set; }
 
     public void DrawCard()
@@ -22,12 +24,37 @@ public class AbsPsyPlayer : IPsyPlayer
     }
 
     public bool isJudge()
+
     {
-        throw new System.NotImplementedException();
+        return this.judge;
     }
 
     public void PlayCard()
     {
-        //define operation here as this will be common to the player
+        //for now it just displays the relevant objects from its hand.
+        // logic required as the human plays the card
+        //with U/I element, this activates when a card is selected and played
+       /* if(Hand.Count > 0)
+        {
+            Debug.Log("Card Played " + Hand[0].title + "Persona " + Hand[0].personality + "weight " + Hand[0].weight);
+
+            //add to the played cards list in the gameloop
+            gL.PlayedCards.Add(Hand[0]);
+
+            Hand.RemoveAt(0); //top card is sufficent
+        }*/
+    }
+
+   // public abstract void PlayCard(GameLoop gameLoop);
+    public abstract void PlayCard(GameLoop gameLoop, int Index);
+
+    public void PlayCard(GameLoop gameLoop)
+    {
+       
+    }
+
+    public void PLayCard(GameLoop gameLoop, int Index)
+    {
+        
     }
 }

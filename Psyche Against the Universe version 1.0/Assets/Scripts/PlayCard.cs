@@ -32,6 +32,17 @@ public class PlayCard : MonoBehaviour,
     private float swaySmoothing = 0.1f;
     private Tween swayTween;
 
+
+    //for loop integration
+    public PsychePlayer Player { get; private set; }
+    public GameLoop GameLoop { get; private set; }
+
+    public void SetOwner(PsychePlayer player, GameLoop gameLoop)
+    {
+        Player = player;
+        GameLoop = gameLoop;
+    }
+
     void Start()
     {
         mainCam = Camera.main;
@@ -139,15 +150,16 @@ public class PlayCard : MonoBehaviour,
 
         if (playPileZone != null)
         {
-            if (playPileZone.isCardInside)
+            if (playPileZone.isCardInside && playPileZone.currentCard == this)
             {
                 // Lock card in place in the pile
                 transform.position = playPileZone.transform.position;
-                handManager.UnregisterCard(this);
+               
+               //handManager.UnregisterCard(this);
                 isLockedToPlayPile = true;
 
                 // Show confirm button and pass this card
-                UIPlayConfirm.Instance.ShowButton(this);
+                UIPlayConfirm.Instance.ShowButton(this); //, Player, GameLoop);
 
                 return; // STOP normal hand repositioning
             }
@@ -210,6 +222,18 @@ public class PlayCard : MonoBehaviour,
         return isDragging;
     }
 
+    public void UnlockFromPlayPile()
+    {
+        isLockedToPlayPile = false;
+        handManager.ReorderCard(this, transform.position.x);
+        handManager.ClearDraggingCard();
+        targetPosition = handManager.GetCardTargetPosition(this);
+        // Reset rotation with DOTween
+        if (swayTween != null && swayTween.IsActive())
+            swayTween.Kill();
+        swayTween = transform.DOLocalRotate(Vector3.zero, 0.8f);
+    }
+
     void ApplySway()
     {
         // Calculate sway angle based on horizontal velocity
@@ -225,4 +249,7 @@ public class PlayCard : MonoBehaviour,
         
         swayTween = transform.DOLocalRotate(new Vector3(0, 0, swayAmount), swaySmoothing);
     }
+
+    
+
 }

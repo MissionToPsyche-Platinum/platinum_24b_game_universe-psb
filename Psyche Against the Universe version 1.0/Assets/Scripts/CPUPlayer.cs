@@ -1,6 +1,8 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 //Version 1.0 By Timothy Burke
 //Defines the product for the CPU cuilder pattern. 
@@ -25,7 +27,10 @@ public class CPUPlayer : IPlayerCommon
     //Basic list structure to hold the CPU players answer cards.
    
     public List<AnswerCard> Hand { get ; set ; } = new List<AnswerCard>();
+   // public GameLoop gL;
     public bool judge { get; set; }
+
+    public PersonalityParse[] PersonalityPriority; // parsed enums
 
     /*
 * This is a general debug method for this class, however it can be 
@@ -36,9 +41,31 @@ public class CPUPlayer : IPlayerCommon
         return $"Name: {Avatar_Name}, Personality: {Personality}";
     }
 
-   public void RunStrategy(string personality)
+   public AnswerCard RunStrategy(string[] personality, IReadOnlyList<AnswerCard> playedCards)
     {
-        //connect to the strategy pattern
+        Debug.Log("Judging based on: " + string.Join(",", personality));
+
+        // Convert string[] personality into PersonalityParse[]
+        PersonalityPriority = personality
+            .Select(p => PersonalityParseextention.FromString(p))
+            .ToArray();
+        // Pick the first bias in the priority list (you can extend this later)
+        PersonalityParse judgeBias = PersonalityPriority.FirstOrDefault();
+
+        // Use StrategyCommon to judge the best card
+        AnswerCard winningCard = StrategyCommon.JudgeBest(playedCards, judgeBias);
+
+        if (winningCard != null)
+        {
+            Debug.Log($"CPU {Avatar_Name} chose winning card: {winningCard.title} played by {winningCard.PlayedBy}");
+        }
+        else
+        {
+            Debug.LogWarning("No winning card found.");
+        }
+
+        return winningCard;
+
 
     }
 
@@ -46,15 +73,91 @@ public class CPUPlayer : IPlayerCommon
     {
         
     }
-
+    /// <summary>
+    /// No longer required in current context
+    /// </summary>
     public void PlayCard()
     {
-        
+       /* if (Hand.Count > 0)
+        {
+            Debug.Log("Card Played " + Hand[0].title + "Persona " + Hand[0].personality + "weight " + Hand[0].weight);
+
+            //add to the played cards list in the gameloop
+            gL.PlayedCards.Add(Hand[0]);
+
+            Hand.RemoveAt(0); //top card is sufficent
+        }*/
     }
 
     public bool isJudge()
     {
-        throw new System.NotImplementedException();
+        return this.judge;
+    }
+
+    public void PlayCard(GameLoop gameLoop)
+    {
+        if (Hand.Count > 0)
+        {
+            
+            //Use CPU logic to determine which card to play from its hand based on dominant personality
+            string DominantPersona = Personality[0];
+            PersonalityParse persona = PersonalityParseextention.FromString(DominantPersona);
+
+            PersonalityPriority = Personality.Select(p => PersonalityParseextention.FromString(p)).ToArray();
+
+            //use the strategy logic to pick the best cards
+            
+            AnswerCard choice = StrategyCommon.PickBestByPersonality(Hand, persona);
+
+            //other choices based on personality matrix
+             if (choice == null)
+            {
+               choice = StrategyCommon.PickBestAcrossPriority(Hand, PersonalityPriority);
+                Debug.Log("Choosing across priority");
+            }
+
+            //should not be needed, but a good catch all
+            if (choice == null)
+            {
+                choice = Hand[0];
+                Debug.Log("Default");
+            }
+
+
+            //following is for logic testing and debug*************************************************************************
+            int maxWeight = Mathf.Max(choice.WeightSerious, choice.WeightSciFi, choice.WeightFunny, choice.WeightChaotic);
+
+            string strongestTrait = "Unknown";
+            if (maxWeight == choice.WeightSerious) strongestTrait = "Serious";
+            else if (maxWeight == choice.WeightSciFi) strongestTrait = "SciFi";
+            else if (maxWeight == choice.WeightFunny) strongestTrait = "Funny";
+            else if (maxWeight == choice.WeightChaotic) strongestTrait = "Chaotic";
+
+            Debug.Log(
+                $"Card Played {choice.title} " +
+                $"serious {choice.WeightSerious} " +
+                $"sci {choice.WeightSciFi} " +
+                $"fun {choice.WeightFunny} " +
+                $"chao {choice.WeightChaotic} " +
+                $"--> strongest: {strongestTrait} ({maxWeight})"
+            );
+            //**********************************************************************************************************************
+
+            gameLoop.TestConsoleLog("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
+             " chao  " + choice.WeightChaotic);
+
+            choice.PlayedBy = this.Avatar_Name;  //this way we know who played the card
+
+            //add to the played cards list in the gameloop
+            gameLoop.RegisterPlayedCard(choice);
+
+            Hand.Remove(choice); //top card is sufficent
+        }
+    }
+
+    public void PLayCard(GameLoop gameLoop, int Index)
+    {
+        throw new NotImplementedException();
     }
     //Add additional game play methods below for judge and card play selection
     // such as judge()
