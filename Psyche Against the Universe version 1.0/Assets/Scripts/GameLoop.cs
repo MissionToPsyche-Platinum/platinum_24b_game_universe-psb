@@ -1,4 +1,4 @@
-using DG.Tweening.Core.Easing;
+﻿using DG.Tweening.Core.Easing;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -43,11 +43,20 @@ public class GameLoop : MonoBehaviour
     //add additional for expanded
 
     //win conditions
-    int NormWin = 6;
-    int SudWin = 3;
+    int NormWin = 3;
+    int SudWin = 2;
     int wincon;             //This gets set based on the activated norm or sudden win flag
                             // bool isWin = false;     //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
                             //the end routine
+
+    public float GameModeTransition = 5f;   //transition back to the Main Menu after game is complete
+
+    
+    bool isFinalRound = false;
+    bool isTie = false;
+    bool isWin = false;
+    bool playedTieBreaker = false;
+    bool sudWinModeset = false;
 
     //Relevant objects for the game loop
     List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
@@ -157,6 +166,7 @@ public class GameLoop : MonoBehaviour
             yield return new WaitForSeconds(1f);
             TestConsoleLog("Sudden Win Mode is set");
             wincon = SudWin;
+            sudWinModeset = true;   //triggers an immediate break
         }
 
         /***************************************************************************************************************************/
@@ -167,10 +177,13 @@ public class GameLoop : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Start Proto Game Loop");
 
-        int i = 0;                                  //temp counter for testing
+        int totalRounds = 8;                                  //Round counter and round number
+        int i = 0;
 
-        while ( i < 3)
+        while ( i < totalRounds)
         {
+            
+
             yield return new WaitForSeconds(1f);
 
             foreach (var player in playerQueue)
@@ -183,7 +196,7 @@ public class GameLoop : MonoBehaviour
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
 
-                            // Enable confirm button for this player�s turn
+                            // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
 
                             // Verify the confirm button was clicked before proceeding.
@@ -236,6 +249,35 @@ public class GameLoop : MonoBehaviour
                 
                 yield return new WaitForSeconds(3f); // pause for observation
             }
+
+            if (isWin)
+            {
+                TestConsoleLog("isWin is true, check for tie");
+                isTie = CheckTie(playerQueue);
+
+                if (!isTie)
+                {
+                    // No tie  end game
+                    displayWinner(playerQueue);
+                    break;
+                }
+
+                if (isTie && !playedTieBreaker)
+                {
+                    TestConsoleLog("Tie detected! Playing tie-breaker round...");
+                    playedTieBreaker = true;
+                    // continue loop
+                }
+                else
+                {
+                    TestConsoleLog("Tie-breaker complete. Ending game.");
+                    displayWinner(playerQueue);
+                    break;
+                }
+
+
+            }
+
             //Assume that score gets updated and a winner is chosen, 
             //judge is last player in the round. Therefore after judgement, the queue gets cycled
             //first turn off the judge labels for all
@@ -262,18 +304,112 @@ public class GameLoop : MonoBehaviour
             ReloadPlayerHands(playerQueue, playerview, CpuView);
             yield return new WaitForSeconds(1f);
 
+            
+
+
+
             //discard and draw a new prompt card
             TestConsoleLog("discard and draw a new prompt card");
-            
-            i++;
-            if(i == 2) { TestConsoleLog("CLEAR"); } //forces and auto clear to make more room
+
+
+            //check for loop break conditions here before incrementing. If isFinalRound false, increment, otherwise it will break the 
+            //loop after the run. This is where a tie check will occur if required. 
+
+            if (!isFinalRound)
+            {
+
+                i++;
+                TestConsoleLog("CLEAR");  //forces and auto clear to make more room
+            }
+            else if(isFinalRound == true) 
+            {
+                // Sudden Win Mode overrides final-round logic
+                if (sudWinModeset)
+                {
+                    break;
+                }
+                TestConsoleLog("Starting Final Round");
+                //i = totalRounds - 1;
+                isWin = true;
+                Debug.Log(isWin);
+                
+            }
+           
+
         }
 
         
         //Debug.Log("End protoloop test");
         TestConsoleLog("End Protoloop test");
+        TestConsoleLog("Game is over, thanks for playing");
+        //return to main menu scene
+        TestConsoleLog("Returning to Main Menu");
+
+        yield return new WaitForSeconds(GameModeTransition);
+        SceneManager.LoadScene("Bootstrap");
+
+    }
+    /// <summary>
+    /// Simple method that displays the winner. This is independent of mode.
+    /// </summary>
+    /// <param name="playerQueue"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void displayWinner(Queue<IPlayerCommon> playerQueue)
+    {
+        IPlayerCommon winner = null;
+        int highestScore = int.MinValue;
+
+        foreach (var player in playerQueue)
+        {
+            if (player.score > highestScore)
+            {
+                highestScore = player.score;
+                winner = player;
+            }
+        }
+
+        if (winner != null)
+        {
+            TestConsoleLog($"Winner is {winner.Avatar_Name} with {highestScore} points!");
+        }
+        else
+        {
+            TestConsoleLog("No winner could be determined.");
+        }
+
+
     }
 
+    /// <summary>
+    /// Simple method that simply counts to see how many players meet the win codition score. if
+    /// greater than 1, a tie is found. Otherwise no tie is possible
+    /// </summary>
+    /// <param name="playerQueue"></param>
+    /// <returns></returns>
+    private bool CheckTie(Queue<IPlayerCommon> playerQueue)
+    {
+        bool tie = false;
+        int tiedPlayers = 0;
+
+        foreach(var player in playerQueue)
+        {
+            if (player.score == wincon)
+            {
+                tiedPlayers++;
+                if (tiedPlayers > 1) { return tie = true; }
+            }
+        }
+        return tie;
+    }
+
+    /// <summary>
+    /// Determines who is the round winner and also initiates the check to determine if a win condition is met
+    /// This checks to see if a players score meets the win condition (regardless of mode).
+    /// It will not check for a tie, because this occurs after the final round is started. 
+    /// Once a win is met, either a final round is made, a flag is set and the loop will break once a winner is declared.
+    /// </summary>
+    /// <param name="playerQueue"></param>
+    /// <param name="playedBy"></param>
     private void FindWinner(Queue<IPlayerCommon> playerQueue, string playedBy)
     {
        foreach(var player in playerQueue) {
@@ -286,6 +422,21 @@ public class GameLoop : MonoBehaviour
                 case PsychePlayer psychePlayer:
                     psychePlayer.score++;
                         HumanScoreField.text = psychePlayer.score.ToString();
+
+                        //check for win condition
+                        if(psychePlayer.score == wincon)
+                        {
+                            if (sudWinModeset)
+                            {
+                                TestConsoleLog($"{player.Avatar_Name}" + "has winning score and won sudden win mode");
+                                isFinalRound = true;
+                                break;
+                            }
+                            isFinalRound = true;
+                            Debug.Log(isFinalRound);
+                            TestConsoleLog($"{player.Avatar_Name}" + "has winning score, Final round flag is set");
+                        }
+
                     break;
 
                 case CPUPlayer cpuPlayer:
@@ -293,6 +444,19 @@ public class GameLoop : MonoBehaviour
                     if (player.Avatar_Name == CPU1Name.text) { CPU1ScoreField.text = cpuPlayer.score.ToString();}
                     else if (player.Avatar_Name==CPU2Name.text) {CPU2ScoreField.text = cpuPlayer.score.ToString();}
 
+                    //check for win condition
+                    if(cpuPlayer.score == wincon)
+                        {
+                            if (sudWinModeset)
+                            {
+                                TestConsoleLog($"{player.Avatar_Name}" + "has winning score and won sudden win mode");
+                                isFinalRound = true;
+                                break;
+                            }
+                            isFinalRound = true;
+                            Debug.Log(isFinalRound);
+                            TestConsoleLog($"{player.Avatar_Name}" + "has winning score, Final round flag is set");
+                        }
                     break;
             }
         }
