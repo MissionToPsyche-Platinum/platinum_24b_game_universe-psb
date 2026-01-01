@@ -164,20 +164,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   PlayText: {fileID: 0}
-  noplayermessage: {fileID: 0}
-  nocpuplayermessage: {fileID: 0}
-  NormalCkBox: {fileID: 0}
-  SDeathCkBox: {fileID: 0}
+  NormalCkbox: {fileID: 0}
+  SDeathCkbox: {fileID: 0}
   HighContrastCkBox: {fileID: 0}
   TxttoSpeechCkBx: {fileID: 0}
   CPUNameText: {fileID: 0}
   BtnStart: {fileID: 0}
   enableNormMode: 0
-  enableSuddenWinMode: 0
+  enableSuddenWinMode: 1
   enableHighContrast: 0
   enableTTSpeech: 0
   CheckPlayerName: 0
   CheckCPUChars: 0
+  NumOfPlayersDD: {fileID: 0}
   GameModeTransition: 3
 --- !u!1 &1710201553
 GameObject:

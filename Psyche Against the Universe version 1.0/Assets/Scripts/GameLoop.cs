@@ -35,10 +35,12 @@ public class GameLoop : MonoBehaviour
     //Banter areas
     public TMP_Text CPUPlay1Banter;
     public TMP_Text CPUPlay2Banter;
+    public TMP_Text CPUPlay3Banter;
     //add additional boxes for exapnded gameboards
     //score boxes
     public TMP_Text CPU2ScoreField;
     public TMP_Text CPU1ScoreField;
+    public TMP_Text CPU3ScoreField;
     public TMP_Text HumanScoreField;
     //add additional for expanded
 
@@ -88,6 +90,10 @@ public class GameLoop : MonoBehaviour
         {
            StartCoroutine(StartGameLoop()); //allows for adding delays
         }
+        if (scene.name == "Gamebrd 4P")    //Will need to add code to address the other gameboard scenes, but it will be similar
+        {
+            StartCoroutine(StartGameLoop()); //allows for adding delays
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -110,7 +116,8 @@ public class GameLoop : MonoBehaviour
 
         //load player names from queue into the player name fields. Match by object type to place human '
         //player in the correct spot
-        //Refactor into a seperate method once game loop is proven
+        //Refactor into a seperate method once game loop is proven.
+        //Will need to refactor once all game play fields are proven
         int index = 0;
         foreach (var player in playerQueue)
         {
@@ -124,14 +131,30 @@ public class GameLoop : MonoBehaviour
                     {
                         CPU1Name.text = CPUplayer.Avatar_Name;
                     }
-                    else if (index == 2)
+                    if (index == 2)
                     {
                         CPU2Name.text = CPUplayer.Avatar_Name;
-                        CPUJudge2.color = Color.white;              //Sets the last player in the queue as the first judge
-                        CPUplayer.judge = true;                     //sets the judge flag to true so the loop can id who is judge
-                        Debug.Log("First Judge field" + CPUplayer.judge);  
+                        
+                        if (playerQueue.Count == 3)
+                        {
+                            CPUJudge2.color = Color.white;              //Sets the last player in the queue as the first judge. Modified to check for additional players
+                            CPUplayer.judge = true;                     //sets the judge flag if three player game
+                            Debug.Log("First Judge field" + CPUplayer.judge);
+                        }
                     }
-                    break;
+                    if (index == 3)
+                    {
+                        CPU3Name.text = CPUplayer.Avatar_Name;
+
+                        if (playerQueue.Count == 4)                     //active if it is a three player game.
+                        {
+                            CPUJudge3.color = Color.white;
+                            CPUplayer.judge = true;
+                            Debug.Log("First Judge field" + CPUplayer.judge);
+                        }
+                       
+                    }
+                        break;
             }
             index++;
 
@@ -305,9 +328,6 @@ public class GameLoop : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             
-
-
-
             //discard and draw a new prompt card
             TestConsoleLog("discard and draw a new prompt card");
 
@@ -443,9 +463,10 @@ public class GameLoop : MonoBehaviour
                     cpuPlayer.score++;
                     if (player.Avatar_Name == CPU1Name.text) { CPU1ScoreField.text = cpuPlayer.score.ToString();}
                     else if (player.Avatar_Name==CPU2Name.text) {CPU2ScoreField.text = cpuPlayer.score.ToString();}
+                    else if (CPU3Name != null && player.Avatar_Name == CPU3Name.text) { CPU3ScoreField.text = cpuPlayer.score.ToString(); }
 
-                    //check for win condition
-                    if(cpuPlayer.score == wincon)
+                        //check for win condition
+                        if (cpuPlayer.score == wincon)
                         {
                             if (sudWinModeset)
                             {
@@ -481,6 +502,10 @@ public class GameLoop : MonoBehaviour
         else if (cPUPlayer.Avatar_Name == CPU2Name.text)
         {
             CPUPlay2Banter.text = banterLine;
+        }
+        else if(CPU3Name != null && cPUPlayer.Avatar_Name == CPU3Name.text)
+        {
+            CPUPlay3Banter.text = banterLine;
         }
         //add additional players later for expanded game
     }
@@ -543,6 +568,10 @@ public class GameLoop : MonoBehaviour
         {
             CPUJudge2.color = Color.white;
         }
+        else if (CPU3Name != null && playerQueue.Last().Avatar_Name == CPU3Name.text)
+        {
+            CPUJudge3.color = Color.white;
+        }
         else if (playerQueue.Last().Avatar_Name == HumanPlayerName.text)
         {
             JudgeLabel.color = Color.white;
@@ -559,7 +588,11 @@ public class GameLoop : MonoBehaviour
         JudgeLabel.color = Color.red;
         CPUJudge1.color = Color.red;
         CPUJudge2.color = Color.red;
-        //CPUJudge3.color = Color.red;
+        if (CPUJudge3 != null)
+        {
+            CPUJudge3.color = Color.red;
+        }
+        
        // CPUJudge4.color = Color.red;
        // CPUJudge5.color = Color.red;
             
