@@ -389,10 +389,21 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(GameModeTransition);
         
-        //Determine which gameboard to load based on the value in the # players DD
+        //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
         if (GamePlayerQueue.Count == 4)
         {
+            Debug.Log("4 player board");
             SceneManager.LoadScene("Gamebrd 4P");
+        }
+        else if (GamePlayerQueue.Count == 5)
+        {
+            Debug.Log("5 player board");
+            SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+        }
+        else if (GamePlayerQueue.Count == 6)
+        {
+            Debug.Log("6 player board");
+            SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
         }
         else
         {

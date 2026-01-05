@@ -36,11 +36,15 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPUPlay1Banter;
     public TMP_Text CPUPlay2Banter;
     public TMP_Text CPUPlay3Banter;
+    public TMP_Text CPUPlay4Banter;
+    public TMP_Text CPUPlay5Banter;
     //add additional boxes for exapnded gameboards
     //score boxes
     public TMP_Text CPU2ScoreField;
     public TMP_Text CPU1ScoreField;
     public TMP_Text CPU3ScoreField;
+    public TMP_Text CPU4ScoreField;
+    public TMP_Text CPU5ScoreField;
     public TMP_Text HumanScoreField;
     //add additional for expanded
 
@@ -90,7 +94,15 @@ public class GameLoop : MonoBehaviour
         {
            StartCoroutine(StartGameLoop()); //allows for adding delays
         }
-        if (scene.name == "Gamebrd 4P")    //Will need to add code to address the other gameboard scenes, but it will be similar
+        if (scene.name == "Gamebrd 4P")    //4 player game format
+        {
+            StartCoroutine(StartGameLoop()); //allows for adding delays
+        }
+        if (scene.name == "Gamebrd 5P")    //Initiate 5 player game format
+        {
+            StartCoroutine(StartGameLoop()); //allows for adding delays
+        }
+        if (scene.name == "Gamebrd 6P")    //Initiate 5 player game format
         {
             StartCoroutine(StartGameLoop()); //allows for adding delays
         }
@@ -146,7 +158,7 @@ public class GameLoop : MonoBehaviour
                     {
                         CPU3Name.text = CPUplayer.Avatar_Name;
 
-                        if (playerQueue.Count == 4)                     //active if it is a three player game.
+                        if (playerQueue.Count == 4)                     //active if it is a four player game.
                         {
                             CPUJudge3.color = Color.white;
                             CPUplayer.judge = true;
@@ -154,7 +166,31 @@ public class GameLoop : MonoBehaviour
                         }
                        
                     }
-                        break;
+                    if (index == 4)
+                    {
+                        CPU4Name.text = CPUplayer.Avatar_Name;
+
+                        if (playerQueue.Count == 5)                     //active if it is a five  player game.
+                        {
+                            CPUJudge4.color = Color.white;
+                            CPUplayer.judge = true;
+                            Debug.Log("First Judge field" + CPUplayer.judge);
+                        }
+
+                    }
+                    if (index == 5)
+                    {
+                        CPU5Name.text = CPUplayer.Avatar_Name;
+
+                        if (playerQueue.Count == 6)                     //active if it is a six  player game.
+                        {
+                            CPUJudge5.color = Color.white;
+                            CPUplayer.judge = true;
+                            Debug.Log("First Judge field" + CPUplayer.judge);
+                        }
+
+                    }
+                    break;
             }
             index++;
 
@@ -200,7 +236,7 @@ public class GameLoop : MonoBehaviour
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Start Proto Game Loop");
 
-        int totalRounds = 8;                                  //Round counter and round number
+        int totalRounds = 20;                                  //Round counter and round number
         int i = 0;
 
         while ( i < totalRounds)
@@ -464,6 +500,8 @@ public class GameLoop : MonoBehaviour
                     if (player.Avatar_Name == CPU1Name.text) { CPU1ScoreField.text = cpuPlayer.score.ToString();}
                     else if (player.Avatar_Name==CPU2Name.text) {CPU2ScoreField.text = cpuPlayer.score.ToString();}
                     else if (CPU3Name != null && player.Avatar_Name == CPU3Name.text) { CPU3ScoreField.text = cpuPlayer.score.ToString(); }
+                    else if (CPU4Name != null && player.Avatar_Name == CPU4Name.text) { CPU4ScoreField.text = cpuPlayer.score.ToString(); }
+                    else if (CPU5Name != null && player.Avatar_Name == CPU5Name.text) { CPU5ScoreField.text = cpuPlayer.score.ToString(); }
 
                         //check for win condition
                         if (cpuPlayer.score == wincon)
@@ -506,6 +544,14 @@ public class GameLoop : MonoBehaviour
         else if(CPU3Name != null && cPUPlayer.Avatar_Name == CPU3Name.text)
         {
             CPUPlay3Banter.text = banterLine;
+        }
+        else if (CPU4Name != null && cPUPlayer.Avatar_Name == CPU4Name.text)
+        {
+            CPUPlay4Banter.text = banterLine;
+        }
+        else if (CPU5Name != null && cPUPlayer.Avatar_Name == CPU5Name.text)
+        {
+            CPUPlay5Banter.text = banterLine;
         }
         //add additional players later for expanded game
     }
@@ -572,6 +618,14 @@ public class GameLoop : MonoBehaviour
         {
             CPUJudge3.color = Color.white;
         }
+        else if (CPU4Name != null && playerQueue.Last().Avatar_Name == CPU4Name.text)
+        {
+            CPUJudge4.color = Color.white;
+        }
+        else if (CPU5Name != null && playerQueue.Last().Avatar_Name == CPU5Name.text)
+        {
+            CPUJudge5.color = Color.white;
+        }
         else if (playerQueue.Last().Avatar_Name == HumanPlayerName.text)
         {
             JudgeLabel.color = Color.white;
@@ -592,10 +646,16 @@ public class GameLoop : MonoBehaviour
         {
             CPUJudge3.color = Color.red;
         }
+        if (CPUJudge4 != null)
+        {
+            CPUJudge4.color = Color.red;
+        }
+        if (CPUJudge5 != null)
+        {
+            CPUJudge5.color = Color.red;
+        }
         
-       // CPUJudge4.color = Color.red;
-       // CPUJudge5.color = Color.red;
-            
+
     }
 
     /// <summary>
@@ -681,7 +741,7 @@ public class GameLoop : MonoBehaviour
         //int[] weights = { 3, 5, 7, 2, 10, 12, 15, 1 };
         var cards = new List<AnswerCard>();
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 40; i++)
         {
             string title = titles[i % titles.Length];
            // string personality = personalities[i % personalities.Length];
