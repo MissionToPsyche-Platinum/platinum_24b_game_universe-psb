@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     public bool CheckPlayerName = false;        //checks if the player name field is filled in. Set to false to force validation
     public bool CheckCPUChars = false;          //checks if the CPU players is blank. Set to false to force validation
 
+    public TMP_Dropdown NumOfPlayersDD;    //this is read to determine which gameboard to load
+
     public float GameModeTransition = 3f;
 
     //singleton object to allow decoupling and interface with the game loop
@@ -386,7 +388,27 @@ public class GameManager : MonoBehaviour
     IEnumerator loadGame()
     {
         yield return new WaitForSeconds(GameModeTransition);
-        SceneManager.LoadScene("Gameboard");
+        
+        //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
+        if (GamePlayerQueue.Count == 4)
+        {
+            Debug.Log("4 player board");
+            SceneManager.LoadScene("Gamebrd 4P");
+        }
+        else if (GamePlayerQueue.Count == 5)
+        {
+            Debug.Log("5 player board");
+            SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+        }
+        else if (GamePlayerQueue.Count == 6)
+        {
+            Debug.Log("6 player board");
+            SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
+        }
+        else
+        {
+            SceneManager.LoadScene("Gameboard");            //default is always 2 additional players
+        }
     }
     /// <summary>
     /// Method makes the private queue accessible by the gameloop script
