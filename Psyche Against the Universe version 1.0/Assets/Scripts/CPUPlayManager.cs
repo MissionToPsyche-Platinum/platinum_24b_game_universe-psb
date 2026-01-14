@@ -24,20 +24,36 @@ public class CPUPlayManager : MonoBehaviour
     public Button BtnCreate;
     public TMP_Text CPUNameText;
 
-    //provide class level scope as required
-    private ICPUBuilder CPUPlayerBuilder;
-    private CPUPlayDirector theDirector;
+    //provide class level scope as required. enabled in this fashion to allow 
+    // for play mode testing.
+    [HideInInspector] public ICPUBuilder CPUPlayerBuilder;
+    [HideInInspector] public CPUPlayDirector theDirector;
+
+    //testing specific field
+    private bool initialized = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        //Testing specific code to prevent double start() calls during test execution
+
+        if (initialized) return;
+        initialized = true;
+
         //Force initialization of the singleton object to hold the player list
         var _ = CPUPlayerSingleton.instance;
 
 
-        //initialize our CPU Builder pattern to create our CPU players
-        CPUPlayerBuilder = new CPUBuilder();
-        theDirector = new CPUPlayDirector(CPUPlayerBuilder);
+        //initialize our CPU Builder pattern to create our CPU players.
+        //modified to account for test code mocking.
+       // CPUPlayerBuilder = new CPUBuilder();
+       // theDirector = new CPUPlayDirector(CPUPlayerBuilder);
+        if (CPUPlayerBuilder == null)
+            CPUPlayerBuilder = new CPUBuilder();
+
+        if (theDirector == null)
+            theDirector = new CPUPlayDirector(CPUPlayerBuilder);
 
         //create a listener
         BtnCreate.onClick.AddListener(BuildPlayers);
