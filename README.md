@@ -14,3 +14,6 @@ the human player. Still need to add popups for the about and Manual buttons. Als
 Last items for CPU character generation are to make the personality fields a string array that are randomly generated with 4 unique personalities. This hierarchy is used by the strategy pattern to determine CPU play strategy.
 Player and CPU characters use the AnswerCard object in thier hand list. 
 Feel free to modify classes as needed to interface with the game logic, but maintain the MVC interface where required.
+
+1/14/26
+All gameboards have been developed and preset pending graphical improvements. Play mode and edit mode testing started on Main menu. Will transition to game loop test once more card elements are complete.
