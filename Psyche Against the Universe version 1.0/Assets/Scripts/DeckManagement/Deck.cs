@@ -16,7 +16,7 @@ public class Deck : MonoBehaviour
     [SerializeField] private Canvas _cardCanvas;
 
     // Instantiated cards:
-    private List<Card> _deckPile;
+    private List<Card> _deckPile = new();
     private List<Card> _discardPile = new(); // Rijul, this may conflict with your discard logic, we can pick the one that works best
 
     public List<Card> HandCards {get; private set;} = new();// this is public, for potential future Hand classes to make a visually nice hand, if needed
