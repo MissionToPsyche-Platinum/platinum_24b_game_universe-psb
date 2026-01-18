@@ -25,6 +25,7 @@ public class PlayerDropdownLoader : MonoBehaviour
 
         //listener to update the player chosen name field
         Dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+       
     }
     void LoadPlayerNames()
     {
