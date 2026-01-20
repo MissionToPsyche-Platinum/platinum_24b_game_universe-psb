@@ -15,6 +15,24 @@ public class HandManager : MonoBehaviour
         UpdateCardPositions();
     }
 
+    // call during judge round to hide hand
+    public void PlayDeckHide()
+    {
+        yOffset = -8f;
+    }
+
+    // call during judge round to judge cards
+    public void PlayDeckJudge()
+    {
+        yOffset = -3.5f;
+    }
+
+    // call after judge round to show hand again
+    public void PlayDeckShow()
+    {
+        yOffset = -4f;
+    }
+
     public void RegisterCard(PlayCard card)
     {
         if (!cards.Contains(card))

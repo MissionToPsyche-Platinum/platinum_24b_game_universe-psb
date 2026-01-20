@@ -96,6 +96,14 @@ public class PlayCard : MonoBehaviour,
         }
     }
 
+    // change card sprite
+    public void SetCardSprite(Sprite newSprite)
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = newSprite;
+    }
+
+
     // ---------- Pointer Events (New Input System compatible) ----------
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -187,7 +195,6 @@ public class PlayCard : MonoBehaviour,
         previousMousePos = currentMousePos;
     }
 
-
     // ---------- Helpers ----------
 
     Vector3 GetMouseWorldPos(PointerEventData eventData)
@@ -249,7 +256,5 @@ public class PlayCard : MonoBehaviour,
         
         swayTween = transform.DOLocalRotate(new Vector3(0, 0, swayAmount), swaySmoothing);
     }
-
-    
 
 }
