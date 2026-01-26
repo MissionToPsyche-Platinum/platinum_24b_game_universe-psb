@@ -48,6 +48,9 @@ public class GameLoop : MonoBehaviour
     public TMP_Text HumanScoreField;
     //add additional for expanded
 
+    //prompt card addition
+    public PromptCardDisplay activeCard;
+
     //win conditions
     int NormWin = 3;
     int SudWin = 2;
@@ -201,8 +204,15 @@ public class GameLoop : MonoBehaviour
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
         testDeck = getTestCards();
-        List <PromptCard> testPromptDeck = new List<PromptCard>();              //this is a test deck. Comment out when final
-        testPromptDeck = getTestPrompts();
+       // List <PromptCard> testPromptDeck = new List<PromptCard>();              //this is a test deck. Comment out when final
+       // testPromptDeck = getTestPrompts();
+        //load a prompt into the scriptable object
+        PromptLoader.LoadPromptText(activeCard.cardData);
+        //Add a delay to fill in an animation later.
+        yield return new WaitForSeconds(2f);
+        //flip the card
+        activeCard.ShowPrompt();
+
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
@@ -367,6 +377,14 @@ public class GameLoop : MonoBehaviour
             //discard and draw a new prompt card
             TestConsoleLog("discard and draw a new prompt card");
 
+            //flip prompt card back to the front side. delay, and then flip
+            activeCard.ShowFront();
+           
+            PromptLoader.LoadPromptText(activeCard.cardData);
+            //Add a delay to fill in an animation later.
+            yield return new WaitForSeconds(2f);
+            //flip the card
+            activeCard.ShowPrompt();
 
             //check for loop break conditions here before incrementing. If isFinalRound false, increment, otherwise it will break the 
             //loop after the run. This is where a tie check will occur if required. 
