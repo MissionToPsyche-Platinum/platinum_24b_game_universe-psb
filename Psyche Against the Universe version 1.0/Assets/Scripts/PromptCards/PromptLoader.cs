@@ -1,9 +1,14 @@
-using UnityEngine;
+//using UnityEngine;
 
 /// <summary>
 /// General utilitly script to load the prompts when required by
 /// the system when the initial and follow along prompts are required.
 /// </summary>
+/// 
+//Deprecated class. No longer required due to integration of the Prompt Deck Manager
+//Maintained in case of use elsewhere
+
+/*
 public static class PromptLoader
 {
     public static void LoadPromptText(PromptCardData data)
@@ -28,3 +33,4 @@ public static class PromptLoader
     }
     
 }
+*/
