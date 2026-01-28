@@ -6,9 +6,9 @@ public class HandManager : MonoBehaviour
     public List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
-    public float moveSpeed = 10f;
 
     private PlayCard draggingCard;
+    private CardSpawner cardSpawner;
 
     void Update()
     {
@@ -56,6 +56,25 @@ public class HandManager : MonoBehaviour
     {
         draggingCard = null;
         UpdateCardPositions();
+    }
+
+    void UpdateCardHand(int playerCount)
+    {
+        PlayDeckHide();
+        WaitForSeconds(0.5f);
+
+        // Adjust hand size based on player count
+        while (cards.Count < (playerCount - 1))
+        {
+            cardSpawner = FindAnyObjectByType<CardSpawner>();
+            CardSpawner.Instance.Spawn();
+        }
+        while (cards.Count > (playerCount - 1))
+        {
+            PlayCard cardToRemove = cards[cards.Count - 1];
+            UnregisterCard(cardToRemove);
+            Destroy(cardToRemove.gameObject);
+        }
     }
 
     void UpdateCardPositions()
