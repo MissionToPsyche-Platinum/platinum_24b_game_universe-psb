@@ -1,5 +1,4 @@
-﻿using DG.Tweening.Core.Easing;
-using JetBrains.Annotations;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,6 +49,7 @@ public class GameLoop : MonoBehaviour
 
     //prompt card addition
     public PromptCardDisplay activeCard;
+    public PromptDeckManager deckManager;
 
     //win conditions
     int NormWin = 3;
@@ -204,10 +204,13 @@ public class GameLoop : MonoBehaviour
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
         testDeck = getTestCards();
-       // List <PromptCard> testPromptDeck = new List<PromptCard>();              //this is a test deck. Comment out when final
-       // testPromptDeck = getTestPrompts();
-        //load a prompt into the scriptable object
-        PromptLoader.LoadPromptText(activeCard.cardData);
+
+        string prompt = deckManager.DrawPrompt();
+        activeCard.SetPrompt(prompt);
+
+
+                                                         //load a prompt into the scriptable object
+                                                         //PromptLoader.LoadPromptText(activeCard.cardData);
         //Add a delay to fill in an animation later.
         yield return new WaitForSeconds(2f);
         //flip the card
@@ -241,7 +244,7 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
         //Testing general game loop using the Test Console object. Disable object and remark out test code when final
         yield return new WaitForSeconds(1f);
-        TestConsoleLog("Deal a Prompt Card");
+        //TestConsoleLog("Deal a Prompt Card");
 
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Start Proto Game Loop");
@@ -388,9 +391,13 @@ public class GameLoop : MonoBehaviour
 
             //flip prompt card back to the front side. delay, and then flip
             activeCard.ShowFront();
-           
-            PromptLoader.LoadPromptText(activeCard.cardData);
-            //Add a delay to fill in an animation later.
+            // Draw a new prompt from the deck
+            string nextPrompt = deckManager.DrawPrompt();
+            // Assign it to the card
+            activeCard.SetPrompt(nextPrompt);
+
+                                                     //PromptLoader.LoadPromptText(activeCard.cardData);
+                                                     //Add a delay to fill in an animation later.
             yield return new WaitForSeconds(2f);
             //flip the card
             activeCard.ShowPrompt();
