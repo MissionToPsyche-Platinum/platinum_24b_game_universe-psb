@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class HandManager : MonoBehaviour
 {
+    public static HandManager Instance;
     public List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
@@ -10,25 +11,31 @@ public class HandManager : MonoBehaviour
     private PlayCard draggingCard;
     private CardSpawner cardSpawner;
 
+    void Awake()
+    {
+        PlayHandHide();
+        Instance = this;
+    }
+
     void Update()
     {
         UpdateCardPositions();
     }
 
     // call during judge round to hide hand
-    public void PlayDeckHide()
+    public void PlayHandHide()
     {
         yOffset = -8f;
     }
 
     // call during judge round to judge cards
-    public void PlayDeckJudge()
+    public void PlayHandJudge()
     {
         yOffset = -3.5f;
     }
 
     // call after judge round to show hand again
-    public void PlayDeckShow()
+    public void PlayHandShow()
     {
         yOffset = -4f;
     }
@@ -58,18 +65,29 @@ public class HandManager : MonoBehaviour
         UpdateCardPositions();
     }
 
-    void UpdateCardHand(int playerCount)
+    public void UpdatePlayHand(int playerCount)
     {
-        PlayDeckHide();
-        WaitForSeconds(0.5f);
-
         // Adjust hand size based on player count
         while (cards.Count < (playerCount - 1))
         {
-            cardSpawner = FindAnyObjectByType<CardSpawner>();
             CardSpawner.Instance.Spawn();
         }
         while (cards.Count > (playerCount - 1))
+        {
+            PlayCard cardToRemove = cards[cards.Count - 1];
+            UnregisterCard(cardToRemove);
+            Destroy(cardToRemove.gameObject);
+        }
+    }
+
+    public void ResetPlayHand()
+    {
+        // Adjust hand size back to 5 cards
+        while (cards.Count < 5)
+        {
+            CardSpawner.Instance.Spawn();
+        }
+        while (cards.Count > 5)
         {
             PlayCard cardToRemove = cards[cards.Count - 1];
             UnregisterCard(cardToRemove);

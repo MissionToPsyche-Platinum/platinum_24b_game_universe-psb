@@ -1346,7 +1346,6 @@ MonoBehaviour:
   cards: []
   cardSpacing: 2
   yOffset: -4
-  moveSpeed: 10
 --- !u!4 &605136286
 Transform:
   m_ObjectHideFlags: 0
@@ -3468,8 +3467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631debc815656a84b92f42827069f2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::PromptDeckmanager
-  allPrompts:
-  - {fileID: 11400000, guid: ab8bd9d59ef3d2f4d87af7381c3682ad, type: 2}
 --- !u!4 &1722637766
 Transform:
   m_ObjectHideFlags: 0
@@ -4388,3 +4385,4 @@ SceneRoots:
   - {fileID: 1741683130}
   - {fileID: 1747904154}
   - {fileID: 68797208}
+  - {fileID: 1722637766}

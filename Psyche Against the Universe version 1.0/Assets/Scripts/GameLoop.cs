@@ -258,6 +258,8 @@ public class GameLoop : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
+            //if (!gm.IsHumanPlayerJudge()) HandManager.Instance.PlayHandShow(); // show play hand if human not judge
+
             foreach (var player in playerQueue)
             {
                 switch (player)
@@ -265,6 +267,8 @@ public class GameLoop : MonoBehaviour
                     case PsychePlayer humanPlayer:
                         if (!humanPlayer.isJudge())
                         {
+                            HandManager.Instance.PlayHandShow();
+
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
 
@@ -276,19 +280,30 @@ public class GameLoop : MonoBehaviour
 
                             //humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
+
+                            HandManager.Instance.PlayHandHide();
                         }
                         else
                         {
                             TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
-                            //judge logic goes here. UI should display the played cards list as UI elements
+                            // judge logic goes here. UI should display the played cards list as UI elements
 
-                            // HandManager.Instance.UpdateCardHand(playerQueue.Count);  //updates the hand to match player count
+                            // HandManager.Instance.PlayHandHide();
+                            // HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            // //yield return new WaitForSeconds(1f);
+                            // HandManager.Instance.PlayHandJudge();
 
                             // // Enable confirm button for this player’s turn
                             // UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
 
                             // // Verify the confirm button was clicked before proceeding.
                             // yield return new WaitUntil(() => UIPlayConfirm.Instance.HasConfirmed);
+
+                            // //humanPlayer.PlayCard(this);
+                            // playerview.UpdateHand(humanPlayer.Hand);
+
+                            // HandManager.Instance.PlayHandHide();
+                            // HandManager.Instance.ResetPlayHand();
 
                             //and select the same way a card is played. For now, this will be auto 
                             TestConsoleLog($"{PlayedCards[0].title} was chosen. {PlayedCards[0].PlayedBy} scores a point");
