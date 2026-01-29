@@ -67,31 +67,37 @@ public class HandManager : MonoBehaviour
 
     public void UpdatePlayHand(int playerCount)
     {
+        int cardCount = cards.Count;
         // Adjust hand size based on player count
-        while (cards.Count < (playerCount - 1))
+        while (cardCount < (playerCount - 1))
         {
             CardSpawner.Instance.Spawn();
+            cardCount++;
         }
-        while (cards.Count > (playerCount - 1))
+        while (cardCount > (playerCount - 1))
         {
             PlayCard cardToRemove = cards[cards.Count - 1];
             UnregisterCard(cardToRemove);
             Destroy(cardToRemove.gameObject);
+            cardCount--;
         }
     }
 
     public void ResetPlayHand()
     {
+        int cardCount = cards.Count;
         // Adjust hand size back to 5 cards
-        while (cards.Count < 5)
+        while (cardCount < 5)
         {
             CardSpawner.Instance.Spawn();
+            cardCount++;
         }
-        while (cards.Count > 5)
+        while (cardCount > 5)
         {
             PlayCard cardToRemove = cards[cards.Count - 1];
             UnregisterCard(cardToRemove);
             Destroy(cardToRemove.gameObject);
+            cardCount--;
         }
     }
 
