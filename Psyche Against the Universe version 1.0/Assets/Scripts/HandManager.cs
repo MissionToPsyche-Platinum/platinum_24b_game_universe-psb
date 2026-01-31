@@ -67,6 +67,8 @@ public class HandManager : MonoBehaviour
 
             // Reinsert in a temporary order (without changing the main list yet)
             orderedCards.Insert(insertIndex, draggingCard);
+
+            
         }
 
         // Update each cards target position smoothly

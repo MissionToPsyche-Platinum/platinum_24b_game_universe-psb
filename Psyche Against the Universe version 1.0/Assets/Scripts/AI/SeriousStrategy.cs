@@ -3,11 +3,11 @@ using System.Collections.Generic;
 public class SeriousStrategy : ICPUStrategy
 {
     public string ChooseBanter(string topic)
-        => BanterManager.Instance.GetLine(Personality.Serious);
+        => BanterManager.Instance.GetLine(PersonalityParse.Serious);
 
-    public Card ChooseCardToPlay(Player self)
+    public AnswerCard ChooseCardToPlay(CPUPlayer self)
         => StrategyCommon.PickBestAcrossPriority(self.Hand, self.PersonalityPriority);
 
-    public Card JudgeWinner(IReadOnlyList<Card> tableCards)
-        => StrategyCommon.JudgeBest(tableCards, Personality.Serious);
+    public AnswerCard JudgeWinner(IReadOnlyList<AnswerCard> tableCards)
+        => StrategyCommon.JudgeBest(tableCards, PersonalityParse.Serious);
 }

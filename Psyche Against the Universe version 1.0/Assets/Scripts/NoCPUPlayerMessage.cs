@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// These are possibly going to be replaced by an exception handling routine. 
+/// Save for now and we can remove later
+/// </summary>
 public class NoCPUPlayerMessage : MonoBehaviour
 {
     public GameObject NoCPUPlayerNameAlert;

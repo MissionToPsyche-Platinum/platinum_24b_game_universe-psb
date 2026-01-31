@@ -18,6 +18,11 @@ public class PlayPileDropZone : MonoBehaviour
     {
         sr.enabled = true;
         sr.color = new Color(1f, 1f, 1f, 0.3f); // dim
+        if (currentCard != null)
+        {
+            Debug.Log("Removing current card: " + currentCard.name);
+            currentCard.UnlockFromPlayPile();
+        }
         Debug.Log("Play pile zone shown");
     }
 
@@ -60,12 +65,25 @@ public class PlayPileDropZone : MonoBehaviour
         Debug.Log("OnTriggerExit2D detected: " + collision.gameObject.name);
         
         PlayCard card = collision.GetComponent<PlayCard>();
+        PlayCard newCard = currentCard;
         if (card != null)
         {
-            isCardInside = false;
-            currentCard = null;
-            ShowZone();
-            Debug.Log("Card exited play pile!");
+            if (currentCard != card)
+            {
+                currentCard = card;
+                ShowZone();
+                currentCard = newCard;
+                Highlight();
+                Debug.Log("Card switched!");
+            }
+
+            if (currentCard == card)
+            {
+                isCardInside = false;
+                currentCard = null;
+                ShowZone();
+                Debug.Log("Card exited play pile!");
+            }
         }
     }
 }

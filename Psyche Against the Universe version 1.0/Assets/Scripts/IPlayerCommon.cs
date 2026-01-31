@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +20,12 @@ public interface IPlayerCommon
     string Avatar_Name { get; set; }
     int score { get; set; }
 
-    List<AnswerCard> Hand { get; set; }
-
+    bool judge { get; set; }
+   List<AnswerCard> Hand { get; set; }
+    void PlayCard(GameLoop gameLoop);
+    void PLayCard(GameLoop gameLoop, int Index);
     void DrawCard();
     void PlayCard();
+    bool isJudge();
 
 }

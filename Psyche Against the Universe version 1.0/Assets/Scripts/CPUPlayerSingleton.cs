@@ -10,6 +10,14 @@ using UnityEngine;
  */
 public class CPUPlayerSingleton : MonoBehaviour
 {
+
+#if UNITY_EDITOR
+    public static void ResetForTests()
+    {
+        instance = null;
+    }
+#endif
+
     public static CPUPlayerSingleton instance { get; private set; }
 
     public List<IPlayerCommon> CPUPlayers { get; private set; } = new List<IPlayerCommon>();

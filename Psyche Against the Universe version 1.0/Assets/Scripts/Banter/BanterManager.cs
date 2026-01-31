@@ -18,8 +18,8 @@ public class BanterManager
     public static BanterManager Instance => _instance ??= new BanterManager();
 
     // Keyed by personality
-    private readonly Dictionary<Personality, List<string>> _lines =
-        new Dictionary<Personality, List<string>>();
+    private readonly Dictionary<PersonalityParse, List<string>> _lines =
+        new Dictionary<PersonalityParse, List<string>>();
 
     private bool _isLoaded;
 
@@ -38,15 +38,15 @@ public class BanterManager
     {
         if (_isLoaded) return;
 
-        _seriousLines = LoadFor(Personality.Serious, "Serious_Banter");
-        _sciFiLines = LoadFor(Personality.SciFi, "SciFi_Banter");
-        _funnyLines = LoadFor(Personality.Funny, "Funny_Banter");
-        _chaoticLines = LoadFor(Personality.Chaotic, "Chaotic_Banter");
+        _seriousLines = LoadFor(PersonalityParse.Serious, "Serious_Banter");
+        _sciFiLines = LoadFor(PersonalityParse.SciFi, "SciFi_Banter");
+        _funnyLines = LoadFor(PersonalityParse.Funny, "Funny_Banter");
+        _chaoticLines = LoadFor(PersonalityParse.Chaotic, "Chaotic_Banter");
 
-        _lines[Personality.Serious] = _seriousLines;
-        _lines[Personality.SciFi] = _sciFiLines;
-        _lines[Personality.Funny] = _funnyLines;
-        _lines[Personality.Chaotic] = _chaoticLines;
+        _lines[PersonalityParse.Serious] = _seriousLines;
+        _lines[PersonalityParse.SciFi] = _sciFiLines;
+        _lines[PersonalityParse.Funny] = _funnyLines;
+        _lines[PersonalityParse.Chaotic] = _chaoticLines;
 
         _isLoaded = true;
     }
@@ -54,7 +54,7 @@ public class BanterManager
     /// 
     /// Returns a random line for the given personality and optional topic.
    
-    public string GetBanterLine(Personality personality, string topic = null)
+    public string GetBanterLine(PersonalityParse personality, string topic = null)
     {
         EnsureLoaded();
 
@@ -77,16 +77,16 @@ public class BanterManager
     /// New UC-13 convenience method used by CPU strategies.
     /// Returns a random line for a single personality without a topic.
     ///
-    public string GetLine(Personality p)
+    public string GetLine(PersonalityParse p)
     {
         EnsureLoaded();
 
         var list = p switch
         {
-            Personality.Serious => _seriousLines,
-            Personality.SciFi => _sciFiLines,
-            Personality.Funny => _funnyLines,
-            Personality.Chaotic => _chaoticLines,
+            PersonalityParse.Serious => _seriousLines,
+            PersonalityParse.SciFi => _sciFiLines,
+            PersonalityParse.Funny => _funnyLines,
+            PersonalityParse.Chaotic => _chaoticLines,
             _ => _seriousLines
         };
 
@@ -97,7 +97,7 @@ public class BanterManager
     /// 
     /// Loads a banter file from Resources and splits into trimmed lines.
    
-    private List<string> LoadFor(Personality p, string resourceName)
+    private List<string> LoadFor(PersonalityParse p, string resourceName)
     {
         var result = new List<string>();
         var ta = Resources.Load<TextAsset>(resourceName);

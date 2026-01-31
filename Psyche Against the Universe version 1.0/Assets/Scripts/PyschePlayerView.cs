@@ -9,13 +9,16 @@ using UnityEngine;
  */
 public class PyschePlayerView : MonoBehaviour
 {
+    
     public void UpdateScore(int score)
     {
-        //Add score logic here to interact with the player controller or class object
+       
     }
     public void UpdateHand(List<AnswerCard> cards)
     {
-        //clear and redraw the UI or whatever fits the game design
+        //for now it just affects the count
+        Debug.Log("hand Updated: " + cards.Count + "cards remaining");
+        //expand later to redraw players card objects on UI
     }
     
     //incorporate additional methods as required.

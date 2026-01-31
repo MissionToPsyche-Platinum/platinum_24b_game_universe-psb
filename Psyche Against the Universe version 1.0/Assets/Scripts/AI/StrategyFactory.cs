@@ -1,11 +1,11 @@
 public static class StrategyFactory
 {
-    public static ICPUStrategy Create(Personality p) => p switch
+    public static ICPUStrategy Create(PersonalityParse p) => p switch
     {
-        Personality.Serious => new SeriousStrategy(),
-        Personality.SciFi => new SciFiStrategy(),
-        Personality.Funny => new FunnyStrategy(),
-        Personality.Chaotic => new ChaoticStrategy(),
+        PersonalityParse.Serious => new SeriousStrategy(),
+        PersonalityParse.SciFi => new SciFiStrategy(),
+        PersonalityParse.Funny => new FunnyStrategy(),
+        PersonalityParse.Chaotic => new ChaoticStrategy(),
         _ => new SeriousStrategy()
     };
 }

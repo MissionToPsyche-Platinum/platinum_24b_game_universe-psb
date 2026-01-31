@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,10 +27,10 @@ public class GameManager : MonoBehaviour
     //Main menu GUI objects
     public TMP_Text PlayText;  //this is where the players name is
     //public TMP_Text NoPlayerNameTxt;
-    public NoPlayerTextMessage noplayermessage;
-    public NoCPUPlayerMessage nocpuplayermessage;
-    public Toggle NormalCkBox;
-    public Toggle SDeathCkBox;
+   // public NoPlayerTextMessage noplayermessage;
+    //public NoCPUPlayerMessage nocpuplayermessage;
+    public Toggle NormalCkbox;
+    public Toggle SDeathCkbox;
     public Toggle HighContrastCkBox;
     public Toggle TxttoSpeechCkBx;
     public TMP_Text CPUNameText;
@@ -42,7 +43,102 @@ public class GameManager : MonoBehaviour
     public bool CheckPlayerName = false;        //checks if the player name field is filled in. Set to false to force validation
     public bool CheckCPUChars = false;          //checks if the CPU players is blank. Set to false to force validation
 
+    public TMP_Dropdown NumOfPlayersDD;    //this is read to determine which gameboard to load
+
     public float GameModeTransition = 3f;
+
+    //singleton object to allow decoupling and interface with the game loop
+    public static GameManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager initialized and marked DontDestroyOnLoad");
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("Duplicate GameManager destroyed");
+        }
+
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Main Menu")
+        {
+            // Reassign UI references here using GameObject.Find or GetComponent
+            BtnStart = GameObject.Find("BtnStart")?.GetComponent<Button>();
+            PlayText = GameObject.Find("PlayText")?.GetComponent<TMP_Text>();
+            CPUNameText = GameObject.Find("CPUNameText")?.GetComponent<TMP_Text>();
+            NormalCkbox=GameObject.Find("NormalCkbox")?.GetComponent<Toggle>();
+            SDeathCkbox = GameObject.Find("SDeathCkbox")?.GetComponent<Toggle>(); 
+            HighContrastCkBox = GameObject.Find("HighContrastCkBox")?.GetComponent<Toggle>(); 
+            TxttoSpeechCkBx = GameObject.Find("TxttoSpeechCkBx")?.GetComponent<Toggle>();
+
+            
+            // Add others as needed...
+
+            if (BtnStart != null)
+            {
+                BtnStart.onClick.AddListener(Startgame);
+                Debug.Log("Start button wired in MainMenu");
+            }
+            else
+            {
+                Debug.LogWarning("Start button not found in MainMenu");
+            }
+
+            if (NormalCkbox != null)
+            {
+                NormalCkbox.isOn = true;
+                Debug.Log("NormalCkBox assigned");
+            }
+            else
+            {
+                Debug.LogWarning("NormalCkBox not found in MainMenu");
+            }
+
+            if (SDeathCkbox != null)
+            {
+                SDeathCkbox.isOn = false;
+                Debug.Log("SDeathCkBox assigned");
+            }
+            else
+            {
+                Debug.LogWarning("SDeathCkBox not found in MainMenu");
+            }
+
+            if (HighContrastCkBox != null)
+            {
+                Debug.Log("HighContrastCkBox assigned");
+            }
+            else
+            {
+                Debug.LogWarning("HighContrastCkBox not found in MainMenu");
+            }
+            if (TxttoSpeechCkBx != null)
+            {
+                Debug.Log("TxttoSpeechCkBx assigned");
+            }
+            else
+            {
+                Debug.LogWarning("TxttoSpeechCkBx not found in MainMenu");
+            }
+        }
+    }
 
     //create the player controller and view object. TODO move to seperate methods
     public PsychePlayerController playerController;
@@ -53,32 +149,45 @@ public class GameManager : MonoBehaviour
     IPlayerCommon HumanPlayer;
     Queue<IPlayerCommon> GamePlayerQueue = new Queue<IPlayerCommon> ();
 
-    void Start()
+   /* void Start()
     {
         //create a listener
-        BtnStart.onClick.AddListener(Startgame);
-    }
+        if (BtnStart != null)
+        {
+           BtnStart.onClick.AddListener(Startgame);
+       }
+
+    }*/
+
     // Startgame calls all the required setup methods contained in game manager to create the required objects
+    //intentionally delayed to cause all menu objects to be loaded.
+    
     public void Startgame()
     {
+
+        //TODO: Post alerts but for now this will work
         // Validate once
-        CheckPlayerName = ValidateInput();
-        CheckCPUChars = ValidateCPUInput();
-        if (!CheckPlayerName)
+        try
         {
-            noplayermessage.ShowMessage("Player Avatar Name is missing");
-            return; //  Exit early
+            ValidateInput();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Validation failed: {ex.Message}");
+            return;
         }
 
         // Validate CPU characters
-        CheckCPUChars = ValidateCPUInput();
-        if (!CheckCPUChars)
+        try
         {
-            nocpuplayermessage.ShowMessage("Generate CPU Players");
-           // NoPlayerNameTxt.text = "Need CPU Characters";
-            //NoPlayerNameAlert.SetActive(true);
-            return; //  Exit early
+            ValidateCPUInput();
         }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Validation failed: {ex.Message}");
+            return; // Exit early
+        }
+
 
 
         //add additional critical validations here 
@@ -92,7 +201,7 @@ public class GameManager : MonoBehaviour
         CreatePlayerController(HumanPlayer);
         CreatePlayerView();
         CreateCPUPlayerView();
-        StartCoroutine(loadGame());
+        StartCoroutine(loadGame());   //Tie this to the multiple game scenes for the player styles
     }
 
     /// <summary>
@@ -120,24 +229,14 @@ public class GameManager : MonoBehaviour
         playerController = new PsychePlayerController(humanPlayer);
     }
 
-    private bool ValidateCPUInput()
+    private void ValidateCPUInput()
     {
-        bool Check;
-
-        if (string.IsNullOrEmpty(CPUNameText.text))
+        if (string.IsNullOrEmpty(CPUNameText?.text))
         {
-  
-            Check = false;
-           
+            throw new Exception("CPU characters not generated");
         }
-        else
-        {
-           
-            Check = true;
-        }
-
-        return Check;
     }
+
 
     private void BuildPlayerQueue(IPlayerCommon _humanPlayer)
     {
@@ -215,7 +314,13 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private bool CheckSudWinMode()
     {
-        bool SWCk = SDeathCkBox.isOn;
+        if (SDeathCkbox == null)
+        {
+            Debug.LogWarning("SwinCkBox is null in ()");
+            return false; // or a safe default
+        }
+
+        bool SWCk = SDeathCkbox.isOn;
         if (SWCk)
         {
             Debug.Log("Sudden Win mode selected.");
@@ -233,7 +338,13 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private bool CheckNormMode()
     {
-        bool NormCk = NormalCkBox.isOn;
+        if (NormalCkbox == null)
+        {
+            Debug.LogWarning("NormalCkBox is null in CheckNormMode()");
+            return false; // or a safe default
+        }
+
+        bool NormCk = NormalCkbox.isOn;
         if (NormCk)
         {
             Debug.Log("Normal mode selected.");
@@ -265,28 +376,63 @@ public class GameManager : MonoBehaviour
     /// validate that the player avatar name is not blank and trigger an alert panel
     /// </summary>
     /// 
-    private Boolean ValidateInput()
+    private void ValidateInput()
     {
-        bool Check;
-
-        if (string.IsNullOrEmpty(PlayText.text))
+        if (string.IsNullOrEmpty(PlayText?.text))
         {
-           
-            Check = false;
+            throw new Exception("Player Avatar Name is missing");
         }
-        else
-        {
-            
-            Check = true;
-        }
-
-        return Check; 
     }
+
 
     IEnumerator loadGame()
     {
         yield return new WaitForSeconds(GameModeTransition);
-        SceneManager.LoadScene("Gameboard");
+        
+        //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
+        if (GamePlayerQueue.Count == 4)
+        {
+            Debug.Log("4 player board");
+            SceneManager.LoadScene("Gamebrd 4P");
+        }
+        else if (GamePlayerQueue.Count == 5)
+        {
+            Debug.Log("5 player board");
+            SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+        }
+        else if (GamePlayerQueue.Count == 6)
+        {
+            Debug.Log("6 player board");
+            SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
+        }
+        else
+        {
+            SceneManager.LoadScene("Gameboard");            //default is always 2 additional players
+        }
+    }
+    /// <summary>
+    /// Method makes the private queue accessible by the gameloop script
+    /// </summary>
+    /// <returns></returns>
+    public Queue<IPlayerCommon> GetPlayerQueue()
+    {
+        return GamePlayerQueue;
+    }
+
+    /// <summary>
+    /// Method makes the playerview visible to the game script
+    /// </summary>
+    public PyschePlayerView getPlayerView()
+    {
+        return playerView;
+    }
+
+    /// <summary>
+    /// Method makes the CPU View visible
+    /// </summary>
+    public CPUPlayView getCPUView()
+    {
+        return cpuPlayView;
     }
     // Update is called once per frame
     void Update()
