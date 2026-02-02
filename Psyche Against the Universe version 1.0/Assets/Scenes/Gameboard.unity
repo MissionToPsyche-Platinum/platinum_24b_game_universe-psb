@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 68797206}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: -4, z: 0}
+  m_LocalPosition: {x: 8, y: -8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1346,6 +1346,12 @@ MonoBehaviour:
   cards: []
   cardSpacing: 2
   yOffset: -4
+  sprites:
+  - {fileID: 6969675125841911368, guid: 493cb054ae45c244d9e3e2b9ed4a51a6, type: 3}
+  - {fileID: -4078080895987700266, guid: af11839e8b0232c489df42650b7f40d8, type: 3}
+  - {fileID: -6197393869314002695, guid: dc97851f4a5bff1459cccccd9a5c4982, type: 3}
+  - {fileID: 2293472953075452017, guid: 42f3f55eb2d3ab847a326b7614d15a53, type: 3}
+  - {fileID: 9137583881920614700, guid: 46b783c2fd29af9448ca080cd423fcd7, type: 3}
 --- !u!4 &605136286
 Transform:
   m_ObjectHideFlags: 0

@@ -4,12 +4,16 @@ using System.Collections.Generic;
 public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
-    public List<PlayCard> cards = new List<PlayCard>();
+    private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
 
+    [SerializeField] private Sprite[] sprites;
     private PlayCard draggingCard;
     private CardSpawner cardSpawner;
+
+    // specifically to get played cards for gameloop to recognize
+    public List<PlayCard> PlayHand {get; private set;}
 
     void Awake()
     {
@@ -165,5 +169,15 @@ public class HandManager : MonoBehaviour
         float totalWidth = (cards.Count - 1) * cardSpacing;
         Vector3 startPos = new Vector3(-totalWidth / 2f, yOffset, 0f);
         return startPos + Vector3.right * (index * cardSpacing);
+    }
+
+    public void PlayCardSpriteReset()
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].SetCardSprite(sprites[i]);
+        }
+
+        PlayHand = new List<PlayCard>(cards);
     }
 }

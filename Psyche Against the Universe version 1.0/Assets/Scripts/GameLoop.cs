@@ -267,7 +267,10 @@ public class GameLoop : MonoBehaviour
                     case PsychePlayer humanPlayer:
                         if (!humanPlayer.isJudge())
                         {
+                            // switches to play hand view for human
                             HandManager.Instance.ResetPlayHand();
+                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            HandManager.Instance.PlayCardSpriteReset();
                             HandManager.Instance.PlayHandShow();
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
@@ -289,8 +292,10 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
                             // judge logic goes here. UI should display the played cards list as UI elements
 
+                            // switches to judge hand view for human
                             HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
-                            yield return new WaitForSeconds(1f);
+                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            HandManager.Instance.PlayCardSpriteReset();
                             HandManager.Instance.PlayHandJudge();
 
                             // Enable confirm button for this player’s turn
@@ -304,10 +309,11 @@ public class GameLoop : MonoBehaviour
 
                             HandManager.Instance.PlayHandHide();
 
-                            //and select the same way a card is played. For now, this will be auto 
-                            TestConsoleLog($"{PlayedCards[0].title} was chosen. {PlayedCards[0].PlayedBy} scores a point");
+                            //and select the same way a card is played. For now, this will be auto
+                            int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
+                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
-                            FindWinner(playerQueue, PlayedCards[0].PlayedBy);
+                            FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                         }
 
                         
