@@ -66,7 +66,7 @@ public class UIPlayConfirm : MonoBehaviour
             Debug.Log($"[UIPlayConfirm] Index of lockedCard = {index}");
             if (index >= 0)
             {
-                Debug.Log($"[UIPlayConfirm] Trying to play card at index {index} for {currentPlayer.Avatar_Name}");
+              //  Debug.Log($"[UIPlayConfirm] Trying to play card at index {index} for {currentPlayer.Avatar_Name}");
                
 
                 // Play the card using its index

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static BanterManager;
 
 //Version 1.0 By Timothy Burke
 //Defines the View Class for the CPU player MVC architecture. 
@@ -11,7 +12,14 @@ using UnityEngine;
  */
 public class CPUPlayView : MonoBehaviour
 {
-   
+    //audio support
+    //public AudioClip[] funnyClips;
+    //public AudioClip[] seriousClips;
+    //public AudioClip[] chaoticClips;
+    //public AudioClip[] sciFiClips;
+
+    //public AudioSource audioSource;
+
     public void UpdateScore(int score)
     {
         
@@ -24,20 +32,46 @@ public class CPUPlayView : MonoBehaviour
         Debug.Log("hand Updated: " + cards.Count + "cards remaining");
         //expand later affect UI elements as required
     }
+    /// <summary>
+    /// test method for banter results
+    /// </summary>
+    /// <param name="cpuplayer"></param>
+    /// <returns></returns>
 
-    public string PlayBanter(CPUPlayer cpuplayer)
+    public BanterResult PlayBanter(CPUPlayer cpuplayer)
     {
-        //access the first personality. This is the CPU players dominant personality type
+        // access the first personality
         string banter = cpuplayer.Personality[0];
-        Debug.Log("CPU personality is" + banter);
+        Debug.Log("CPU personality is " + banter);
 
-        //integrating the banter manager into the CPU view
         PersonalityParse personality = PersonalityParseextention.FromString(banter);
 
-        string banterline = BanterManager.Instance.GetBanterLine(personality);
+        // Get BOTH the line and the index
+        BanterResult result = BanterManager.Instance.GetBanterLine(personality);
 
-        Debug.Log(banterline);
-        return banterline;
+        Debug.Log(result.line);
+
+        return result;
     }
+
+    
+    
+
+
+    /*  public string PlayBanter(CPUPlayer cpuplayer)
+      {
+          //access the first personality. This is the CPU players dominant personality type
+          string banter = cpuplayer.Personality[0];
+          Debug.Log("CPU personality is" + banter);
+
+          //integrating the banter manager into the CPU view
+          PersonalityParse personality = PersonalityParseextention.FromString(banter);
+
+          string banterline = BanterManager.Instance.GetBanterLine(personality);
+
+          Debug.Log(banterline);
+          return banterline;
+      }
+  */
 
 }

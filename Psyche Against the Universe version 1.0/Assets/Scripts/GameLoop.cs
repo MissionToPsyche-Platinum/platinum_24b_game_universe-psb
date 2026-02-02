@@ -9,6 +9,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static BanterManager;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameLoop : MonoBehaviour
@@ -46,6 +47,15 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPU5ScoreField;
     public TMP_Text HumanScoreField;
     //add additional for expanded
+
+
+    //Audio Support
+    public AudioClip[] funnyClips;
+    public AudioClip[] seriousClips;
+    public AudioClip[] chaoticClips;
+    public AudioClip[] sciFiClips;
+
+    public AudioSource audioSource;
 
     //prompt card addition
     public PromptCardDisplay activeCard;
@@ -295,10 +305,31 @@ public class GameLoop : MonoBehaviour
                         {
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
-                            banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
-                            DisplayBanter(banterLine, CPUPlayer);
-                            yield return new WaitForSeconds(2f);
+
+                            BanterResult result = CpuView.PlayBanter(CPUPlayer);
+
+                            // Display text
+                            DisplayBanter(result.line, CPUPlayer);
+
+                            // Play audio
+                            PlayAudioFor(result.index, CPUPlayer);
+
+                            Debug.Log("AUDIO DEBUG — audioSource = " + audioSource);
+                            Debug.Log("AUDIO DEBUG — audioSource.clip = " + audioSource.clip);
+                            Debug.Log("AUDIO DEBUG — audioSource.clip?.length = " + (audioSource.clip != null ? audioSource.clip.length : -1));
+
+                            // Wait for the audio to finish
+                            yield return new WaitForSeconds(audioSource.clip.length);
+
+                            // Clear text
                             DisplayBanter("", CPUPlayer);
+
+
+
+                            //banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
+                            // DisplayBanter(banterLine, CPUPlayer);
+                            //yield return new WaitForSeconds(2f);
+                            //DisplayBanter("", CPUPlayer);
                             CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
                             
@@ -481,6 +512,42 @@ public class GameLoop : MonoBehaviour
             }
         }
         return tie;
+    }
+
+    /// <summary>
+    /// Test audio method
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="cpu"></param>
+    private void PlayAudioFor(int index, CPUPlayer cpu)
+    {
+        Debug.Log("PLAYAUDIOFOR — CALLED with index " + index);
+
+        PersonalityParse p = PersonalityParseextention.FromString(cpu.Personality[0]);
+
+        AudioClip clip = null;
+
+        switch (p)
+        {
+            case PersonalityParse.Funny:
+                clip = funnyClips[index];
+                break;
+            case PersonalityParse.Serious:
+                clip = seriousClips[index];
+                break;
+            case PersonalityParse.Chaotic:
+                clip = chaoticClips[index];
+                break;
+            case PersonalityParse.SciFi:
+                clip = sciFiClips[index];
+                break;
+        }
+
+        Debug.Log("PLAYAUDIOFOR — clip = " + clip);
+
+        audioSource.clip = clip;
+        audioSource.Play();
+
     }
 
     /// <summary>
