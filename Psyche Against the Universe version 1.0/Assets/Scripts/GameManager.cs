@@ -420,6 +420,19 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Checks if the human player is currently the judge
+    /// </summary>
+    public bool IsHumanPlayerJudge()
+    {
+        foreach (IPlayerCommon player in GamePlayerQueue)
+        {
+            if (player is PsychePlayer psyche && psyche.isJudge())
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Method makes the playerview visible to the game script
     /// </summary>
     public PyschePlayerView getPlayerView()

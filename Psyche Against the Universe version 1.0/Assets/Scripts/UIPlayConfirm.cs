@@ -14,8 +14,8 @@ public class UIPlayConfirm : MonoBehaviour
     private PsychePlayer currentPlayer;
     private GameLoop currentGameLoop;
 
-    public bool HasConfirmed { get; private set; }
-
+    public bool HasConfirmed { get; private set;}
+    public int ChosenCardIndex { get; private set;}
    
 
     void Awake()
@@ -62,12 +62,12 @@ public class UIPlayConfirm : MonoBehaviour
             Debug.Log("Card confirmed: " + lockedCard.name);
 
             // Find the index of this card in the HandManager list
-            int index = handManager.cards.IndexOf(lockedCard);
+            int index = handManager.PlayHand.IndexOf(lockedCard);
             Debug.Log($"[UIPlayConfirm] Index of lockedCard = {index}");
             if (index >= 0)
             {
-              //  Debug.Log($"[UIPlayConfirm] Trying to play card at index {index} for {currentPlayer.Avatar_Name}");
-               
+                // Debug.Log($"[UIPlayConfirm] Trying to play card at index {index} for {currentPlayer.Avatar_Name}");
+                ChosenCardIndex = index;
 
                 // Play the card using its index
                 currentPlayer.PlayCard(currentGameLoop, index);
