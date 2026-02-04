@@ -3,16 +3,45 @@ using System.Collections.Generic;
 
 public class HandManager : MonoBehaviour
 {
-    public List<PlayCard> cards = new List<PlayCard>();
+    public static HandManager Instance;
+    private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
-    public float moveSpeed = 10f;
 
+    [SerializeField] private Sprite[] sprites;
     private PlayCard draggingCard;
+    private CardSpawner cardSpawner;
+
+    // specifically to get played cards for gameloop to recognize
+    public List<PlayCard> PlayHand {get; private set;}
+
+    void Awake()
+    {
+        PlayHandHide();
+        Instance = this;
+    }
 
     void Update()
     {
         UpdateCardPositions();
+    }
+
+    // call during judge round to hide hand
+    public void PlayHandHide()
+    {
+        yOffset = -8f;
+    }
+
+    // call during judge round to judge cards
+    public void PlayHandJudge()
+    {
+        yOffset = -3.5f;
+    }
+
+    // call after judge round to show hand again
+    public void PlayHandShow()
+    {
+        yOffset = -4f;
     }
 
     public void RegisterCard(PlayCard card)
@@ -38,6 +67,42 @@ public class HandManager : MonoBehaviour
     {
         draggingCard = null;
         UpdateCardPositions();
+    }
+
+    public void UpdatePlayHand(int playerCount)
+    {
+        int cardCount = cards.Count;
+        // Adjust hand size based on player count
+        while (cardCount < (playerCount - 1))
+        {
+            CardSpawner.Instance.Spawn();
+            cardCount++;
+        }
+        while (cardCount > (playerCount - 1))
+        {
+            PlayCard cardToRemove = cards[cards.Count - 1];
+            UnregisterCard(cardToRemove);
+            Destroy(cardToRemove.gameObject);
+            cardCount--;
+        }
+    }
+
+    public void ResetPlayHand()
+    {
+        int cardCount = cards.Count;
+        // Adjust hand size back to 5 cards
+        while (cardCount < 5)
+        {
+            CardSpawner.Instance.Spawn();
+            cardCount++;
+        }
+        while (cardCount > 5)
+        {
+            PlayCard cardToRemove = cards[cards.Count - 1];
+            UnregisterCard(cardToRemove);
+            Destroy(cardToRemove.gameObject);
+            cardCount--;
+        }
     }
 
     void UpdateCardPositions()
@@ -104,5 +169,15 @@ public class HandManager : MonoBehaviour
         float totalWidth = (cards.Count - 1) * cardSpacing;
         Vector3 startPos = new Vector3(-totalWidth / 2f, yOffset, 0f);
         return startPos + Vector3.right * (index * cardSpacing);
+    }
+
+    public void PlayCardSpriteReset()
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].SetCardSprite(sprites[i]);
+        }
+
+        PlayHand = new List<PlayCard>(cards);
     }
 }
