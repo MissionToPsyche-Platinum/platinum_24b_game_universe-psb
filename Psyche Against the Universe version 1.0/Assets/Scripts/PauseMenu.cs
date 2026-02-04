@@ -50,7 +50,7 @@ public class PauseMenu : MonoBehaviour
         playPileDropZoneObject.SetActive(true); // bring back play pile zone
 
         // show hand again after pause
-        handManager.PlayHandShow();
+        handManager.ResetOffset();
 
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;

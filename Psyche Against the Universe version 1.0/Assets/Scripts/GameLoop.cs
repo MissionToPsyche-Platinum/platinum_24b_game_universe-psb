@@ -282,6 +282,7 @@ public class GameLoop : MonoBehaviour
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
+                        HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
                             // switches to play hand view for human
@@ -333,7 +334,7 @@ public class GameLoop : MonoBehaviour
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                         }
 
-                        
+                        HandManager.Instance.SetYOffset(false); // hide hand after human turn
                         break;
 
                     case CPUPlayer CPUPlayer:
