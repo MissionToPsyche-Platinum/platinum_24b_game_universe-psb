@@ -258,6 +258,7 @@ public class GameLoop : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Start Proto Game Loop");
+        PauseMenu.GameIsPaused = false; //ensure game is unpaused at start of loop
 
         int totalRounds = 20;                                  //Round counter and round number
         int i = 0;
@@ -272,9 +273,16 @@ public class GameLoop : MonoBehaviour
 
             foreach (var player in playerQueue)
             {
+                // pause loop if game paused
+                if (PauseMenu.GameIsPaused)
+                {
+                    yield return new WaitUntil(() => !PauseMenu.GameIsPaused);
+                }
+
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
+                        HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
                             // switches to play hand view for human
@@ -326,7 +334,7 @@ public class GameLoop : MonoBehaviour
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                         }
 
-                        
+                        HandManager.Instance.SetYOffset(false); // hide hand after human turn
                         break;
 
                     case CPUPlayer CPUPlayer:
