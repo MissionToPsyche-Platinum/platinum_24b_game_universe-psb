@@ -7,6 +7,10 @@ public class HandManager : MonoBehaviour
     private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
+    public float hideYOffset = -8f;
+    public float judgeYOffset = -3.5f;
+    public float showYOffset = -4f;
+    public float resetOffset = -8f;
 
     [SerializeField] private Sprite[] sprites;
     private PlayCard draggingCard;
@@ -29,19 +33,29 @@ public class HandManager : MonoBehaviour
     // call during judge round to hide hand
     public void PlayHandHide()
     {
-        yOffset = -8f;
+        yOffset = hideYOffset;
     }
 
     // call during judge round to judge cards
     public void PlayHandJudge()
     {
-        yOffset = -3.5f;
+        yOffset = judgeYOffset;
     }
 
     // call after judge round to show hand again
     public void PlayHandShow()
     {
-        yOffset = -4f;
+        yOffset = showYOffset;
+    }
+
+    public void ResetOffset()
+    {
+        yOffset = resetOffset;
+    }
+
+    public void SetYOffset(bool isHumanPlayer)
+    {
+        resetOffset = isHumanPlayer ? showYOffset : hideYOffset;
     }
 
     public void RegisterCard(PlayCard card)
