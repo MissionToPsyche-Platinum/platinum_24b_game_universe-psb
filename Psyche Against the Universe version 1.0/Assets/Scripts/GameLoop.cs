@@ -1,5 +1,4 @@
-﻿using DG.Tweening.Core.Easing;
-using JetBrains.Annotations;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static BanterManager;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameLoop : MonoBehaviour
@@ -47,6 +47,19 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPU5ScoreField;
     public TMP_Text HumanScoreField;
     //add additional for expanded
+
+
+    //Audio Support
+    public AudioClip[] funnyClips;
+    public AudioClip[] seriousClips;
+    public AudioClip[] chaoticClips;
+    public AudioClip[] sciFiClips;
+
+    public AudioSource audioSource;
+
+    //prompt card addition
+    public PromptCardDisplay activeCard;
+    public PromptDeckManager deckManager;
 
     //win conditions
     int NormWin = 3;
@@ -201,8 +214,18 @@ public class GameLoop : MonoBehaviour
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
         testDeck = getTestCards();
-        List <PromptCard> testPromptDeck = new List<PromptCard>();              //this is a test deck. Comment out when final
-        testPromptDeck = getTestPrompts();
+
+        string prompt = deckManager.DrawPrompt();
+        activeCard.SetPrompt(prompt);
+
+
+                                                         //load a prompt into the scriptable object
+                                                         //PromptLoader.LoadPromptText(activeCard.cardData);
+        //Add a delay to fill in an animation later.
+        yield return new WaitForSeconds(2f);
+        //flip the card
+        activeCard.ShowPrompt();
+
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
@@ -231,10 +254,11 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
         //Testing general game loop using the Test Console object. Disable object and remark out test code when final
         yield return new WaitForSeconds(1f);
-        TestConsoleLog("Deal a Prompt Card");
+        //TestConsoleLog("Deal a Prompt Card");
 
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Start Proto Game Loop");
+        PauseMenu.GameIsPaused = false; //ensure game is unpaused at start of loop
 
         int totalRounds = 20;                                  //Round counter and round number
         int i = 0;
@@ -245,13 +269,28 @@ public class GameLoop : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
+            //if (!gm.IsHumanPlayerJudge()) HandManager.Instance.PlayHandShow(); // show play hand if human not judge
+
             foreach (var player in playerQueue)
             {
+                // pause loop if game paused
+                if (PauseMenu.GameIsPaused)
+                {
+                    yield return new WaitUntil(() => !PauseMenu.GameIsPaused);
+                }
+
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
+                        HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
+                            // switches to play hand view for human
+                            HandManager.Instance.ResetPlayHand();
+                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            HandManager.Instance.PlayCardSpriteReset();
+                            HandManager.Instance.PlayHandShow();
+
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
 
@@ -263,18 +302,39 @@ public class GameLoop : MonoBehaviour
 
                             //humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
+
+                            HandManager.Instance.PlayHandHide();
                         }
                         else
                         {
                             TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
-                            //judge logic goes here. UI should display the played cards list as UI elements
-                            //and select the same way a card is played. For now, this will be auto 
-                            TestConsoleLog($"{PlayedCards[0].title} was chosen. {PlayedCards[0].PlayedBy} scores a point");
+                            // judge logic goes here. UI should display the played cards list as UI elements
+
+                            // switches to judge hand view for human
+                            HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            HandManager.Instance.PlayCardSpriteReset();
+                            HandManager.Instance.PlayHandJudge();
+
+                            // Enable confirm button for this player’s turn
+                            UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
+
+                            // Verify the confirm button was clicked before proceeding.
+                            yield return new WaitUntil(() => UIPlayConfirm.Instance.HasConfirmed);
+
+                            //humanPlayer.PlayCard(this);
+                            playerview.UpdateHand(humanPlayer.Hand);
+
+                            HandManager.Instance.PlayHandHide();
+
+                            //and select the same way a card is played. For now, this will be auto
+                            int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
+                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
-                            FindWinner(playerQueue, PlayedCards[0].PlayedBy);
+                            FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                         }
 
-                        
+                        HandManager.Instance.SetYOffset(false); // hide hand after human turn
                         break;
 
                     case CPUPlayer CPUPlayer:
@@ -282,10 +342,31 @@ public class GameLoop : MonoBehaviour
                         {
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
-                            banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
-                            DisplayBanter(banterLine, CPUPlayer);
-                            yield return new WaitForSeconds(2f);
+
+                            BanterResult result = CpuView.PlayBanter(CPUPlayer);
+
+                            // Display text
+                            DisplayBanter(result.line, CPUPlayer);
+
+                            // Play audio
+                            PlayAudioFor(result.index, CPUPlayer);
+
+                            Debug.Log("AUDIO DEBUG — audioSource = " + audioSource);
+                            Debug.Log("AUDIO DEBUG — audioSource.clip = " + audioSource.clip);
+                            Debug.Log("AUDIO DEBUG — audioSource.clip?.length = " + (audioSource.clip != null ? audioSource.clip.length : -1));
+
+                            // Wait for the audio to finish
+                            yield return new WaitForSeconds(audioSource.clip.length);
+
+                            // Clear text
                             DisplayBanter("", CPUPlayer);
+
+
+
+                            //banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
+                            // DisplayBanter(banterLine, CPUPlayer);
+                            //yield return new WaitForSeconds(2f);
+                            //DisplayBanter("", CPUPlayer);
                             CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
                             
@@ -367,6 +448,18 @@ public class GameLoop : MonoBehaviour
             //discard and draw a new prompt card
             TestConsoleLog("discard and draw a new prompt card");
 
+            //flip prompt card back to the front side. delay, and then flip
+            activeCard.ShowFront();
+            // Draw a new prompt from the deck
+            string nextPrompt = deckManager.DrawPrompt();
+            // Assign it to the card
+            activeCard.SetPrompt(nextPrompt);
+
+                                                     //PromptLoader.LoadPromptText(activeCard.cardData);
+                                                     //Add a delay to fill in an animation later.
+            yield return new WaitForSeconds(2f);
+            //flip the card
+            activeCard.ShowPrompt();
 
             //check for loop break conditions here before incrementing. If isFinalRound false, increment, otherwise it will break the 
             //loop after the run. This is where a tie check will occur if required. 
@@ -456,6 +549,42 @@ public class GameLoop : MonoBehaviour
             }
         }
         return tie;
+    }
+
+    /// <summary>
+    /// Test audio method
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="cpu"></param>
+    private void PlayAudioFor(int index, CPUPlayer cpu)
+    {
+        Debug.Log("PLAYAUDIOFOR — CALLED with index " + index);
+
+        PersonalityParse p = PersonalityParseextention.FromString(cpu.Personality[0]);
+
+        AudioClip clip = null;
+
+        switch (p)
+        {
+            case PersonalityParse.Funny:
+                clip = funnyClips[index];
+                break;
+            case PersonalityParse.Serious:
+                clip = seriousClips[index];
+                break;
+            case PersonalityParse.Chaotic:
+                clip = chaoticClips[index];
+                break;
+            case PersonalityParse.SciFi:
+                clip = sciFiClips[index];
+                break;
+        }
+
+        Debug.Log("PLAYAUDIOFOR — clip = " + clip);
+
+        audioSource.clip = clip;
+        audioSource.Play();
+
     }
 
     /// <summary>

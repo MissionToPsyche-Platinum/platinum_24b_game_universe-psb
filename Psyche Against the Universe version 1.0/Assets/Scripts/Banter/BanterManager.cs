@@ -23,6 +23,19 @@ public class BanterManager
 
     private bool _isLoaded;
 
+    //banter struct to return a line and index inorder to match voice file
+    public struct BanterResult
+    {
+        public string line;
+        public int index;
+
+        public BanterResult(string line, int index)
+        {
+            this.line = line;
+            this.index = index;
+        }
+    }
+
     // Cached lists for quick access
     private List<string> _seriousLines;
     private List<string> _sciFiLines;
@@ -51,9 +64,25 @@ public class BanterManager
         _isLoaded = true;
     }
 
+    ///
+    /// New banter return method
     /// 
+    public BanterResult GetBanterLine(PersonalityParse personality)
+    {
+        EnsureLoaded();
+
+        if (_lines.TryGetValue(personality, out var list) && list.Count > 0)
+        {
+            int idx = Random.Range(0, list.Count);
+            return new BanterResult(list[idx], idx);
+        }
+
+        return new BanterResult("(no banter found)", -1);
+    }
+
+
     /// Returns a random line for the given personality and optional topic.
-   
+
     public string GetBanterLine(PersonalityParse personality, string topic = null)
     {
         EnsureLoaded();

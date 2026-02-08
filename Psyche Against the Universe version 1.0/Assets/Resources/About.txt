@@ -1,0 +1,15 @@
+About Pysche Against the Universe
+
+Created by: Timothy Burke
+            Azaria Mehanovic
+			Abdur-Rahman Igram
+			Rijul Sudesh
+
+A digital version of the "Physche Against the Universe" card game created by Nihah Shah
+as part of the Physche Inspire Program.
+
+The game aims to meet the intent of the original and provides a digital means of learning about the 
+Psyshce Mission as well as having fun.
+
+Sponsored by: Cassie Bowman, Arizona State Univerity through a partnership with NASA. Capstone Project for
+Penn State University, SWENG 480 and 481.
