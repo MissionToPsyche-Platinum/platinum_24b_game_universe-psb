@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746388682}
+  - component: {fileID: 746388683}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -150,6 +151,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &746388683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746388681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a9c88b92904fd2a3272d42b265f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::Deck
+  _answerDeck: {fileID: 0}
+  _cardPefab: {fileID: 0}
+  _cardCanvas: {fileID: 0}
 --- !u!1001 &1452980492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,5 +372,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1935962878}
-  - {fileID: 1452980492}
   - {fileID: 746388682}
+  - {fileID: 1452980492}
