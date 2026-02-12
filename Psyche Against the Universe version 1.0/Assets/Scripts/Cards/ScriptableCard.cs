@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Holds all card data
-// To give credit where credit is due, a lot of this came from a tutorial by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
 
-[CreateAssetMenu(menuName = "CardData")] // you can now create a new CardData object with right click
+[CreateAssetMenu(fileName = "ScriptableCard", menuName = "CardData")] // you can now create a new CardData object with right click
 
 public class ScriptableCard : ScriptableObject
 {

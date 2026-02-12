@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Collection of CardData objects; can be used by both answer and prompt decks
-// Credit: tuturials by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
-[CreateAssetMenu(menuName = "Card Collection")]
+[CreateAssetMenu(fileName = "CardCollection", menuName = "Card Collection")]
 public class CardCollection : ScriptableObject
 {
     [field: SerializeField] public List<ScriptableCard> CardsInCollection {get; private set;}

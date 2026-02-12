@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // Handles drag and drop for cards; this can be combined or replaced with Rijul's script
-// To give credit where credit is due, a lot of this came from a tutorial by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
 
 public class CardMovement : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
@@ -14,7 +14,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IEndDragHandler, IBegin
     private bool _isBeingDragged;
     private Canvas _cardCanvas; // needs to be gotten at runtime
     private RectTransform _rectTransform;
-    private Card _card;
+    private AnswerCards _card;
 
     private readonly string CANVAS_TAG = "CardCanvas";
 
@@ -27,7 +27,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IEndDragHandler, IBegin
     {
         _cardCanvas = GameObject.FindGameObjectWithTag(CANVAS_TAG).GetComponent<Canvas>();
         _rectTransform = GetComponent<RectTransform>();
-        _card = GetComponent<Card>();
+        _card = GetComponent<AnswerCards>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

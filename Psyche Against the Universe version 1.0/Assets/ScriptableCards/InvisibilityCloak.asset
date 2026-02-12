@@ -17,7 +17,7 @@ MonoBehaviour:
     of Psyche's solar electric thrusters, ionizing xenon gas around you to create
     a shimmering plasma field. Does it actually make you invisible? No. But it does
     make you look like a ghostly space wizard.
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 9152642065209082086, guid: 3d411e65b5eff4ecfb93fa602aac9872, type: 3}
   <CardSerious>k__BackingField: 3
   <CardScifi>k__BackingField: 8
   <CardFunny>k__BackingField: 4

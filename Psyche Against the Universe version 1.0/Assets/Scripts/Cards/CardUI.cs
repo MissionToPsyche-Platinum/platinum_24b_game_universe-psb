@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 
 // Updates UI visuals of each card depending on its data (NOTE TO SELF: MAKE SURE TO DO THIS)
-// To give credit where credit is due, a lot of this came from a tutorial by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
 
 public class CardUI : MonoBehaviour
 {
     #region Fields and Properties
 
-    private Card _card;
+    private AnswerCards _card;
 
     [Header("Prefab Elements")]
     [SerializeField] private Image _cardImage;
@@ -30,7 +30,7 @@ public class CardUI : MonoBehaviour
 
     private void Awake()
     {
-        _card = GetComponent<Card>();
+        _card = GetComponent<AnswerCards>();
         SetCardUI();
     }
 

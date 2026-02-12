@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Defines the card, connects data and behavior
-// To give credit where credit is due, a lot of this came from a tutorial by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
 
 [RequireComponent(typeof(CardUI))] // attatches CardUI script to all card objects
 [RequireComponent(typeof(CardMovement))] // handles percieved card movement
-public class Card : MonoBehaviour
+public class AnswerCards : MonoBehaviour
 {
     #region Fields and Properties
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Card deck; uses Singleton
-// Credit: tuturials by Endocrine Gamedev
+// Credit: tutorials by Endocrine Gamedev
 // Version 1.0 by Abdur-Rahman Igram
 public class Deck : MonoBehaviour
 {
@@ -11,15 +11,15 @@ public class Deck : MonoBehaviour
     public static Deck Instance {get; private set;}
 
     [SerializeField] private CardCollection _answerDeck;
-    [SerializeField] private Card _cardPefab; //make copies with cardPrefab and different CardData
+    [SerializeField] private AnswerCards _cardPefab; //make copies with cardPrefab and different CardData
 
     [SerializeField] private Canvas _cardCanvas;
 
     // Instantiated cards:
-    private List<Card> _deckPile = new();
-    private List<Card> _discardPile = new(); // Rijul, this may conflict with your discard logic, we can pick the one that works best
+    private List<AnswerCards> _deckPile = new();
+    private List<AnswerCards> _discardPile = new(); // Rijul, this may conflict with your discard logic, we can pick the one that works best
 
-    public List<Card> HandCards {get; private set;} = new();// this is public, for potential future Hand classes to make a visually nice hand, if needed
+    public List<AnswerCards> HandCards {get; private set;} = new();// this is public, for potential future Hand classes to make a visually nice hand, if needed
 
     #endregion
 
@@ -46,7 +46,7 @@ public class Deck : MonoBehaviour
     {
         for (int i = 0; i < _answerDeck.CardsInCollection.Count; i++)
         {
-            Card card = Instantiate(_cardPefab, _cardCanvas.transform); //instantiates card prefab as child of card canvas
+            AnswerCards card = Instantiate(_cardPefab, _cardCanvas.transform); //instantiates card prefab as child of card canvas
             card.SetUp(_answerDeck.CardsInCollection[i]);
             _deckPile.Add(card); // all cards in deck at the start, none in hand or discard
             card.gameObject.SetActive(false); // cards need to be activated after drawing
@@ -79,14 +79,17 @@ public class Deck : MonoBehaviour
                 ShuffleDeck();
             }
 
-            HandCards.Add(_deckPile[0]);
-            _deckPile[0].gameObject.SetActive(true);
-            _deckPile.RemoveAt(0);
+            if (_deckPile.Count > 0)
+            {
+                HandCards.Add(_deckPile[0]);
+                _deckPile[0].gameObject.SetActive(true);
+                _deckPile.RemoveAt(0);
+            }
         }
     }
 
     // below may not be neccessary if we can use Rijul's instead
-    public void DiscardCard(Card card)
+    public void DiscardCard(AnswerCards card)
     {
         if (HandCards.Contains(card))
         {
