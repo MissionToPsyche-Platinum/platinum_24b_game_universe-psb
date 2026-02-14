@@ -31,13 +31,15 @@ public class CardUI : MonoBehaviour
     private void Awake()
     {
         _card = GetComponent<AnswerCards>();
-        SetCardUI();
+       // SetCardUI();
     }
 
     // lets you see changes in editor without having to start game
     private void OnValidate()
     {
-        Awake();
+        _card = GetComponent<AnswerCards>();
+
+        //Awake();
     }
 
     public void SetCardUI()

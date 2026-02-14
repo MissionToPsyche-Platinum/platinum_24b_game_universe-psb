@@ -61,7 +61,7 @@ public class MockPlayer : IPlayerCommon
     string IPlayerCommon.Avatar_Name { get => Avatar_Name; set => Avatar_Name = value; }
     public int score { get ; set ; }
     public bool judge { get ; set ; }
-    public List<AnswerCard> Hand { get ; set; }
+    public List<ScriptableCard> Hand { get ; set; }
 
     public MockPlayer(string name, string[] personality)
     {

@@ -21,7 +21,8 @@ public interface IPlayerCommon
     int score { get; set; }
 
     bool judge { get; set; }
-   List<AnswerCard> Hand { get; set; }
+   //List<AnswerCards> Hand { get; set; }
+   List<ScriptableCard> Hand { get; set; }
     void PlayCard(GameLoop gameLoop);
     void PLayCard(GameLoop gameLoop, int Index);
     void DrawCard();

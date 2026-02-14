@@ -20,17 +20,32 @@ public class PsychePlayer : AbsPsyPlayer
          Debug.Log("Your Hand:");
          for (int i = 0; i < Hand.Count; i++)
          {
-         Debug.Log($"{i}: {Hand[i].title}, {Hand[i].WeightChaotic},{Hand[i].WeightSerious}, {Hand[i].WeightSciFi}, {Hand[i].WeightFunny}");
+            var d = Hand[i];
+            Debug.Log($"{i}: {d.CardTitle}, {d.CardChaos}, {d.CardSerious}, {d.CardScifi}, {d.CardFunny}");
+
+            //Debug.Log($"{i}: {Hand[i].title}, {Hand[i].WeightChaotic},{Hand[i].WeightSerious}, {Hand[i].WeightSciFi}, {Hand[i].WeightFunny}");
          }
         
         var cardToPlay = Hand[Index];
-        gameLoop.TestConsoleLog($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
-       // Debug.Log($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
+        var data = cardToPlay;
+        gameLoop.TestConsoleLog(
+         $"Card Played {data.CardTitle} | serious {data.CardSerious}, sci {data.CardScifi}, fun {data.CardFunny}, chao {data.CardChaos}"
+);
 
-        cardToPlay.PlayedBy = this.Avatar_Name;
+        //gameLoop.TestConsoleLog($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
+        // Debug.Log($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
+        //gameLoop.PlayedBy.Add(this.Avatar_Name);
 
-        // add to the played cards list in the gameloop
-        gameLoop.RegisterPlayedCard(cardToPlay);
+        //cardToPlay.PlayedBy = this.Avatar_Name;
+
+        //// add to the played cards list in the gameloop
+        //gameLoop.RegisterPlayedCard(ScriptableCard);
+        // Spawn the UI card for the played card
+        AnswerCards uiCard = CardSpawner.Instance.Spawn(cardToPlay);
+        uiCard.PlayedBy = this.Avatar_Name;
+
+        // Register the played card (UI + data + who played)
+        gameLoop.RegisterPlayedCard(uiCard);
 
         // remove the selected card from hand
         Hand.RemoveAt(Index);

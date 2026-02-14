@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using DG.Tweening;
@@ -257,4 +257,4 @@ public class PlayCard : MonoBehaviour,
         swayTween = transform.DOLocalRotate(new Vector3(0, 0, swayAmount), swaySmoothing);
     }
 
-}
+}*/

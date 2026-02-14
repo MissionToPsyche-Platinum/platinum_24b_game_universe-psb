@@ -6,7 +6,8 @@ public class UIPlayConfirm : MonoBehaviour
     public static UIPlayConfirm Instance;
 
     public Button confirmButton;
-    private PlayCard lockedCard;
+    //private PlayCard lockedCard;
+    private AnswerCards lockedCard;
     private PlayPileDropZone playPileZone;
     private HandManager handManager;
 
@@ -38,7 +39,8 @@ public class UIPlayConfirm : MonoBehaviour
         HasConfirmed = false;
     }
 
-    public void ShowButton(PlayCard card)
+    //public void ShowButton(PlayCard card)
+    public void ShowButton(AnswerCards card)
     {
         lockedCard = card;
         confirmButton.gameObject.SetActive(true); // show once a card is dropped

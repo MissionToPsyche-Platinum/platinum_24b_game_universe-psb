@@ -5,9 +5,9 @@ public class SciFiStrategy : ICPUStrategy
     public string ChooseBanter(string topic)
         => BanterManager.Instance.GetLine(PersonalityParse.SciFi);
 
-    public AnswerCard ChooseCardToPlay(CPUPlayer self)
+    public ScriptableCard ChooseCardToPlay(CPUPlayer self)
         => StrategyCommon.PickBestAcrossPriority(self.Hand, self.PersonalityPriority);
 
-    public AnswerCard JudgeWinner(IReadOnlyList<AnswerCard> tableCards)
+    public ScriptableCard JudgeWinner(IReadOnlyList<ScriptableCard> tableCards)
         => StrategyCommon.JudgeBest(tableCards, PersonalityParse.SciFi);
 }

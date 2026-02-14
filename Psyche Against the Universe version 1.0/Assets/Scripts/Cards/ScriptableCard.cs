@@ -26,4 +26,16 @@ public class ScriptableCard : ScriptableObject
     [field: SerializeField, Range(1, 10)]
     public int CardChaos { get; private set; }
 
+    public int WeightFor(PersonalityParse p)
+    {
+        return p switch
+        {
+            PersonalityParse.Serious => CardSerious,
+            PersonalityParse.SciFi => CardScifi,
+            PersonalityParse.Funny => CardFunny,
+            PersonalityParse.Chaotic => CardChaos,
+            _ => 0
+        };
+    }
+
 }

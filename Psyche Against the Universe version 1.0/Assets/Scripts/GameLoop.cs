@@ -78,9 +78,14 @@ public class GameLoop : MonoBehaviour
     bool sudWinModeset = false;
 
     //Relevant objects for the game loop
-    List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-    public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();  //holds the answer cards during the game round.
-                                                                     //emptied at the end of round. 
+    //  List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
+    // public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();  //holds the answer cards during the game round.//emptied at the end of round. 
+
+    //incorporating new Answer Deck
+    public List<ScriptableCard> PlayedCards = new List<ScriptableCard>();
+    public List<string> PlayedBy = new List<string>();
+    public List<AnswerCards> PlayedUICards = new List<AnswerCards>();
+
     string banterLine;
 
     //Create strategy objects for use by the CPU Players during thier respective turns
@@ -127,6 +132,11 @@ public class GameLoop : MonoBehaviour
     }
     private IEnumerator StartGameLoop()
     {
+
+        // Ensure Deck is fully initialized
+        yield return null;
+        yield return null;
+
         var gm = GameManager.Instance;        //Access the game manager assets through the singleton
         if (gm == null)
         {
@@ -213,7 +223,7 @@ public class GameLoop : MonoBehaviour
         //TEST OBJECTS TO DEVELOP GAME LOOP
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-        testDeck = getTestCards();
+       // testDeck = getTestCards();
 
         string prompt = deckManager.DrawPrompt();
         activeCard.SetPrompt(prompt);
@@ -229,11 +239,31 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
-        DealHands(playerQueue, testDeck);
+        //DealHands(playerQueue, testDeck);
+        //foreach (var player in playerQueue)
+        // {
+        //   Debug.Log($"{player.Avatar_Name} has {player.Hand.Count} cards in hand.");
+        // }
+
+
+        // 1. Deck is already instantiated and shuffled by Deck.Start()
+
+        // 2. Deal 5 cards to each player using Deck.DrawHand()
+        Debug.Log("Deck.Instance = " + Deck.Instance);
+        Debug.Log("HandCards = " + Deck.Instance?.HandCards);
+
         foreach (var player in playerQueue)
         {
+            // Draw 5 ScriptableCards from the deck
+            List<ScriptableCard> drawnCards = Deck.Instance.DrawHand(5);
+
+            // Assign these ScriptableCards to the player's hand
+            player.Hand = drawnCards;
+
             Debug.Log($"{player.Avatar_Name} has {player.Hand.Count} cards in hand.");
+
         }
+
 
         /***************************************************************************************************************************/
         // set the win condition
@@ -286,7 +316,19 @@ public class GameLoop : MonoBehaviour
                         if (!humanPlayer.isJudge())
                         {
                             // switches to play hand view for human
-                            HandManager.Instance.ResetPlayHand();
+                            //HandManager.Instance.ResetPlayHand();
+                            foreach (var c in humanPlayer.Hand)
+                            {
+                                Debug.Log(
+                                     $"HAND CARD: {c.CardTitle} | " +
+                                     $"Serious {c.CardSerious}, " +
+                                        $"SciFi {c.CardScifi}, " +
+                                     $"Funny {c.CardFunny}, " +
+                                     $"Chaos {c.CardChaos}");
+
+                            }
+                            HandManager.Instance.ResetPlayHand(humanPlayer.Hand);
+
                             yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
                             HandManager.Instance.PlayCardSpriteReset();
                             HandManager.Instance.PlayHandShow();
@@ -302,6 +344,7 @@ public class GameLoop : MonoBehaviour
 
                             //humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
+                          
 
                             HandManager.Instance.PlayHandHide();
                         }
@@ -311,7 +354,9 @@ public class GameLoop : MonoBehaviour
                             // judge logic goes here. UI should display the played cards list as UI elements
 
                             // switches to judge hand view for human
-                            HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            //HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            HandManager.Instance.ResetPlayHand(PlayedCards.Select(pc => pc).ToList());
+
                             yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
                             HandManager.Instance.PlayCardSpriteReset();
                             HandManager.Instance.PlayHandJudge();
@@ -329,9 +374,16 @@ public class GameLoop : MonoBehaviour
 
                             //and select the same way a card is played. For now, this will be auto
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+
+                            //TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+                            TestConsoleLog(
+                                          $"{PlayedCards[chosenIndex].CardTitle} at index {chosenIndex} was chosen. " +
+                                          $"{PlayedBy[chosenIndex]} scores a point");
+
                             // Find the player in the queue by matching Avatar_Name
-                            FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
+                            //FindWinner(playerQueue, PlayedCards[chosenIndex]);
+                            FindWinner(playerQueue, PlayedBy[chosenIndex]);
+
                         }
 
                         HandManager.Instance.SetYOffset(false); // hide hand after human turn
@@ -373,20 +425,32 @@ public class GameLoop : MonoBehaviour
                         }
                         else
                         {
-                            AnswerCard chosenCard;
+                            ScriptableCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judge cards.");
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );  //CPU logic will define this further later
-                            TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
+                           //TestConsoleLog($"{chosenCard.CardTitle} was chosen. {chosenCard.PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
-                            FindWinner(playerQueue, chosenCard.PlayedBy);
+                           // FindWinner(playerQueue, chosenCard.PlayedBy);
+                            // chosenCard already selected by judge (human or CPU)
+                            int chosenIndex = PlayedCards.IndexOf(chosenCard);
+                            // winner name
+                            string winnerName = PlayedBy[chosenIndex];
+                            // log
+                            TestConsoleLog($"{chosenCard.CardTitle} was chosen. {winnerName} scores a point");
+                            // award point
+                            FindWinner(playerQueue, winnerName);
+
+
+
                         }
                         break;
 
                 }
                 
-                    Debug.Log("PlayedCards: " + string.Join(", ", PlayedCards.Select(c => c.PlayedBy)));
-                
+                    //Debug.Log("PlayedCards: " + string.Join(", ", PlayedCards.Select(c => c.PlayedBy)));
+                    Debug.Log("PlayedBy: " + string.Join(", ", PlayedBy));
+
                 yield return new WaitForSeconds(3f); // pause for observation
             }
 
@@ -437,11 +501,58 @@ public class GameLoop : MonoBehaviour
 
             //discard all played answer cards (return to the test deck or answer card deck
             TestConsoleLog("returning answer cards to answer deck");
-            returnPlayedCards();
+            //returnPlayedCards();
+
+            // foreach (var card in PlayedCards)
+            // {
+            // Deck.Instance.DiscardCard(card);   // moves to discard pile + deactivates
+            // }
+
+            TestConsoleLog("Returning answer cards to answer deck");
+
+            foreach (var uiCard in PlayedUICards)
+            {
+                Deck.Instance.DiscardCard(uiCard);
+            }
+
+            PlayedUICards.Clear();
+            PlayedCards.Clear();
+            PlayedBy.Clear();
+
+
             yield return new WaitForSeconds(1f);
 
             //at this point deal a new answer card to all players less than 5 cards
-            ReloadPlayerHands(playerQueue, playerview, CpuView);
+            //ReloadPlayerHands(playerQueue, playerview, CpuView);
+
+           /* foreach (var player in playerQueue)
+            {
+                while (player.Hand.Count < 5)
+                {
+                    Deck.Instance.DrawHand(1);   // draw 1 card into Deck.Instance.HandCards
+
+                    // Give that card to the player
+                    player.Hand.Add(Deck.Instance.HandCards[0]);
+
+                    // Clear Deck’s temporary hand buffer
+                    Deck.Instance.HandCards.Clear();
+                }
+            }*/
+
+            foreach (var player in playerQueue)
+            {
+                while (player.Hand.Count < 5)
+                {
+                    Deck.Instance.DrawHand(1);   // draw 1 UI card into HandCards
+
+                    // Add the ScriptableCard data to the player's hand
+                    player.Hand.Add(Deck.Instance.HandCards[0].CardData);
+
+                    // Clear Deck’s temporary UI buffer
+                    Deck.Instance.HandCards.Clear();
+                }
+            }
+
             yield return new WaitForSeconds(1f);
 
             
@@ -690,7 +801,7 @@ public class GameLoop : MonoBehaviour
     /// </summary>
     /// <param name="playerQueue"></param>
 
-    public void ReloadPlayerHands(Queue<IPlayerCommon> playerQueue, PyschePlayerView playerview, CPUPlayView cpuView)
+    /*public void ReloadPlayerHands(Queue<IPlayerCommon> playerQueue, PyschePlayerView playerview, CPUPlayView cpuView)
     {
         foreach (var player in playerQueue)
         {
@@ -713,20 +824,20 @@ public class GameLoop : MonoBehaviour
             }
 
         }
-    }
+    }*/
 
     /// <summary>
     /// Returns all the played cards to the answer card deck. 
     /// For development of the protoloop, this uses the testdeck list
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public void returnPlayedCards()
+    /*public void returnPlayedCards()
     {
         testDeck.AddRange(PlayedCards);
         PlayedCards.Clear();
         Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
         TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
-    }
+    }*/
 
     /// <summary>
     /// 
@@ -829,19 +940,19 @@ public class GameLoop : MonoBehaviour
     /// <param name="playerQueue"></param>
     /// <param name="testDeck"></param>
     /// <exception cref="NotImplementedException"></exception>
-    private void DealHands(Queue<IPlayerCommon> playerQueue, List<AnswerCard> testDeck)
-    {
-        foreach (var player in playerQueue)
-        {
-            for (int i = 0; i < 5 && testDeck.Count > 0; i++)
-            {
-                player.Hand.Add(testDeck[0]);
-                testDeck.RemoveAt(0);
+    //private void DealHands(Queue<IPlayerCommon> playerQueue, List<AnswerCard> testDeck)
+   // {
+        //foreach (var player in playerQueue)
+       // {
+           // for (int i = 0; i < 5 && testDeck.Count > 0; i++)
+           // {
+                //player.Hand.Add(testDeck[0]);
+               // testDeck.RemoveAt(0);
 
      
-            }
-        }
-    }
+          //  }
+        //}
+  //  }
 
     /// <summary>
     /// Test method for creating the game loop. Remark out for final work
@@ -890,11 +1001,13 @@ public class GameLoop : MonoBehaviour
     /// Allows for player objects to interact and store thier played cards into the holding queue
     /// </summary>
     /// <param name="card"></param>
-    public void RegisterPlayedCard(AnswerCard card)
+    public void RegisterPlayedCard(AnswerCards uiCard)
     {
-        PlayedCards.Add(card);
-        //Debug.Log($"Registered card: {card.title}");
+        PlayedUICards.Add(uiCard);          // UI card
+        PlayedCards.Add(uiCard.CardData);   // ScriptableCard
+        PlayedBy.Add(uiCard.PlayedBy);      // who played it
     }
+
 
 }
 

@@ -14,9 +14,10 @@ public abstract class AbsPsyPlayer : IPsyPlayer
     public int score { get; set; }
 
     // basic list structure to act as the players hand. 
-    public List<AnswerCard> Hand { get; set; } = new List<AnswerCard>();
+    public List<ScriptableCard> Hand { get; set; } = new List<ScriptableCard>();
    // public GameLoop gL;
     public bool judge { get; set; }
+    
 
     public void DrawCard()
     {

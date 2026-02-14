@@ -26,7 +26,7 @@ public class CPUPlayView : MonoBehaviour
 
         
     }
-    public void UpdateHand(List<AnswerCard> cards)
+    public void UpdateHand(List<ScriptableCard> cards)
     {
         //for now it just affects the count
         Debug.Log("hand Updated: " + cards.Count + "cards remaining");

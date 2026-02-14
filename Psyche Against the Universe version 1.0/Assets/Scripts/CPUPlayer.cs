@@ -25,8 +25,7 @@ public class CPUPlayer : IPlayerCommon
     public int score { get ; set ; }
     
     //Basic list structure to hold the CPU players answer cards.
-   
-    public List<AnswerCard> Hand { get ; set ; } = new List<AnswerCard>();
+    public List<ScriptableCard> Hand { get ; set ; } = new List<ScriptableCard>();
    // public GameLoop gL;
     public bool judge { get; set; }
 
@@ -38,10 +37,13 @@ public class CPUPlayer : IPlayerCommon
 */
     public override string ToString()
     {
-        return $"Name: {Avatar_Name}, Personality: {Personality}";
-    }
+        //return $"Name: {Avatar_Name}, Personality: {Personality}";
+        return $"Name: {Avatar_Name}, Personality: {string.Join(",", Personality)}";
 
-   public AnswerCard RunStrategy(string[] personality, IReadOnlyList<AnswerCard> playedCards)
+    }
+    //public AnswerCard RunStrategy(string[] personality, IReadOnlyList<AnswerCard> playedCards)
+    public ScriptableCard RunStrategy(string[] personality, IReadOnlyList<ScriptableCard> playedCards)
+
     {
         Debug.Log("Judging based on: " + string.Join(",", personality));
 
@@ -49,15 +51,19 @@ public class CPUPlayer : IPlayerCommon
         PersonalityPriority = personality
             .Select(p => PersonalityParseextention.FromString(p))
             .ToArray();
+
         // Pick the first bias in the priority list (you can extend this later)
         PersonalityParse judgeBias = PersonalityPriority.FirstOrDefault();
 
         // Use StrategyCommon to judge the best card
-        AnswerCard winningCard = StrategyCommon.JudgeBest(playedCards, judgeBias);
+        //AnswerCard winningCard = StrategyCommon.JudgeBest(playedCards, judgeBias);
+        // Use StrategyCommon to judge the best card
+        ScriptableCard winningCard = StrategyCommon.JudgeBest(playedCards, judgeBias);
 
+        // if (winningCard != null)
         if (winningCard != null)
         {
-            Debug.Log($"CPU {Avatar_Name} chose winning card: {winningCard.title} played by {winningCard.PlayedBy}");
+            Debug.Log($"CPU {Avatar_Name} chose winning card: {winningCard.CardTitle}");
         }
         else
         {
@@ -106,11 +112,12 @@ public class CPUPlayer : IPlayerCommon
             PersonalityPriority = Personality.Select(p => PersonalityParseextention.FromString(p)).ToArray();
 
             //use the strategy logic to pick the best cards
-            
-            AnswerCard choice = StrategyCommon.PickBestByPersonality(Hand, persona);
+
+            //AnswerCard choice = StrategyCommon.PickBestByPersonality(Hand, persona);
+            ScriptableCard choice = StrategyCommon.PickBestByPersonality(Hand, persona);
 
             //other choices based on personality matrix
-             if (choice == null)
+            if (choice == null)
             {
                choice = StrategyCommon.PickBestAcrossPriority(Hand, PersonalityPriority);
                 Debug.Log("Choosing across priority");
@@ -123,34 +130,57 @@ public class CPUPlayer : IPlayerCommon
                 Debug.Log("Default");
             }
 
+            var data = choice;
+            // Debug: determine strongest trait
+            int maxWeight = Mathf.Max(
+                data.CardSerious,
+                data.CardScifi,
+                data.CardFunny,
+                data.CardChaos
+            );
 
             //following is for logic testing and debug*************************************************************************
-            int maxWeight = Mathf.Max(choice.WeightSerious, choice.WeightSciFi, choice.WeightFunny, choice.WeightChaotic);
+            //int maxWeight = Mathf.Max(choice.WeightSerious, choice.WeightSciFi, choice.WeightFunny, choice.WeightChaotic);
 
             string strongestTrait = "Unknown";
-            if (maxWeight == choice.WeightSerious) strongestTrait = "Serious";
-            else if (maxWeight == choice.WeightSciFi) strongestTrait = "SciFi";
-            else if (maxWeight == choice.WeightFunny) strongestTrait = "Funny";
-            else if (maxWeight == choice.WeightChaotic) strongestTrait = "Chaotic";
+            if (maxWeight == data.CardSerious) strongestTrait = "Serious";
+            else if (maxWeight == data.CardScifi) strongestTrait = "SciFi";
+            else if (maxWeight == data.CardFunny) strongestTrait = "Funny";
+            else if (maxWeight == data.CardChaos) strongestTrait = "Chaotic";
+
+            //if (maxWeight == choice.WeightSerious) strongestTrait = "Serious";
+            // else if (maxWeight == choice.WeightSciFi) strongestTrait = "SciFi";
+            //else if (maxWeight == choice.WeightFunny) strongestTrait = "Funny";
+            //else if (maxWeight == choice.WeightChaotic) strongestTrait = "Chaotic";
 
             Debug.Log(
-                $"Card Played {choice.title} " +
-                $"serious {choice.WeightSerious} " +
-                $"sci {choice.WeightSciFi} " +
-                $"fun {choice.WeightFunny} " +
-                $"chao {choice.WeightChaotic} " +
+                $"Card Played {data.CardTitle} " +
+                $"serious {data.CardSerious} " +
+                $"sci {data.CardScifi} " +
+                $"fun {data.CardFunny} " +
+                $"chao {data.CardChaos} " +
                 $"--> strongest: {strongestTrait} ({maxWeight})"
+
+           // Debug.Log(
+                //$"Card Played {choice.title} " +
+                //$"serious {choice.WeightSerious} " +
+                //$"sci {choice.WeightSciFi} " +
+                //$"fun {choice.WeightFunny} " +
+                //$"chao {choice.WeightChaotic} " +
+                //$"--> strongest: {strongestTrait} ({maxWeight})"
             );
             //**********************************************************************************************************************
 
-            gameLoop.TestConsoleLog("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
-             " chao  " + choice.WeightChaotic);
+            gameLoop.TestConsoleLog("Card Played " + choice.CardTitle + " serious  " + choice.CardSerious + " Sci  " +choice.CardScifi + " fun  " + choice.CardFunny + 
+             " chao  " + choice.CardChaos);
 
-            choice.PlayedBy = this.Avatar_Name;  //this way we know who played the card
+            //choice.PlayedBy = this.Avatar_Name;  //this way we know who played the card
+            var uiCard = CardSpawner.Instance.Spawn(choice);
+            uiCard.PlayedBy = this.Avatar_Name;
 
             //add to the played cards list in the gameloop
-            gameLoop.RegisterPlayedCard(choice);
-
+            //gameLoop.RegisterPlayedCard(choice);
+            gameLoop.RegisterPlayedCard(uiCard);
             Hand.Remove(choice); //top card is sufficent
         }
     }

@@ -67,14 +67,14 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void DrawHand(int amount = 5) //hand is 5 cards 
+    /*public void DrawHand(int amount = 5) //hand is 5 cards 
     {
         for (int i = 0; i < amount; i++)
         {
             // if draw pile runs out, discard pile is shuffled and becomes draw pile
             if (_deckPile.Count <= 0)
             {
-                _discardPile = _deckPile;
+                _discardPile = new List<AnswerCards>(_discardPile);
                 _discardPile.Clear();
                 ShuffleDeck();
             }
@@ -86,6 +86,43 @@ public class Deck : MonoBehaviour
                 _deckPile.RemoveAt(0);
             }
         }
+    }*/
+    public List<ScriptableCard> DrawHand(int count)
+    {
+        List<ScriptableCard> hand = new List<ScriptableCard>();
+
+        for (int i = 0; i < count; i++)
+        {
+            ScriptableCard cardData = DrawOneCard();
+            hand.Add(cardData);
+        }
+
+        return hand;
+    }
+    public ScriptableCard DrawOneCard()
+    {
+        if (_deckPile.Count == 0)
+        {
+            // Refill from discard pile if needed
+            if (_discardPile.Count > 0)
+            {
+                _deckPile = new List<AnswerCards>(_discardPile);
+                _discardPile.Clear();
+                ShuffleDeck();
+            }
+            else
+            {
+                Debug.LogWarning("Deck is empty — no cards to draw.");
+                return null;
+            }
+        }
+
+        // Take the top UI card
+        AnswerCards uiCard = _deckPile[0];
+        _deckPile.RemoveAt(0);
+
+        // Return the ScriptableCard data
+        return uiCard.CardData;
     }
 
     // below may not be neccessary if we can use Rijul's instead
