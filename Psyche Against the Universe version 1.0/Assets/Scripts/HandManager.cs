@@ -83,13 +83,30 @@ public class HandManager : MonoBehaviour
         UpdateCardPositions();
     }
 
+    //2.15.26 updated to use the new answer card prefab vice thedafault play card
+    //helper method for spritebased to UI conversion
+    public void ClearHand()
+    {
+        // Work on a copy so we don't modify the list while iterating
+        var copy = new List<PlayCard>(cards);
+
+        foreach (var card in copy)
+        {
+            UnregisterCard(card);          // removes from cards list
+            if (card != null)
+                Destroy(card.gameObject);  // destroy the GameObject
+        }
+
+    }
+
     public void UpdatePlayHand(int playerCount)
     {
         int cardCount = cards.Count;
-        // Adjust hand size based on player count
+       
+      
         while (cardCount < (playerCount - 1))
         {
-            CardSpawner.Instance.Spawn();
+            // CardSpawner.Instance.Spawn();//remarked out 2/15
             cardCount++;
         }
         while (cardCount > (playerCount - 1))
@@ -107,7 +124,7 @@ public class HandManager : MonoBehaviour
         // Adjust hand size back to 5 cards
         while (cardCount < 5)
         {
-            CardSpawner.Instance.Spawn();
+            //CardSpawner.Instance.Spawn(); //remarked out 2/15
             cardCount++;
         }
         while (cardCount > 5)

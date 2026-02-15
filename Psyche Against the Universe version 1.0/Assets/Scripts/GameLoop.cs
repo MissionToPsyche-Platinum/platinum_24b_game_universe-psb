@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 using TMPro;
 
 using Unity.Collections;
@@ -213,7 +215,10 @@ public class GameLoop : MonoBehaviour
         //TEST OBJECTS TO DEVELOP GAME LOOP
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-        testDeck = getTestCards();
+
+          //comment out 2/15/26 to support integration
+       // testDeck = getTestCards();
+
 
         string prompt = deckManager.DrawPrompt();
         activeCard.SetPrompt(prompt);
@@ -229,7 +234,11 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
-        DealHands(playerQueue, testDeck);
+        //comment out 2/15/26 to support integration
+        // DealHands(playerQueue, testDeck);
+
+        DealHands(playerQueue, AnswerDeckManager.Instance.deck);  // new line
+
         foreach (var player in playerQueue)
         {
             Debug.Log($"{player.Avatar_Name} has {player.Hand.Count} cards in hand.");
@@ -285,11 +294,34 @@ public class GameLoop : MonoBehaviour
                         HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
-                            // switches to play hand view for human
-                            HandManager.Instance.ResetPlayHand();
-                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            HandManager.Instance.PlayCardSpriteReset();
-                            HandManager.Instance.PlayHandShow();
+                            // switches to play hand view for human 2-15-26 next 4 lines remarked out for answer card integration. 
+                            // HandManager.Instance.ResetPlayHand();
+                            // yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            // HandManager.Instance.PlayCardSpriteReset();
+                            // HandManager.Instance.PlayHandShow();
+
+                            //Added 2/16/26 
+                           // Clear old visual cards
+                            HandManager.Instance.ClearHand();//Added 2/16/26 
+                            Debug.Log($"[GameLoop] humanPlayer.Hand count: {humanPlayer.Hand.Count}");//Added 2/16/26 
+                            // Spawn new visual cards using the player's actual AnswerCard data
+                            foreach (AnswerCard cardData in humanPlayer.Hand)//Added 2/16/26 
+                            {
+                                Debug.Log($"[GameLoop] Spawning card: {cardData.title}");//Added 2/16/26 
+
+                                CardSpawner.Instance.Spawn(cardData);//Added 2/16/26 
+                            }
+
+                            // Smooth reveal timing
+                            yield return new WaitForSeconds(1f);//Added 2/16/26 
+
+                            // Reset sprites if needed
+                            HandManager.Instance.PlayCardSpriteReset();//Added 2/16/26 
+
+                            // Show the hand
+                            HandManager.Instance.PlayHandShow();//Added 2/16/26 
+
+
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
@@ -694,10 +726,17 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-            while (player.Hand.Count < 5 && testDeck.Count > 0)
+            //Comment out 2/16/26 to account for real deck integration
+            //while (player.Hand.Count < 5 && testDeck.Count > 0)
+            while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
             {
-                AnswerCard drawn = testDeck[0];         //pull from the top
-                testDeck.RemoveAt(0);
+                //remark out these two lines 2/16/26 
+                //AnswerCard drawn = testDeck[0];         //pull from the top
+                //testDeck.RemoveAt(0);
+
+                // Draw from the real deck
+                AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
+                AnswerDeckManager.Instance.deck.RemoveAt(0);
 
                 player.Hand.Add(drawn);
                 switch (player)

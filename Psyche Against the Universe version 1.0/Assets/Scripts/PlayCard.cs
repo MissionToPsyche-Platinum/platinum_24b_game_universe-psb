@@ -1,7 +1,9 @@
+﻿using DG.Tweening;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
-using DG.Tweening;
+using UnityEngine.UI;
 
 public class PlayCard : MonoBehaviour,
     IPointerDownHandler,
@@ -32,10 +34,30 @@ public class PlayCard : MonoBehaviour,
     private float swaySmoothing = 0.1f;
     private Tween swayTween;
 
+    // 2/16 adds 
+    private RectTransform rectTransform;
+    private Canvas parentCanvas;
+
 
     //for loop integration
     public PsychePlayer Player { get; private set; }
     public GameLoop GameLoop { get; private set; }
+
+    //For answer card visual integration 2/16/26
+    // UI references
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private Image artworkImage;
+
+    [SerializeField] private TMP_Text seriousText;
+    [SerializeField] private TMP_Text scifiText;
+    [SerializeField] private TMP_Text funnyText;
+    [SerializeField] private TMP_Text chaoticText;
+
+    // The data this card represents
+    private AnswerCard cardData;
 
     public void SetOwner(PsychePlayer player, GameLoop gameLoop)
     {
@@ -95,6 +117,22 @@ public class PlayCard : MonoBehaviour,
             ApplySway();
         }
     }
+    //adding in 2/15/26 for answer card visual integration
+    public void SetCard(AnswerCard data)
+    {
+        cardData = data;
+
+        if (titleText != null) titleText.text = data.title;
+        if (descriptionText != null) descriptionText.text = data.description;
+
+        if (backgroundImage != null) backgroundImage.sprite = data.background;
+        if (artworkImage != null) artworkImage.sprite = data.artwork;
+
+        if (seriousText != null) seriousText.text = data.WeightSerious.ToString();
+        if (scifiText != null) scifiText.text = data.WeightSciFi.ToString();
+        if (funnyText != null) funnyText.text = data.WeightFunny.ToString();
+        if (chaoticText != null) chaoticText.text = data.WeightChaotic.ToString();
+    }
 
     // change card sprite
     public void SetCardSprite(Sprite newSprite)
@@ -110,14 +148,16 @@ public class PlayCard : MonoBehaviour,
     {
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x * hoverMultiplier, 0.1f));
-        transform.localPosition += Vector3.up * (0.2f * baseScale.y);
+        //transform.localPosition += Vector3.up * (0.2f * baseScale.y); //2/16/
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x, 0.1f));
-        transform.localPosition -= Vector3.up * (0.2f * baseScale.y);
+        //transform.localPosition -= Vector3.up * (0.2f * baseScale.y); //2/16
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)
