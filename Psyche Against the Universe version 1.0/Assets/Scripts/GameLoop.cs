@@ -9,6 +9,7 @@ using TMPro;
 
 using Unity.Collections;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static BanterManager;
@@ -343,10 +344,18 @@ public class GameLoop : MonoBehaviour
                             // judge logic goes here. UI should display the played cards list as UI elements
 
                             // switches to judge hand view for human
-                            HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            //HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count  //remarked out 2/16
+                            HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  //2/16
+
                             yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            HandManager.Instance.PlayCardSpriteReset();
+                            //HandManager.Instance.PlayCardSpriteReset();  //turned off 2/16
+                            //added 2/16
+                            HandManager.Instance.ApplyPlayedCardsToUI(PlayedCards);
+
                             HandManager.Instance.PlayHandJudge();
+
+
+                       
 
                             // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
@@ -761,7 +770,9 @@ public class GameLoop : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     public void returnPlayedCards()
     {
-        testDeck.AddRange(PlayedCards);
+       // testDeck.AddRange(PlayedCards); //remove 2/16 as there is no longer a test deck
+        AnswerDeckManager.Instance.deck.AddRange(PlayedCards);  //2/16  return cards to the actual deck
+
         PlayedCards.Clear();
         Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
         TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");

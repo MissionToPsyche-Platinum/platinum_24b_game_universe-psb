@@ -281,6 +281,14 @@ public class PlayCard : MonoBehaviour,
         swayTween = transform.DOLocalRotate(Vector3.zero, 0.8f);
     }
 
+    //2/16 helper method to ensure that the correct UI overlay is 
+    //applied to the played cards hand.
+
+    public void ApplyAnswerCard(AnswerCard data)
+    {
+        SetCard(data); // this already updates all UI fields
+    }
+
     void ApplySway()
     {
         // Calculate sway angle based on horizontal velocity

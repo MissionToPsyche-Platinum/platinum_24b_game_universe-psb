@@ -104,12 +104,12 @@ public class HandManager : MonoBehaviour
         int cardCount = cards.Count;
        
       
-        while (cardCount < (playerCount - 1))
+        while (cardCount < (playerCount))    //removed -1 2/16
         {
-            // CardSpawner.Instance.Spawn();//remarked out 2/15
+            CardSpawner.Instance.Spawn();
             cardCount++;
         }
-        while (cardCount > (playerCount - 1))
+        while (cardCount > (playerCount))//removed -1 2/16
         {
             PlayCard cardToRemove = cards[cards.Count - 1];
             UnregisterCard(cardToRemove);
@@ -211,4 +211,18 @@ public class HandManager : MonoBehaviour
 
         PlayHand = new List<PlayCard>(cards);
     }
+
+    //2/16 method do assign the correct scriptable object during human judging
+    public void ApplyPlayedCardsToUI(List<AnswerCard> playedCards)
+    {
+        for (int i = 0; i < cards.Count && i < playedCards.Count; i++)
+        {
+            cards[i].ApplyAnswerCard(playedCards[i]);
+        }
+
+        PlayHand = new List<PlayCard>(cards);
+    }
+
+
+
 }

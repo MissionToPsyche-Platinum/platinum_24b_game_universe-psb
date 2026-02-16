@@ -28,7 +28,7 @@ public class CardSpawner : MonoBehaviour
 
         PlayCard card = go.GetComponent<PlayCard>();
 
-        card.SetCard(data);   // ⭐ THIS is the magic line
+        card.SetCard(data);   
 
         return card;
     }
