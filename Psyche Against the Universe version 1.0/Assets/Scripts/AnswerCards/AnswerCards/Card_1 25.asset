@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1 25
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 25
-  description: This is a test
+  title: Deep Space Blaster
+  description: NASA's Deep Space Optical Comm laser was built for high-bandwidth
+    data transmission, but it also happens to be a great way to blind an enemy spacecraft
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
-  WeightSerious: 6
-  WeightSciFi: 4
-  WeightFunny: 2
+  WeightSerious: 2
+  WeightSciFi: 18
+  WeightFunny: 6
   WeightChaotic: 8

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1 17
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 17
-  description: This is a test
+  title: The Egg Cracks
+  description: urns out Psyche wasn't just a metal asteroid-it was an egg, and whatever
+    just hatched is very interested in helping ... or at least really good at smashing
+    things.
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
-  WeightSerious: 9
-  WeightSciFi: 8
-  WeightFunny: 8
-  WeightChaotic: 9
+  WeightSerious: 5
+  WeightSciFi: 20
+  WeightFunny: 15
+  WeightChaotic: 18

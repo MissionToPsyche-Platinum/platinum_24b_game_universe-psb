@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1 36
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 36
-  description: This is a test
+  title: Gravitational Wi-Fi
+  description: By tracking tiny shifts in radio waves, we can map Psyche's gravity,
+    mass, and rotation- basically using deep-space Wi-Fi to weigh an asteroid
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
-  WeightSerious: 7
-  WeightSciFi: 7
-  WeightFunny: 10
+  WeightSerious: 18
+  WeightSciFi: 12
+  WeightFunny: 3
   WeightChaotic: 2
