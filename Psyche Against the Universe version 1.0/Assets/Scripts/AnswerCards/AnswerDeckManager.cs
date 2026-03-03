@@ -43,6 +43,7 @@ public class AnswerDeckManager : MonoBehaviour
         }
     }
 
+    //incorporate the fisher-yates algorithm into the shuffle routine
          private void ShuffleDeck()
     {
         for (int i = 0; i < deck.Count; i++)
