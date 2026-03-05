@@ -814,27 +814,34 @@ public class GameLoop : MonoBehaviour
 
     /// <summary>
     /// Turns off judge fields
+    /// modified to change the alpha value vice color. Allows for use 
+    /// with various backgrounds and objects.
     /// </summary>
 
     private void TurnOffJudge()
     {
-        JudgeLabel.color = Color.red;
-        CPUJudge1.color = Color.red;
-        CPUJudge2.color = Color.red;
+        JudgeLabel.alpha = 0;
+        // JudgeLabel.color = Color.red;
+        CPUJudge1.alpha = 0;
+        CPUJudge2.alpha = 0;
+        //CPUJudge1.color = Color.red;
+        //CPUJudge2.color = Color.red;
         if (CPUJudge3 != null)
         {
-            CPUJudge3.color = Color.red;
+            //CPUJudge3.color = Color.red;
+            CPUJudge3.alpha = 0;
         }
         if (CPUJudge4 != null)
         {
-            CPUJudge4.color = Color.red;
+            //CPUJudge4.color = Color.red;
+            CPUJudge4.alpha = 0;
         }
         if (CPUJudge5 != null)
         {
-            CPUJudge5.color = Color.red;
+            //CPUJudge5.color = Color.red;
+            CPUJudge5.alpha = 0;
         }
-        
-
+   
     }
 
     /// <summary>

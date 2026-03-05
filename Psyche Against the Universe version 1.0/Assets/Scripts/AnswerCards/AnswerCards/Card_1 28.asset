@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1 28
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 28
-  description: This is a test
+  title: Quantum Coin Flip
+  description: A 50/50 chance of fixing everything ... or making it infinitely worse.
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
-  WeightSerious: 6
-  WeightSciFi: 6
+  WeightSerious: 3
+  WeightSciFi: 5
   WeightFunny: 6
-  WeightChaotic: 6
+  WeightChaotic: 18

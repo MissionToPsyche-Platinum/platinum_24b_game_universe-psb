@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1 18
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 18
-  description: This is a test
+  title: The Alcubierre Maneuver
+  description: Who needs fuel when you can just bend spacetime? Engage the warp bubble,
+    break physics, and hope the universe doesn't notice.
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
-  WeightSerious: 8
-  WeightSciFi: 6
-  WeightFunny: 7
-  WeightChaotic: 5
+  WeightSerious: 4
+  WeightSciFi: 18
+  WeightFunny: 15
+  WeightChaotic: 16

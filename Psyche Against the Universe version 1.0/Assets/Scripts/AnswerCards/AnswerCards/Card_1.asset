@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198741e4899f2414b8fdc1a0b28f5027, type: 3}
   m_Name: Card_1
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
-  title: Test Card 0
-  description: This is a test
+  title: Invisibility Cloak
+  description: 'Wrap yourself in a carefully positioned array of Psyche''s solar
+    electric thrusters, ionizing xenon gas around you to create a shimmering plasma
+    field. Does it actually make you invisible? No. '
   background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
   artwork: {fileID: 9202113190364003600, guid: 60b588d2edd4cac46963a2f20f9500f6, type: 3}
-  WeightSerious: 5
-  WeightSciFi: 10
-  WeightFunny: 8
-  WeightChaotic: 2
+  WeightSerious: 7
+  WeightSciFi: 20
+  WeightFunny: 16
+  WeightChaotic: 15
