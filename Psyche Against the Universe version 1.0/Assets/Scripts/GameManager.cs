@@ -369,6 +369,7 @@ public class GameManager : MonoBehaviour
 
         //build player
         _common.Avatar_Name = PlayText.text;     //Builds the human player object here and adds it to the player queue
+        Debug.Log("GameManager PlayText object: " + PlayText.GetInstanceID());
 
         return _common;
     }
