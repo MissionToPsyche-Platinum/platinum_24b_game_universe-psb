@@ -51,6 +51,13 @@ public class GameLoop : MonoBehaviour
     public TMP_Text HumanScoreField;
     //add additional for expanded
 
+    //Add Player turn highlights - UI object only. No player object interaction
+    public PlayerHighlight humanHighlighter;
+    public PlayerHighlight cpu1Highlight;
+    public PlayerHighlight cpu2Highlight;
+    public PlayerHighlight cpu3Highlight;
+    public PlayerHighlight cpu4Highlight;
+    public PlayerHighlight cpu5Highlight;
 
     //Audio Support
     public AudioClip[] funnyClips;
@@ -292,6 +299,8 @@ public class GameLoop : MonoBehaviour
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
+                        humanHighlighter.StartFlashing(1f);
+
                         HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
@@ -337,6 +346,8 @@ public class GameLoop : MonoBehaviour
                             playerview.UpdateHand(humanPlayer.Hand);
 
                             HandManager.Instance.PlayHandHide();
+                            humanHighlighter.StopFlashing();
+
                         }
                         else
                         {
@@ -373,6 +384,8 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
+                            humanHighlighter.StopFlashing();
+
                         }
 
                         HandManager.Instance.SetYOffset(false); // hide hand after human turn
@@ -381,6 +394,8 @@ public class GameLoop : MonoBehaviour
                     case CPUPlayer CPUPlayer:
                         if (!CPUPlayer.isJudge())
                         {
+                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
+
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
 
@@ -410,10 +425,13 @@ public class GameLoop : MonoBehaviour
                             //DisplayBanter("", CPUPlayer);
                             CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
-                            
+                            HighlightCPUPlayer(null);
+
+
                         }
                         else
                         {
+                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
                             AnswerCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judge cards.");
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
@@ -421,6 +439,9 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
+                            yield return new WaitForSeconds(2F);
+                            HighlightCPUPlayer(null);
+
                         }
                         break;
 
@@ -539,6 +560,51 @@ public class GameLoop : MonoBehaviour
         SceneManager.LoadScene("Bootstrap");
 
     }
+
+    private void HighlightCPUPlayer(CPUPlayer cpuPlayer)
+    {
+        // If null → turn off all highlights and exit
+        if (cpuPlayer == null)
+        {
+            cpu1Highlight.StopFlashing();
+            cpu2Highlight.StopFlashing();
+            if (cpu3Highlight != null) cpu3Highlight.StopFlashing();
+            if (cpu4Highlight != null) cpu4Highlight.StopFlashing();
+            if (cpu5Highlight != null) cpu5Highlight.StopFlashing();
+            return;
+        }
+
+        // Turn off all highlights first
+        cpu1Highlight.StopFlashing();
+        cpu2Highlight.StopFlashing();
+        if (cpu3Highlight != null) cpu3Highlight.StopFlashing();
+        if (cpu4Highlight != null) cpu4Highlight.StopFlashing();
+        if (cpu5Highlight != null) cpu5Highlight.StopFlashing();
+
+        // Now activate the correct one
+        if (cpuPlayer.Avatar_Name == CPU1Name.text)
+        {
+            cpu1Highlight.StartFlashing(1f);
+        }
+        else if (cpuPlayer.Avatar_Name == CPU2Name.text)
+        {
+            cpu2Highlight.StartFlashing(1f);
+        }
+        else if (CPU3Name != null && cpuPlayer.Avatar_Name == CPU3Name.text)
+        {
+            cpu3Highlight.StartFlashing(1f);
+        }
+        else if (CPU4Name != null && cpuPlayer.Avatar_Name == CPU4Name.text)
+        {
+            cpu4Highlight.StartFlashing(1f);
+        }
+        else if (CPU5Name != null && cpuPlayer.Avatar_Name == CPU5Name.text)
+        {
+            cpu5Highlight.StartFlashing(1f);
+        }
+
+    }
+
     /// <summary>
     /// Simple method that displays the winner. This is independent of mode.
     /// </summary>

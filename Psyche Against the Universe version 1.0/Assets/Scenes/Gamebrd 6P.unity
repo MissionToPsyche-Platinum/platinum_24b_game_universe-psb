@@ -1423,6 +1423,8 @@ GameObject:
   - component: {fileID: 334167599}
   - component: {fileID: 334167601}
   - component: {fileID: 334167600}
+  - component: {fileID: 334167603}
+  - component: {fileID: 334167602}
   m_Layer: 5
   m_Name: CPUPlayer1
   m_TagString: Untagged
@@ -1490,6 +1492,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334167598}
   m_CullTransparentMesh: 1
+--- !u!114 &334167602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334167598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
+--- !u!114 &334167603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334167598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
 --- !u!1 &336431188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2483,8 @@ GameObject:
   - component: {fileID: 417729029}
   - component: {fileID: 417729031}
   - component: {fileID: 417729030}
+  - component: {fileID: 417729033}
+  - component: {fileID: 417729032}
   m_Layer: 5
   m_Name: CPUPlayer5
   m_TagString: Untagged
@@ -2521,6 +2552,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417729028}
   m_CullTransparentMesh: 1
+--- !u!114 &417729032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417729028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
+--- !u!114 &417729033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417729028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &435827897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,6 +2665,8 @@ GameObject:
   - component: {fileID: 561047861}
   - component: {fileID: 561047863}
   - component: {fileID: 561047862}
+  - component: {fileID: 561047865}
+  - component: {fileID: 561047864}
   m_Layer: 5
   m_Name: CPUPlayer2
   m_TagString: Untagged
@@ -2674,6 +2734,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561047860}
   m_CullTransparentMesh: 1
+--- !u!114 &561047864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561047860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
+--- !u!114 &561047865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561047860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &571013036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,6 +3154,8 @@ GameObject:
   - component: {fileID: 764929369}
   - component: {fileID: 764929371}
   - component: {fileID: 764929370}
+  - component: {fileID: 764929373}
+  - component: {fileID: 764929372}
   m_Layer: 5
   m_Name: CPUPlayer4
   m_TagString: Untagged
@@ -3134,6 +3223,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764929368}
   m_CullTransparentMesh: 1
+--- !u!114 &764929372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764929368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
+--- !u!114 &764929373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764929368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &863795773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4544,6 +4660,8 @@ GameObject:
   - component: {fileID: 1021715202}
   - component: {fileID: 1021715204}
   - component: {fileID: 1021715203}
+  - component: {fileID: 1021715206}
+  - component: {fileID: 1021715205}
   m_Layer: 5
   m_Name: HumanPlayer
   m_TagString: Untagged
@@ -4611,6 +4729,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021715201}
   m_CullTransparentMesh: 1
+--- !u!114 &1021715205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021715201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
+--- !u!114 &1021715206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021715201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1041267161
 GameObject:
   m_ObjectHideFlags: 0
@@ -7597,6 +7742,8 @@ GameObject:
   - component: {fileID: 1686509673}
   - component: {fileID: 1686509675}
   - component: {fileID: 1686509674}
+  - component: {fileID: 1686509677}
+  - component: {fileID: 1686509676}
   m_Layer: 5
   m_Name: CPUPlayer3
   m_TagString: Untagged
@@ -7664,6 +7811,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686509672}
   m_CullTransparentMesh: 1
+--- !u!114 &1686509676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686509672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3f4b6c568f0246830b32f73db3ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::PlayerHighlight
+--- !u!114 &1686509677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686509672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.9056604, g: 0.84694856, b: 0.15686275, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1715637166
 GameObject:
   m_ObjectHideFlags: 0
@@ -8033,6 +8207,12 @@ MonoBehaviour:
   CPU4ScoreField: {fileID: 1417828273}
   CPU5ScoreField: {fileID: 36183336}
   HumanScoreField: {fileID: 1603762360}
+  humanHighlighter: {fileID: 1021715205}
+  cpu1Highlight: {fileID: 334167603}
+  cpu2Highlight: {fileID: 561047864}
+  cpu3Highlight: {fileID: 1686509676}
+  cpu4Highlight: {fileID: 764929372}
+  cpu5Highlight: {fileID: 417729032}
   funnyClips:
   - {fileID: 8300000, guid: 0fe3faaebee02c1468c4ba8e1b1d3a98, type: 3}
   - {fileID: 8300000, guid: 50448e241d2f0984495e15463b219a9b, type: 3}
