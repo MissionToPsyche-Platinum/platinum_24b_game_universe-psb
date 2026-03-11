@@ -81,7 +81,7 @@ public class TabMenu : MonoBehaviour
         }
         
         if (Application.isPlaying)
-            OnPageIndexChanged?.Invoke(pageIndex);
+            OnPageIndexChanged?.Invoke(index);
     }
 
     private void EnsureIndexIsInRange(int index)
