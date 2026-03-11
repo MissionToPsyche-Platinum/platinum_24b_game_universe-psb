@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
-    private List<PlayCard> cards = new List<PlayCard>();
+    [SerializeField] private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
     public float hideYOffset = -8f;
@@ -75,6 +75,7 @@ public class HandManager : MonoBehaviour
     public void SetDraggingCard(PlayCard card)
     {
         draggingCard = card;
+        card.GetComponent<RectTransform>().SetAsLastSibling();
     }
 
     public void ClearDraggingCard()
@@ -191,6 +192,7 @@ public class HandManager : MonoBehaviour
         }
 
         cards.Insert(newIndex, card);
+        card.GetComponent<RectTransform>().SetSiblingIndex(newIndex);
         UpdateCardPositions();
     }
 
