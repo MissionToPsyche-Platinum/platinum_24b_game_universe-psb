@@ -172,7 +172,7 @@ public class GameLoop : MonoBehaviour
                         
                         if (playerQueue.Count == 3)
                         {
-                            CPUJudge2.color = Color.white;              //Sets the last player in the queue as the first judge. Modified to check for additional players
+                            CPUJudge2.color = Color.red;              //Sets the last player in the queue as the first judge. Modified to check for additional players
                             CPUplayer.judge = true;                     //sets the judge flag if three player game
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -183,7 +183,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 4)                     //active if it is a four player game.
                         {
-                            CPUJudge3.color = Color.white;
+                            CPUJudge3.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -195,7 +195,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 5)                     //active if it is a five  player game.
                         {
-                            CPUJudge4.color = Color.white;
+                            CPUJudge4.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -207,7 +207,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 6)                     //active if it is a six  player game.
                         {
-                            CPUJudge5.color = Color.white;
+                            CPUJudge5.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -853,27 +853,27 @@ public class GameLoop : MonoBehaviour
     {
         if(playerQueue.Last().Avatar_Name == CPU1Name.text)
         {
-            CPUJudge1.color = Color.white;
+            CPUJudge1.color = Color.red;
         }
         else if (playerQueue.Last().Avatar_Name == CPU2Name.text)
         {
-            CPUJudge2.color = Color.white;
+            CPUJudge2.color = Color.red;
         }
         else if (CPU3Name != null && playerQueue.Last().Avatar_Name == CPU3Name.text)
         {
-            CPUJudge3.color = Color.white;
+            CPUJudge3.color = Color.red;
         }
         else if (CPU4Name != null && playerQueue.Last().Avatar_Name == CPU4Name.text)
         {
-            CPUJudge4.color = Color.white;
+            CPUJudge4.color = Color.red;
         }
         else if (CPU5Name != null && playerQueue.Last().Avatar_Name == CPU5Name.text)
         {
-            CPUJudge5.color = Color.white;
+            CPUJudge5.color = Color.red;
         }
         else if (playerQueue.Last().Avatar_Name == HumanPlayerName.text)
         {
-            JudgeLabel.color = Color.white;
+            JudgeLabel.color = Color.red;
         }
 
     }
