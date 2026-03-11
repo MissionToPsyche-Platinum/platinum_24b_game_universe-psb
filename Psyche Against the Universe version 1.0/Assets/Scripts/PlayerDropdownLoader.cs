@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO; // Required for file operations
 using TMPro;
-using System.Diagnostics; // If using TextMeshPro Dropdown
+using System.Diagnostics;
+using System.Collections; // If using TextMeshPro Dropdown
 
 //Version 1.0 By Timothy Burke
 //Controls the operation of the drop down option by pulling all of the Avatar names from the asset
@@ -14,22 +15,53 @@ using System.Diagnostics; // If using TextMeshPro Dropdown
 public class PlayerDropdownLoader : MonoBehaviour
 {
     public TMP_Dropdown Dropdown;
-    public string filepath = "Assets/Resources/Player_Avatar_Names.txt";
-   // public TMP_Text PlayerNameTextdisp;
+    //public string filepath = "Assets/Resources/Player_Avatar_Names.txt";
+    public string filepath = "Player_Avatar_Names";
+    // public TMP_Text PlayerNameTextdisp;
     public TMP_Text PlayText;
 
+    // Hard-coded fallback names (always safe)
+    private static readonly List<string> fallbackNames = new List<string>
+    {
+        "Jack",
+        "Jean-Luc",
+        "Neil",
+        "Samantha",
+        "Halley",
+        "Marconi",
+        "Katherine",
+        "Louis",
+        "Carl",
+        "Sally",
+        "Edwin",
+        "Goddard",
+        "Han",
+        "Luke",
+        "Leia",
+        "Vader"
+    };
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //IEnumerator Start()
     void Start()
     {
+       // yield return null;
         LoadPlayerNames();
 
         //listener to update the player chosen name field
         Dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
        
     }
+  
+
     void LoadPlayerNames()
     {
         List<string> names = new List<string>();
+       
+        // Load the TextAsset from Resources
+        TextAsset file = Resources.Load<TextAsset>(filepath);
+      
 
         //read the names from the file
         if (File.Exists(filepath))
@@ -42,7 +74,9 @@ public class PlayerDropdownLoader : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.Log("File not found: ");
+            UnityEngine.Debug.Log("External file NOT found. Using fallback names.");
+            names.AddRange(fallbackNames);
+
         }
 
         Dropdown.ClearOptions();

@@ -1,22 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
+using System.Collections.Generic;
 
 public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
-    public Transform cardContainer;   // MUST be here
-
-    // public GameLoop gameLoop;
-    // public GameManager gameManager;
-
-    
-
-    // These are the UI card objects (AnswerCards) spawned for the hand
-    private List<AnswerCards> cards = new List<AnswerCards>();
-
-    //public static HandManager Instance;
-    //private List<PlayCard> cards = new List<PlayCard>();
+    private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
     public float hideYOffset = -8f;
@@ -24,29 +12,22 @@ public class HandManager : MonoBehaviour
     public float showYOffset = -4f;
     public float resetOffset = -8f;
 
-    // The hand the GameLoop needs to read
-    public List<AnswerCards> PlayHand { get; private set; }
-
-    //[SerializeField] private Sprite[] sprites;
-    private AnswerCards draggingCard;
-
-   // private PlayCard draggingCard;
-    //private CardSpawner cardSpawner;
+    [SerializeField] private Sprite[] sprites;
+    private PlayCard draggingCard;
+    private CardSpawner cardSpawner;
 
     // specifically to get played cards for gameloop to recognize
-   // public List<PlayCard> PlayHand {get; private set;}
+    public List<PlayCard> PlayHand {get; private set;}
 
     void Awake()
     {
-       // PlayHandHide();
-        Instance = this;
         PlayHandHide();
-
+        Instance = this;
     }
 
     void Update()
     {
-       // UpdateCardPositions();
+        UpdateCardPositions();
     }
 
     // call during judge round to hide hand
@@ -77,25 +58,21 @@ public class HandManager : MonoBehaviour
         resetOffset = isHumanPlayer ? showYOffset : hideYOffset;
     }
 
-    // public void RegisterCard(PlayCard card)
-    public void RegisterCard(AnswerCards card)
+    public void RegisterCard(PlayCard card)
     {
         if (!cards.Contains(card))
             cards.Add(card);
         UpdateCardPositions();
     }
 
-   // public void UnregisterCard(PlayCard card)
-    public void UnregisterCard(AnswerCards card)
+    public void UnregisterCard(PlayCard card)
     {
         if (cards.Contains(card))
             cards.Remove(card);
         UpdateCardPositions();
     }
 
-    // Called by CardMovement when dragging begins
-    //public void SetDraggingCard(PlayCard card)
-    public void SetDraggingCard(AnswerCards card)
+    public void SetDraggingCard(PlayCard card)
     {
         draggingCard = card;
     }
@@ -106,93 +83,48 @@ public class HandManager : MonoBehaviour
         UpdateCardPositions();
     }
 
-    public void DisplayHand(List<ScriptableCard> hand)
+    //2.15.26 updated to use the new answer card prefab vice thedafault play card
+    //helper method for spritebased to UI conversion
+    public void ClearHand()
     {
-        // Destroy old UI cards
-        foreach (var c in cards)
-            Destroy(c.gameObject);
+        // Work on a copy so we don't modify the list while iterating
+        var copy = new List<PlayCard>(cards);
 
-        cards.Clear();
-
-        // Spawn UI cards using ScriptableCard data
-        foreach (var card in hand)
+        foreach (var card in copy)
         {
-            AnswerCards uiCard = CardSpawner.Instance.Spawn(card);
-            cards.Add(uiCard);
-        }
-
-        PlayHand = new List<AnswerCards>(cards);
-        UpdateCardPositions();
-    }
-
-
-    //public void UpdatePlayHand(int playerCount)
-    //public void UpdatePlayHand(List<AnswerCards> hand)
-    //{
-    /* int cardCount = cards.Count;
-     // Adjust hand size based on player count
-     while (cardCount < (playerCount - 1))
-     {
-         CardSpawner.Instance.Spawn();
-         cardCount++;
-     }
-     while (cardCount > (playerCount - 1))
-     {
-         PlayCard cardToRemove = cards[cards.Count - 1];
-         UnregisterCard(cardToRemove);
-         Destroy(cardToRemove.gameObject);
-         cardCount--;
-     }*/
-    //DisplayHand(GetPlayedCardsForJudge());
-
-
-    //}
-    // GameLoop calls this to restore human hand
-    //public void ResetPlayHand()
-    // {
-    // DisplayHand(GetHumanPlayerHand());
-    // }
-    public void ResetPlayHand(List<ScriptableCard> hand)
-    {
-        ClearHandUI();
-
-        foreach (var cardData in hand)
-        {
-            var uiCard = CardSpawner.Instance.Spawn(cardData);
-            cards.Add(uiCard);
-        }
-
-        UpdateCardPositions();
-    }
-
-    private void ClearHandUI()
-    {
-        // Destroy all existing UI card objects
-        foreach (var card in cards)
-        {
+            UnregisterCard(card);          // removes from cards list
             if (card != null)
-                Destroy(card.gameObject);
+                Destroy(card.gameObject);  // destroy the GameObject
         }
 
-        // Clear the list
-        cards.Clear();
     }
 
-    public void UpdateHand(List<ScriptableCard> hand)
-
+    public void UpdatePlayHand(int playerCount)
     {
-        DisplayHand(hand);
-
+        int cardCount = cards.Count;
+       
+      
+        while (cardCount < (playerCount))    //removed -1 2/16
+        {
+            CardSpawner.Instance.Spawn();
+            cardCount++;
+        }
+        while (cardCount > (playerCount))//removed -1 2/16
+        {
+            PlayCard cardToRemove = cards[cards.Count - 1];
+            UnregisterCard(cardToRemove);
+            Destroy(cardToRemove.gameObject);
+            cardCount--;
+        }
     }
 
-
-    /*public void ResetPlayHand()
+    public void ResetPlayHand()
     {
         int cardCount = cards.Count;
         // Adjust hand size back to 5 cards
         while (cardCount < 5)
         {
-            CardSpawner.Instance.Spawn();
+            //CardSpawner.Instance.Spawn(); //remarked out 2/15
             cardCount++;
         }
         while (cardCount > 5)
@@ -202,37 +134,51 @@ public class HandManager : MonoBehaviour
             Destroy(cardToRemove.gameObject);
             cardCount--;
         }
-    }*/
+    }
 
-    private void UpdateCardPositions()
+    void UpdateCardPositions()
     {
         if (cards.Count == 0) return;
 
-        float cardWidth = 300f;      // UI card width in pixels
-        float spacing = 50f;         // extra spacing between cards
-        float totalWidth = cards.Count * (cardWidth + spacing);
+        float totalWidth = (cards.Count - 1) * cardSpacing;
+        Vector3 startPos = new Vector3(-totalWidth / 2f, yOffset, 0f);
 
-        float startX = -totalWidth / 2f + (cardWidth / 2f);
+        // Default order
+        List<PlayCard> orderedCards = new List<PlayCard>(cards);
 
-        for (int i = 0; i < cards.Count; i++)
+        // If dragging, find where the dragged card would be inserted
+        if (draggingCard != null)
         {
-            float x = startX + i * (cardWidth + spacing);
-            float y = yOffset; // 
+            float dragX = draggingCard.transform.position.x;
 
+            // Remove dragged card from temporary list
+            orderedCards.Remove(draggingCard);
 
-            //cards[i].GetComponent<CardMovement>()
-            //.SetTargetPosition(new Vector3(x, y, 0));
-            cards[i].GetComponent<CardMovement>().SetTargetPosition(new Vector3(x, y, 0));
+            int insertIndex = 0;
+            for (int i = 0; i < orderedCards.Count; i++)
+            {
+                if (dragX > orderedCards[i].transform.position.x)
+                    insertIndex = i + 1;
+            }
 
+            // Reinsert in a temporary order (without changing the main list yet)
+            orderedCards.Insert(insertIndex, draggingCard);
 
+            
+        }
+
+        // Update each cards target position smoothly
+        for (int i = 0; i < orderedCards.Count; i++)
+        {
+            PlayCard card = orderedCards[i];
+            if (card == draggingCard) continue; // dragged card follows the mouse manually
+
+            Vector3 targetPos = startPos + Vector3.right * (i * cardSpacing);
+            card.SetTargetPosition(targetPos);
         }
     }
 
-
-
-
-    //public void ReorderCard(PlayCard card, float draggedX)
-    public void ReorderCard(AnswerCards card, float draggedX)
+    public void ReorderCard(PlayCard card, float draggedX)
     {
         // Permanently reinsert based on where it was released
         cards.Remove(card);
@@ -247,25 +193,8 @@ public class HandManager : MonoBehaviour
         cards.Insert(newIndex, card);
         UpdateCardPositions();
     }
-    /*private List<AnswerCards> GetHumanPlayerHand()
-    {
-        foreach (var player in gameManager.GetPlayerQueue())
 
-        {
-            if (player is PsychePlayer psyche)
-                return psyche.Hand;
-        }
-
-        return new List<AnswerCards>();
-    }/*
-
-    private List<AnswerCards> GetPlayedCardsForJudge()
-    {
-        return gameLoop.PlayedCards;
-    }*/
-
-    //public Vector3 GetCardTargetPosition(PlayCard card)
-    public Vector3 GetCardTargetPosition(AnswerCards card)
+    public Vector3 GetCardTargetPosition(PlayCard card)
     {
         int index = cards.IndexOf(card);
         float totalWidth = (cards.Count - 1) * cardSpacing;
@@ -273,14 +202,27 @@ public class HandManager : MonoBehaviour
         return startPos + Vector3.right * (index * cardSpacing);
     }
 
-
     public void PlayCardSpriteReset()
     {
-       // for (int i = 0; i < cards.Count; i++)
-       // {
-           // cards[i].SetCardSprite(sprites[i]);
-       // }
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].SetCardSprite(sprites[i]);
+        }
 
-       // PlayHand = new List<PlayCard>(cards);
+        PlayHand = new List<PlayCard>(cards);
     }
+
+    //2/16 method do assign the correct scriptable object during human judging
+    public void ApplyPlayedCardsToUI(List<AnswerCard> playedCards)
+    {
+        for (int i = 0; i < cards.Count && i < playedCards.Count; i++)
+        {
+            cards[i].ApplyAnswerCard(playedCards[i]);
+        }
+
+        PlayHand = new List<PlayCard>(cards);
+    }
+
+
+
 }
