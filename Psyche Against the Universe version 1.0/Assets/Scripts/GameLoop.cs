@@ -3,14 +3,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 using TMPro;
 
 using Unity.Collections;
 using Unity.VisualScripting;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static BanterManager;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameLoop : MonoBehaviour
 {
@@ -32,6 +35,7 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPUJudge5;     //used when in 6 player
     //Test console (disable once final)
     public TMP_Text TestConsole;
+    public AutoScroll autoScroll;   //transfers the test log to a UI object with autoscroll
     //Banter areas
     public TMP_Text CPUPlay1Banter;
     public TMP_Text CPUPlay2Banter;
@@ -48,6 +52,13 @@ public class GameLoop : MonoBehaviour
     public TMP_Text HumanScoreField;
     //add additional for expanded
 
+    //Add Player turn highlights - UI object only. No player object interaction
+    public PlayerHighlight humanHighlighter;
+    public PlayerHighlight cpu1Highlight;
+    public PlayerHighlight cpu2Highlight;
+    public PlayerHighlight cpu3Highlight;
+    public PlayerHighlight cpu4Highlight;
+    public PlayerHighlight cpu5Highlight;
 
     //Audio Support
     public AudioClip[] funnyClips;
@@ -90,6 +101,8 @@ public class GameLoop : MonoBehaviour
     ICPUStrategy Funny = new FunnyStrategy();
     ICPUStrategy Serious = new SeriousStrategy();
     ICPUStrategy Nerdy = new SciFiStrategy();
+
+    
 
     void OnEnable()
     {
@@ -162,7 +175,7 @@ public class GameLoop : MonoBehaviour
                         
                         if (playerQueue.Count == 3)
                         {
-                            CPUJudge2.color = Color.white;              //Sets the last player in the queue as the first judge. Modified to check for additional players
+                            CPUJudge2.color = Color.red;              //Sets the last player in the queue as the first judge. Modified to check for additional players
                             CPUplayer.judge = true;                     //sets the judge flag if three player game
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -173,7 +186,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 4)                     //active if it is a four player game.
                         {
-                            CPUJudge3.color = Color.white;
+                            CPUJudge3.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -185,7 +198,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 5)                     //active if it is a five  player game.
                         {
-                            CPUJudge4.color = Color.white;
+                            CPUJudge4.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -197,7 +210,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 6)                     //active if it is a six  player game.
                         {
-                            CPUJudge5.color = Color.white;
+                            CPUJudge5.color = Color.red;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -213,7 +226,10 @@ public class GameLoop : MonoBehaviour
         //TEST OBJECTS TO DEVELOP GAME LOOP
         //Deal cards. Currently simulated as a means to fill the list
        // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-        testDeck = getTestCards();
+
+          //comment out 2/15/26 to support integration
+       // testDeck = getTestCards();
+
 
         string prompt = deckManager.DrawPrompt();
         activeCard.SetPrompt(prompt);
@@ -229,7 +245,11 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
-        DealHands(playerQueue, testDeck);
+        //comment out 2/15/26 to support integration
+        // DealHands(playerQueue, testDeck);
+
+        DealHands(playerQueue, AnswerDeckManager.Instance.deck);  // new line
+
         foreach (var player in playerQueue)
         {
             Debug.Log($"{player.Avatar_Name} has {player.Hand.Count} cards in hand.");
@@ -282,14 +302,39 @@ public class GameLoop : MonoBehaviour
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
+                        humanHighlighter.StartFlashing(1f);
+
                         HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
-                            // switches to play hand view for human
-                            HandManager.Instance.ResetPlayHand();
-                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            HandManager.Instance.PlayCardSpriteReset();
-                            HandManager.Instance.PlayHandShow();
+                            // switches to play hand view for human 2-15-26 next 4 lines remarked out for answer card integration. 
+                            // HandManager.Instance.ResetPlayHand();
+                            // yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
+                            // HandManager.Instance.PlayCardSpriteReset();
+                            // HandManager.Instance.PlayHandShow();
+
+                            //Added 2/16/26 
+                           // Clear old visual cards
+                            HandManager.Instance.ClearHand();//Added 2/16/26 
+                            Debug.Log($"[GameLoop] humanPlayer.Hand count: {humanPlayer.Hand.Count}");//Added 2/16/26 
+                            // Spawn new visual cards using the player's actual AnswerCard data
+                            foreach (AnswerCard cardData in humanPlayer.Hand)//Added 2/16/26 
+                            {
+                                Debug.Log($"[GameLoop] Spawning card: {cardData.title}");//Added 2/16/26 
+
+                                CardSpawner.Instance.Spawn(cardData);//Added 2/16/26 
+                            }
+
+                            // Smooth reveal timing
+                            yield return new WaitForSeconds(1f);//Added 2/16/26 
+
+                            // Reset sprites if needed
+                            HandManager.Instance.PlayCardSpriteReset();//Added 2/16/26 
+
+                            // Show the hand
+                            HandManager.Instance.PlayHandShow();//Added 2/16/26 
+
+
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
@@ -304,6 +349,8 @@ public class GameLoop : MonoBehaviour
                             playerview.UpdateHand(humanPlayer.Hand);
 
                             HandManager.Instance.PlayHandHide();
+                            humanHighlighter.StopFlashing();
+
                         }
                         else
                         {
@@ -311,10 +358,18 @@ public class GameLoop : MonoBehaviour
                             // judge logic goes here. UI should display the played cards list as UI elements
 
                             // switches to judge hand view for human
-                            HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count
+                            //HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count  //remarked out 2/16
+                            HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  //2/16
+
                             yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            HandManager.Instance.PlayCardSpriteReset();
+                            //HandManager.Instance.PlayCardSpriteReset();  //turned off 2/16
+                            //added 2/16
+                            HandManager.Instance.ApplyPlayedCardsToUI(PlayedCards);
+
                             HandManager.Instance.PlayHandJudge();
+
+
+                       
 
                             // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
@@ -332,6 +387,8 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
+                            humanHighlighter.StopFlashing();
+
                         }
 
                         HandManager.Instance.SetYOffset(false); // hide hand after human turn
@@ -340,6 +397,8 @@ public class GameLoop : MonoBehaviour
                     case CPUPlayer CPUPlayer:
                         if (!CPUPlayer.isJudge())
                         {
+                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
+
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
 
@@ -369,10 +428,13 @@ public class GameLoop : MonoBehaviour
                             //DisplayBanter("", CPUPlayer);
                             CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
-                            
+                            HighlightCPUPlayer(null);
+
+
                         }
                         else
                         {
+                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
                             AnswerCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judge cards.");
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
@@ -380,6 +442,9 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
+                            yield return new WaitForSeconds(2F);
+                            HighlightCPUPlayer(null);
+
                         }
                         break;
 
@@ -498,6 +563,51 @@ public class GameLoop : MonoBehaviour
         SceneManager.LoadScene("Bootstrap");
 
     }
+
+    private void HighlightCPUPlayer(CPUPlayer cpuPlayer)
+    {
+        // If null → turn off all highlights and exit
+        if (cpuPlayer == null)
+        {
+            cpu1Highlight.StopFlashing();
+            cpu2Highlight.StopFlashing();
+            if (cpu3Highlight != null) cpu3Highlight.StopFlashing();
+            if (cpu4Highlight != null) cpu4Highlight.StopFlashing();
+            if (cpu5Highlight != null) cpu5Highlight.StopFlashing();
+            return;
+        }
+
+        // Turn off all highlights first
+        cpu1Highlight.StopFlashing();
+        cpu2Highlight.StopFlashing();
+        if (cpu3Highlight != null) cpu3Highlight.StopFlashing();
+        if (cpu4Highlight != null) cpu4Highlight.StopFlashing();
+        if (cpu5Highlight != null) cpu5Highlight.StopFlashing();
+
+        // Now activate the correct one
+        if (cpuPlayer.Avatar_Name == CPU1Name.text)
+        {
+            cpu1Highlight.StartFlashing(1f);
+        }
+        else if (cpuPlayer.Avatar_Name == CPU2Name.text)
+        {
+            cpu2Highlight.StartFlashing(1f);
+        }
+        else if (CPU3Name != null && cpuPlayer.Avatar_Name == CPU3Name.text)
+        {
+            cpu3Highlight.StartFlashing(1f);
+        }
+        else if (CPU4Name != null && cpuPlayer.Avatar_Name == CPU4Name.text)
+        {
+            cpu4Highlight.StartFlashing(1f);
+        }
+        else if (CPU5Name != null && cpuPlayer.Avatar_Name == CPU5Name.text)
+        {
+            cpu5Highlight.StartFlashing(1f);
+        }
+
+    }
+
     /// <summary>
     /// Simple method that displays the winner. This is independent of mode.
     /// </summary>
@@ -694,10 +804,17 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-            while (player.Hand.Count < 5 && testDeck.Count > 0)
+            //Comment out 2/16/26 to account for real deck integration
+            //while (player.Hand.Count < 5 && testDeck.Count > 0)
+            while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
             {
-                AnswerCard drawn = testDeck[0];         //pull from the top
-                testDeck.RemoveAt(0);
+                //remark out these two lines 2/16/26 
+                //AnswerCard drawn = testDeck[0];         //pull from the top
+                //testDeck.RemoveAt(0);
+
+                // Draw from the real deck
+                AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
+                AnswerDeckManager.Instance.deck.RemoveAt(0);
 
                 player.Hand.Add(drawn);
                 switch (player)
@@ -722,7 +839,9 @@ public class GameLoop : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     public void returnPlayedCards()
     {
-        testDeck.AddRange(PlayedCards);
+       // testDeck.AddRange(PlayedCards); //remove 2/16 as there is no longer a test deck
+        AnswerDeckManager.Instance.deck.AddRange(PlayedCards);  //2/16  return cards to the actual deck
+
         PlayedCards.Clear();
         Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
         TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
@@ -737,54 +856,61 @@ public class GameLoop : MonoBehaviour
     {
         if(playerQueue.Last().Avatar_Name == CPU1Name.text)
         {
-            CPUJudge1.color = Color.white;
+            CPUJudge1.color = Color.red;
         }
         else if (playerQueue.Last().Avatar_Name == CPU2Name.text)
         {
-            CPUJudge2.color = Color.white;
+            CPUJudge2.color = Color.red;
         }
         else if (CPU3Name != null && playerQueue.Last().Avatar_Name == CPU3Name.text)
         {
-            CPUJudge3.color = Color.white;
+            CPUJudge3.color = Color.red;
         }
         else if (CPU4Name != null && playerQueue.Last().Avatar_Name == CPU4Name.text)
         {
-            CPUJudge4.color = Color.white;
+            CPUJudge4.color = Color.red;
         }
         else if (CPU5Name != null && playerQueue.Last().Avatar_Name == CPU5Name.text)
         {
-            CPUJudge5.color = Color.white;
+            CPUJudge5.color = Color.red;
         }
         else if (playerQueue.Last().Avatar_Name == HumanPlayerName.text)
         {
-            JudgeLabel.color = Color.white;
+            JudgeLabel.color = Color.red;
         }
 
     }
 
     /// <summary>
     /// Turns off judge fields
+    /// modified to change the alpha value vice color. Allows for use 
+    /// with various backgrounds and objects.
     /// </summary>
 
     private void TurnOffJudge()
     {
-        JudgeLabel.color = Color.red;
-        CPUJudge1.color = Color.red;
-        CPUJudge2.color = Color.red;
+        JudgeLabel.alpha = 0;
+        // JudgeLabel.color = Color.red;
+        CPUJudge1.alpha = 0;
+        CPUJudge2.alpha = 0;
+        //CPUJudge1.color = Color.red;
+        //CPUJudge2.color = Color.red;
         if (CPUJudge3 != null)
         {
-            CPUJudge3.color = Color.red;
+            //CPUJudge3.color = Color.red;
+            CPUJudge3.alpha = 0;
         }
         if (CPUJudge4 != null)
         {
-            CPUJudge4.color = Color.red;
+            //CPUJudge4.color = Color.red;
+            CPUJudge4.alpha = 0;
         }
         if (CPUJudge5 != null)
         {
-            CPUJudge5.color = Color.red;
+            //CPUJudge5.color = Color.red;
+            CPUJudge5.alpha = 0;
         }
-        
-
+   
     }
 
     /// <summary>
@@ -812,13 +938,20 @@ public class GameLoop : MonoBehaviour
     public void TestConsoleLog( string message)
     {
         //Append a line to the console
-        TestConsole.text += "\n" + message;
+       // TestConsole.text += "\n" + message;
 
-         if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
-            {
-                TestConsole.text = string.Empty;
-                return;
-            }
+       //  if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
+       //     {
+       //         TestConsole.text = string.Empty;
+       //         return;
+       //     }
+        if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))
+        {
+            autoScroll.AddMessage("");   // clears the UI through AutoScroll
+            return;
+        }
+
+        autoScroll.AddMessage(message);
 
     }
 

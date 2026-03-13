@@ -4,12 +4,19 @@
 // 11/26/25 Updated by Tim Burke with the additional fields and method to integrate with the CPU logic.
 
 
+using UnityEngine;
+
 [System.Serializable]
 public class AnswerCard {
     public string title;
     public string description;
+
+    //Mod added 2/14/26
+    public Sprite background;  //visual background for the card
+    public Sprite artwork;     //any card specific artwork
+
     //public string personality;
-    public int weight;    //we can remove this since we have the trait scores
+    //public int weight;    //we can remove this since we have the trait scores
 
     public PersonalityParse PersonalityTag; // For Answer cards; Scenario can ignore
 
@@ -21,9 +28,29 @@ public class AnswerCard {
     //Metadata field to track who played the card
     public string PlayedBy { get; set; }
 
+    //creating a new constructor for card assets. 2/14/26 
+    public AnswerCard( 
+        string title,
+        string description,
+        Sprite background, 
+        Sprite artwork,
+        int weightSerious, 
+        int weightSciFi, 
+        int weightFunny, 
+        int wieghtChaotic)
+    {
+        this.title = title;
+        this.description = description;
+        this.background = background;
+        this.artwork = artwork;
+        this.WeightSerious = weightSerious;
+        this.WeightSciFi = weightSciFi;
+        this.WeightFunny = weightFunny;
+        this.WeightChaotic = wieghtChaotic;
+    }
 
     //default constructor to create test cards for game loop creation
-    //modify to suit
+    //modify to suit -2/14/26 maintain for use
     public AnswerCard(string title, int WieghtSerious, int WeightSciFi, int WeightFunny,
     int WeightChaotic)
     {
@@ -34,7 +61,7 @@ public class AnswerCard {
         this.WeightFunny = WeightFunny;
         this.WeightChaotic = WeightChaotic;
         this.WeightSciFi = WeightSciFi;
-    
+        
     }
 
     public int WeightFor(PersonalityParse p) => p switch
