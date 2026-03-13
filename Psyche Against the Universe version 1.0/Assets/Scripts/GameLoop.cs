@@ -35,6 +35,7 @@ public class GameLoop : MonoBehaviour
     public TMP_Text CPUJudge5;     //used when in 6 player
     //Test console (disable once final)
     public TMP_Text TestConsole;
+    public AutoScroll autoScroll;   //transfers the test log to a UI object with autoscroll
     //Banter areas
     public TMP_Text CPUPlay1Banter;
     public TMP_Text CPUPlay2Banter;
@@ -100,6 +101,8 @@ public class GameLoop : MonoBehaviour
     ICPUStrategy Funny = new FunnyStrategy();
     ICPUStrategy Serious = new SeriousStrategy();
     ICPUStrategy Nerdy = new SciFiStrategy();
+
+    
 
     void OnEnable()
     {
@@ -935,13 +938,20 @@ public class GameLoop : MonoBehaviour
     public void TestConsoleLog( string message)
     {
         //Append a line to the console
-        TestConsole.text += "\n" + message;
+       // TestConsole.text += "\n" + message;
 
-         if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
-            {
-                TestConsole.text = string.Empty;
-                return;
-            }
+       //  if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
+       //     {
+       //         TestConsole.text = string.Empty;
+       //         return;
+       //     }
+        if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))
+        {
+            autoScroll.AddMessage("");   // clears the UI through AutoScroll
+            return;
+        }
+
+        autoScroll.AddMessage(message);
 
     }
 
