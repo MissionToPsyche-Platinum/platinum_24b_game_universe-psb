@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
-    private List<PlayCard> cards = new List<PlayCard>();
+    [SerializeField] private List<PlayCard> cards = new List<PlayCard>();
     public float cardSpacing = 2f;
     public float yOffset = -4f;
     public float hideYOffset = -8f;
@@ -75,6 +75,7 @@ public class HandManager : MonoBehaviour
     public void SetDraggingCard(PlayCard card)
     {
         draggingCard = card;
+        card.GetComponent<RectTransform>().SetAsLastSibling();
     }
 
     public void ClearDraggingCard()
@@ -83,16 +84,33 @@ public class HandManager : MonoBehaviour
         UpdateCardPositions();
     }
 
+    //2.15.26 updated to use the new answer card prefab vice thedafault play card
+    //helper method for spritebased to UI conversion
+    public void ClearHand()
+    {
+        // Work on a copy so we don't modify the list while iterating
+        var copy = new List<PlayCard>(cards);
+
+        foreach (var card in copy)
+        {
+            UnregisterCard(card);          // removes from cards list
+            if (card != null)
+                Destroy(card.gameObject);  // destroy the GameObject
+        }
+
+    }
+
     public void UpdatePlayHand(int playerCount)
     {
         int cardCount = cards.Count;
-        // Adjust hand size based on player count
-        while (cardCount < (playerCount - 1))
+       
+      
+        while (cardCount < (playerCount))    //removed -1 2/16
         {
             CardSpawner.Instance.Spawn();
             cardCount++;
         }
-        while (cardCount > (playerCount - 1))
+        while (cardCount > (playerCount))//removed -1 2/16
         {
             PlayCard cardToRemove = cards[cards.Count - 1];
             UnregisterCard(cardToRemove);
@@ -107,7 +125,7 @@ public class HandManager : MonoBehaviour
         // Adjust hand size back to 5 cards
         while (cardCount < 5)
         {
-            CardSpawner.Instance.Spawn();
+            //CardSpawner.Instance.Spawn(); //remarked out 2/15
             cardCount++;
         }
         while (cardCount > 5)
@@ -174,6 +192,7 @@ public class HandManager : MonoBehaviour
         }
 
         cards.Insert(newIndex, card);
+        card.GetComponent<RectTransform>().SetSiblingIndex(newIndex);
         UpdateCardPositions();
     }
 
@@ -194,4 +213,18 @@ public class HandManager : MonoBehaviour
 
         PlayHand = new List<PlayCard>(cards);
     }
+
+    //2/16 method do assign the correct scriptable object during human judging
+    public void ApplyPlayedCardsToUI(List<AnswerCard> playedCards)
+    {
+        for (int i = 0; i < cards.Count && i < playedCards.Count; i++)
+        {
+            cards[i].ApplyAnswerCard(playedCards[i]);
+        }
+
+        PlayHand = new List<PlayCard>(cards);
+    }
+
+
+
 }

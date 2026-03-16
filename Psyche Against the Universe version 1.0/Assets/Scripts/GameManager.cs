@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -369,6 +369,7 @@ public class GameManager : MonoBehaviour
 
         //build player
         _common.Avatar_Name = PlayText.text;     //Builds the human player object here and adds it to the player queue
+        Debug.Log("GameManager PlayText object: " + PlayText.GetInstanceID());
 
         return _common;
     }

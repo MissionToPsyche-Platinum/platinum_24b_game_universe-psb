@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,12 @@ public class DefaultPlayer : MonoBehaviour
     IEnumerator WaitAndRead()
 
     {
-        yield return null; // wait one frame
+        // Wait until dropdown has at least one option
+    //while (Dropdown.options.Count == 0)
+         yield return null;
+
+        Debug.Log("DefaultPlayer PlayText object: " + PlayText.GetInstanceID());
+
         PlayText.text = Dropdown.options[Dropdown.value].text;
     }
 
