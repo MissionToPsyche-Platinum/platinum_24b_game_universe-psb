@@ -168,6 +168,7 @@ public class GameLoop : MonoBehaviour
                     if (index == 1)
                     {
                         CPU1Name.text = CPUplayer.Avatar_Name;
+
                     }
                     if (index == 2)
                     {
@@ -230,7 +231,7 @@ public class GameLoop : MonoBehaviour
           //comment out 2/15/26 to support integration
        // testDeck = getTestCards();
 
-
+        //Keep this section. round starts with the drawing of the prompt card. 
         string prompt = deckManager.DrawPrompt();
         activeCard.SetPrompt(prompt);
 
@@ -238,10 +239,15 @@ public class GameLoop : MonoBehaviour
                                                          //load a prompt into the scriptable object
                                                          //PromptLoader.LoadPromptText(activeCard.cardData);
         //Add a delay to fill in an animation later.
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         //flip the card
         activeCard.ShowPrompt();
 
+        //Provide one round of clues. Each CPU player makes a statement based on thier dominant personality. 
+        //Triggers the border flash and prompt to appear in the desingated banter field.
+        TestConsoleLog("You take a chance to observe the other players");
+        ProvideClue(playerQueue);
+        yield return new WaitForSeconds(3f);     
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
@@ -277,7 +283,7 @@ public class GameLoop : MonoBehaviour
         //TestConsoleLog("Deal a Prompt Card");
 
         yield return new WaitForSeconds(1f);
-        TestConsoleLog("Start Proto Game Loop");
+        TestConsoleLog("Starting Game");
         PauseMenu.GameIsPaused = false; //ensure game is unpaused at start of loop
 
         int totalRounds = 20;                                  //Round counter and round number
@@ -368,9 +374,6 @@ public class GameLoop : MonoBehaviour
 
                             HandManager.Instance.PlayHandJudge();
 
-
-                       
-
                             // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
 
@@ -384,7 +387,7 @@ public class GameLoop : MonoBehaviour
 
                             //and select the same way a card is played. For now, this will be auto
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+                            TestConsoleLog($"{PlayedCards[chosenIndex].title} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
@@ -436,8 +439,8 @@ public class GameLoop : MonoBehaviour
                         {
                             HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
                             AnswerCard chosenCard;
-                            TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judge cards.");
-                            TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
+                            TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judging cards.");
+                            //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );  //CPU logic will define this further later
                             TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
@@ -457,7 +460,7 @@ public class GameLoop : MonoBehaviour
 
             if (isWin)
             {
-                TestConsoleLog("isWin is true, check for tie");
+                //TestConsoleLog("isWin is true, check for tie");
                 isTie = CheckTie(playerQueue);
 
                 if (!isTie)
@@ -497,11 +500,11 @@ public class GameLoop : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             //now take the last name in the queue, find its label and turn it on
-            TestConsoleLog("Set new judge");
+            TestConsoleLog("Rotating judge");
             TurnOnJudge(playerQueue);
 
             //discard all played answer cards (return to the test deck or answer card deck
-            TestConsoleLog("returning answer cards to answer deck");
+            Debug.Log("returning answer cards to answer deck");
             returnPlayedCards();
             yield return new WaitForSeconds(1f);
 
@@ -509,9 +512,9 @@ public class GameLoop : MonoBehaviour
             ReloadPlayerHands(playerQueue, playerview, CpuView);
             yield return new WaitForSeconds(1f);
 
-            
+
             //discard and draw a new prompt card
-            TestConsoleLog("discard and draw a new prompt card");
+            Debug.Log("discard and draw a new prompt card");
 
             //flip prompt card back to the front side. delay, and then flip
             activeCard.ShowFront();
@@ -552,9 +555,9 @@ public class GameLoop : MonoBehaviour
 
         }
 
-        
+
         //Debug.Log("End protoloop test");
-        TestConsoleLog("End Protoloop test");
+        Debug.Log("End Protoloop test");
         TestConsoleLog("Game is over, thanks for playing");
         //return to main menu scene
         TestConsoleLog("Returning to Main Menu");
@@ -562,6 +565,42 @@ public class GameLoop : MonoBehaviour
         yield return new WaitForSeconds(GameModeTransition);
         SceneManager.LoadScene("Bootstrap");
 
+    }
+    //method displays a prompt on the huma machine that highlights the player and then provides a 
+    //context clue for guessing personality
+    private void ProvideClue(Queue<IPlayerCommon> playerQueue)
+    {
+        foreach(var player in playerQueue)
+        {
+            if(player is CPUPlayer cpu)
+            {
+                string trait = cpu.Personality[0];
+
+                //print the preset message based on personality match
+                if (trait == "Serious")
+                {
+                    TestConsoleLog(cpu.Avatar_Name + " makes a serious face");
+                    
+                }
+                else if (trait == "Sci_Fy")
+                {
+                    TestConsoleLog(cpu.Avatar_Name + " is wearing Vulcan Ears");
+                   
+                }
+                else if (trait == "Funny")
+                {
+                    TestConsoleLog(cpu.Avatar_Name + " is making silly gestures");
+                    
+                }
+                else if (trait == "Chaotic")
+                {
+                    TestConsoleLog(cpu.Avatar_Name + " is giving a devious expression");
+                   
+                }
+            }
+            
+        }
+      
     }
 
     private void HighlightCPUPlayer(CPUPlayer cpuPlayer)
@@ -587,23 +626,23 @@ public class GameLoop : MonoBehaviour
         // Now activate the correct one
         if (cpuPlayer.Avatar_Name == CPU1Name.text)
         {
-            cpu1Highlight.StartFlashing(1f);
+            cpu1Highlight.StartFlashing(2f);
         }
         else if (cpuPlayer.Avatar_Name == CPU2Name.text)
         {
-            cpu2Highlight.StartFlashing(1f);
+            cpu2Highlight.StartFlashing(2f);
         }
         else if (CPU3Name != null && cpuPlayer.Avatar_Name == CPU3Name.text)
         {
-            cpu3Highlight.StartFlashing(1f);
+            cpu3Highlight.StartFlashing(2f);
         }
         else if (CPU4Name != null && cpuPlayer.Avatar_Name == CPU4Name.text)
         {
-            cpu4Highlight.StartFlashing(1f);
+            cpu4Highlight.StartFlashing(2f);
         }
         else if (CPU5Name != null && cpuPlayer.Avatar_Name == CPU5Name.text)
         {
-            cpu5Highlight.StartFlashing(1f);
+            cpu5Highlight.StartFlashing(2f);
         }
 
     }
@@ -633,7 +672,7 @@ public class GameLoop : MonoBehaviour
         }
         else
         {
-            TestConsoleLog("No winner could be determined.");
+            Debug.Log("No winner could be determined.");
         }
 
 
@@ -844,7 +883,7 @@ public class GameLoop : MonoBehaviour
 
         PlayedCards.Clear();
         Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
-        TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
+        //TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
     }
 
     /// <summary>
