@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &63247000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -575,11 +575,11 @@ MonoBehaviour:
     which type of card personality a player will use, and then play a card of that
     type to influence them when they are the judge.
 
-    
 
-    Do the same when
-    it is your turn as judge to ensure you don''t accidently give another player
-    a winning chance.'
+
+    Do the same when it is
+    your turn as judge to ensure you don''t accidently give another player a winning
+    chance.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2877,7 +2877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &543313185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8801,7 +8801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1362881088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9189,7 +9189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1386461809
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9519,7 +9519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1435764433
 RectTransform:
   m_ObjectHideFlags: 0
