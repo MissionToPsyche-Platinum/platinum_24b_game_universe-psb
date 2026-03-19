@@ -102,8 +102,13 @@ public class GameLoop : MonoBehaviour
     ICPUStrategy Serious = new SeriousStrategy();
     ICPUStrategy Nerdy = new SciFiStrategy();
 
-    
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        GameManager.NextSceneAfterIntermission = null;
+
+    }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -133,14 +138,12 @@ public class GameLoop : MonoBehaviour
             StartCoroutine(StartGameLoop()); //allows for adding delays
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    
     private IEnumerator StartGameLoop()
     {
+       
         var gm = GameManager.Instance;        //Access the game manager assets through the singleton
+        
         if (gm == null)
         {
             Debug.LogError("GameManager Instance not found");
@@ -263,13 +266,15 @@ public class GameLoop : MonoBehaviour
 
         /***************************************************************************************************************************/
         // set the win condition
-        if (gm.NormalCkbox.isOn)
+        //if (gm.NormalCkbox.isOn)
+        if (gm.enableNormMode)    
         {
             yield return new WaitForSeconds(1f);
             TestConsoleLog("Normal Mode is set");
             wincon = NormWin;
         }
-        if (gm.SDeathCkbox.isOn)
+        //if (gm.SDeathCkbox.isOn)
+        if (gm.enableSuddenWinMode)
         {
             yield return new WaitForSeconds(1f);
             TestConsoleLog("Sudden Win Mode is set");

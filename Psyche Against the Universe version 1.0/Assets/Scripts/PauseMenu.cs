@@ -58,7 +58,9 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitButton()
     {
+        GameManager.ReturnToMenu = true;
         Debug.Log("Returning to Main Menu");
-        SceneManager.LoadScene("Bootstrap");
+        //SceneManager.LoadScene("Bootstrap");
+        SceneManager.LoadScene("FunFacts5");
     }
 }

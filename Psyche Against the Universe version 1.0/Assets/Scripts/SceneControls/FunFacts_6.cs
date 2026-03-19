@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class FunFacts_2 : MonoBehaviour
+public class FunFacts_6 : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +15,7 @@ public class FunFacts_2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       //Debug.Log("Intermission Update running");
+        //Debug.Log("Intermission Update running");
 
         // Press Enter
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
@@ -37,6 +37,6 @@ public class FunFacts_2 : MonoBehaviour
         SceneManager.LoadScene(GameManager.NextSceneAfterIntermission);
         //SceneManager.LoadScene("Gameboard");
     }
-
 }
+
 
