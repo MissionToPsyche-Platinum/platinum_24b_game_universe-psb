@@ -4011,7 +4011,6 @@ GameObject:
   - component: {fileID: 778465396}
   - component: {fileID: 778465395}
   - component: {fileID: 778465394}
-  - component: {fileID: 778465397}
   m_Layer: 5
   m_Name: Manual Button
   m_TagString: Untagged
@@ -4133,21 +4132,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778465392}
   m_CullTransparentMesh: 1
---- !u!114 &778465397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778465392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080984f434e376d4aae2429610cef63f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameAssembly::ManualBox
-  ManualPanel: {fileID: 834990726}
-  ManualText: {fileID: 816273702}
-  ManCloseButton: {fileID: 524647935}
 --- !u!1 &816273700
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,7 +4934,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1158512778}
   m_HandleRect: {fileID: 1158512777}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
