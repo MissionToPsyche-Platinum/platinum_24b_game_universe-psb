@@ -804,31 +804,41 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-            //Comment out 2/16/26 to account for real deck integration
-            //while (player.Hand.Count < 5 && testDeck.Count > 0)
+            // Enforce maximum hand size of 5 first
+            if (player.Hand.Count > 5)
+            {
+                Debug.LogError($"{player.Avatar_Name} has more than 5 cards. Discarding extras.");
+
+                while (player.Hand.Count > 5)
+                {
+                    // Remove extra cards from the end of the hand
+                    AnswerCard extraCard = player.Hand[player.Hand.Count - 1];
+                    player.Hand.RemoveAt(player.Hand.Count - 1);
+
+                    // Return discarded extra card to the bottom of the deck
+                    AnswerDeckManager.Instance.deck.Add(extraCard);
+                }
+            }
+
+            // Refill hands below 5
             while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
             {
-                //remark out these two lines 2/16/26 
-                //AnswerCard drawn = testDeck[0];         //pull from the top
-                //testDeck.RemoveAt(0);
-
-                // Draw from the real deck
                 AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
                 AnswerDeckManager.Instance.deck.RemoveAt(0);
 
                 player.Hand.Add(drawn);
+
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
                         playerview.UpdateHand(humanPlayer.Hand);
                         break;
 
-                    case CPUPlayer CPUplayer:
-                        cpuView.UpdateHand(CPUplayer.Hand);
+                    case CPUPlayer cpuPlayer:
+                        cpuView.UpdateHand(cpuPlayer.Hand);
                         break;
                 }
             }
-
         }
     }
 
