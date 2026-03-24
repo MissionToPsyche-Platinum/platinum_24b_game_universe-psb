@@ -143,9 +143,9 @@ public class CPUPlayer : IPlayerCommon
             );
             //**********************************************************************************************************************
 
-            gameLoop.TestConsoleLog("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
-             " chao  " + choice.WeightChaotic);
-
+            //gameLoop.TestConsoleLog("Card Played " + choice.title + " serious  " + choice.WeightSerious + " Sci  " +choice.WeightSciFi + " fun  " + choice.WeightFunny + 
+            // " chao  " + choice.WeightChaotic);
+            gameLoop.TestConsoleLog("Played a card ");
             choice.PlayedBy = this.Avatar_Name;  //this way we know who played the card
 
             //add to the played cards list in the gameloop

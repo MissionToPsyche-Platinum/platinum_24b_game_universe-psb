@@ -22,7 +22,8 @@ public class TitleTransition : MonoBehaviour
     IEnumerator loadMenu()
     {
         yield return new WaitForSeconds(delayTransistion);
-        SceneManager.LoadScene("Main Menu");
+        //SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("FunFacts1");  //transition to intermission scene
     }
     // Update is called once per frame
     void Update()
