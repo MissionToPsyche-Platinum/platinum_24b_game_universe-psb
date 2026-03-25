@@ -14,13 +14,16 @@ using UnityEngine;
  *            to iterate through the array and play a strategy defined in the strategy pattern by matching the name
  *            to the object type.
  *          - Modified the setCPUPersonality method to randomly shuffle and load the personality array
+ *3/25/26 - Added a temp list to fix repeat name bug
+ *3/25/26 - added hashset to ensure maximum dominant personality uniqueness
  */
 public class CPUBuilder : ICPUBuilder
 
 {
-
+    private static List<string> cachedNames = null;         //create a temp list of CPU names
     private CPUPlayer _cpuPlayer = new CPUPlayer();
-   
+    private static HashSet<string> usedFirstTraits = new HashSet<string>();   //used to ensure maximum uniqueness
+
     //Define the enumeration of personality types
     //Note: The builder pattern will need to be modified across the whole pattern if more personality types 
     //      are added.
@@ -50,25 +53,33 @@ public class CPUBuilder : ICPUBuilder
     /// <param name="name"></param>
     public void SetCPUname(string name)             //Will pull a CPU player name at random from the player file
     {
-        
-        //load the text assets from the file 
-        TextAsset cpuNameFile = Resources.Load<TextAsset>("CPU_Char_Names");
-        //test file load
-        if (cpuNameFile == null)
+
+        //load the text assets from the file only once instead of each time.
+        if (cachedNames == null || cachedNames.Count == 0)  //new line
         {
-            Debug.LogError("File not found in resources folder");
-            return;
+            TextAsset cpuNameFile = Resources.Load<TextAsset>("CPU_Char_Names");
+            //test file load
+            if (cpuNameFile == null)
+            {
+                Debug.LogError("File not found in resources folder");
+                return;
+            }
+
+            //split the file into lines
+            string[] nameList = cpuNameFile.text.Split(new[] { '\r', '\n' },
+                System.StringSplitOptions.RemoveEmptyEntries);
+
+            //List<string> cpuNameList = new List<string>(nameList);   //old line
+            cachedNames = new List<string>(nameList);
         }
-
-        //split the file into lines
-        string[] nameList = cpuNameFile.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-        List<string> cpuNameList = new List<string>(nameList);
-
-        //pick a random name
-        System.Random rng = new System.Random();
-        int index = rng.Next(cpuNameList.Count);
-        string nameAtRandom = nameList[index];
-        cpuNameList.RemoveAt(index);
+            //pick a random name
+            System.Random rng = new System.Random();
+        //int index = rng.Next(cpuNameList.Count); //old line
+        int index = rng.Next(cachedNames.Count);
+        //string nameAtRandom = nameList[index]; //old line
+        string nameAtRandom = cachedNames[index];
+        //cpuNameList.RemoveAt(index);//old line
+        cachedNames.RemoveAt(index);
 
         //assign it to the CPU
         _cpuPlayer.Avatar_Name = nameAtRandom;                     //TODO: modify to pull from the name file at random
@@ -85,20 +96,44 @@ public class CPUBuilder : ICPUBuilder
         //get all of the personalities from the enum
         List<string> allTypes = Enum.GetNames(typeof(CPUPersonalityTypes)).ToList();
 
-        //perform a basic shuffle and then load linearly
-        for (int i = allTypes.Count -1; i>0; i--)
+        //perform a shuffle using System.Random (fixes identical matrices)
+        System.Random rng = new System.Random();
+        for (int i = allTypes.Count - 1; i > 0; i--)
         {
-            int j = UnityEngine.Random.Range(0, i + 1);
+            int j = rng.Next(i + 1);
             (allTypes[i], allTypes[j]) = (allTypes[j], allTypes[i]);
         }
+        // maximize uniqueness
 
-        //fill the personality matrix
-        for (int i = 0; i < personality.Length && i < allTypes.Count; i++)
+        string firstTrait;
+
+        if (usedFirstTraits.Count < 4)
         {
-            personality[i] = allTypes[i];
+            // enforce unique first element for first 4 CPUs
+            firstTrait = allTypes.First(t => !usedFirstTraits.Contains(t));
+            usedFirstTraits.Add(firstTrait);
+        }
+        else
+        {
+            // 5th+ CPU: choose any random trait
+            firstTrait = allTypes[rng.Next(allTypes.Count)];
         }
 
-        _cpuPlayer.Personality = personality;           
+        personality[0] = firstTrait;
+
+        //  Fill rest of matrix leaving the first element intact 
+        int fillIndex = 1;
+        foreach (var t in allTypes)
+        {
+            if (t == firstTrait) continue;
+            if (fillIndex >= personality.Length) break;
+
+            personality[fillIndex] = t;
+            fillIndex++;
+        }
+
+       
+        _cpuPlayer.Personality = personality;         
     }
 
 
