@@ -8,8 +8,17 @@ public class BootstrapLoader : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Load the Main Menu scene after GameManager is initialized
+        // If returning from Quit, skip Title Scene
+        if (GameManager.ReturnToMenu)
+        {
+            GameManager.ReturnToMenu = false; // reset for next time
+            SceneManager.LoadScene("Main Menu");
+            return;
+        }
+
+        // Normal startup flow
         SceneManager.LoadScene("Title Scene");
+
 
     }
 

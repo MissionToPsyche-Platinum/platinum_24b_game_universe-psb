@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     public float GameModeTransition = 3f;
 
+    public static bool ReturnToMenu = false;  //allows for the game to load from quit without doing the whole title sequence
+    public static string NextSceneAfterIntermission = null;  //allow for intermission scenes
     //singleton object to allow decoupling and interface with the game loop
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -389,26 +391,37 @@ public class GameManager : MonoBehaviour
     IEnumerator loadGame()
     {
         yield return new WaitForSeconds(GameModeTransition);
-        
+
+        enableNormMode = NormalCkbox.isOn;
+        enableSuddenWinMode = SDeathCkbox.isOn;
         //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
         if (GamePlayerQueue.Count == 4)
         {
             Debug.Log("4 player board");
-            SceneManager.LoadScene("Gamebrd 4P");
+            //SceneManager.LoadScene("Gamebrd 4P");
+            GameManager.NextSceneAfterIntermission = "Gamebrd 4P";
+            SceneManager.LoadScene("FunFacts3");   //go to intermission then go to gameboard
         }
         else if (GamePlayerQueue.Count == 5)
         {
             Debug.Log("5 player board");
-            SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+            //SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+            GameManager.NextSceneAfterIntermission = "Gamebrd 5P";
+            SceneManager.LoadScene("FunFacts4");   //go to intermission then go to gameboard
         }
         else if (GamePlayerQueue.Count == 6)
         {
             Debug.Log("6 player board");
-            SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
+            //SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
+            GameManager.NextSceneAfterIntermission = "Gamebrd 6P";
+            SceneManager.LoadScene("FunFacts6");   //go to intermission then go to gameboard
         }
         else
         {
-            SceneManager.LoadScene("Gameboard");            //default is always 2 additional players
+             //SceneManager.LoadScene("Gameboard");            //default is always 2 additional players
+             
+            GameManager.NextSceneAfterIntermission = "Gameboard";
+            SceneManager.LoadScene("FunFacts2");   //go to intermission then go to gameboard
         }
     }
     /// <summary>
