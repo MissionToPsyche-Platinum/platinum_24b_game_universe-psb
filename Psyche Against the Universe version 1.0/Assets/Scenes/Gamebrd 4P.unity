@@ -5450,9 +5450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Human-Machine Interface Vers. 1.0
-
-    Rijul-Rahman Industries 2026.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6548,7 +6546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3629527857601055834, guid: 088b2b04f11e9be4f999b199e1559618, type: 3}
+  m_Sprite: {fileID: -1433233204730549904, guid: 7bc61ff7477d64529a352f2b96aa14e1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
