@@ -71,6 +71,7 @@ public class GameLoop : MonoBehaviour
     //prompt card addition
     public PromptCardDisplay activeCard;
     public PromptDeckManager deckManager;
+    public AnswerCardDisplay winningCardDisplay;
 
     //win conditions
     int NormWin = 3;
@@ -392,7 +393,9 @@ public class GameLoop : MonoBehaviour
 
                             //and select the same way a card is played. For now, this will be auto
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-                            TestConsoleLog($"{PlayedCards[chosenIndex].title} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+                            // display the selected winning card
+                            DisplayWinningCard(PlayedCards[chosenIndex]);
+                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
@@ -446,7 +449,9 @@ public class GameLoop : MonoBehaviour
                             AnswerCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judging cards.");
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
-                            chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );  //CPU logic will define this further later
+                            chosenCard = CPUPlayer.RunStrategy(CPUPlayer.Personality, PlayedCards);  //CPU logic will define this further later
+                            //display the CPU-selected winning card
+                            DisplayWinningCard(chosenCard);
                             TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
@@ -681,6 +686,29 @@ public class GameLoop : MonoBehaviour
         }
 
 
+    }
+    /// <summary>
+    /// Displays the winning answer card to the user.
+    /// </summary>
+    /// <param name="chosenCard"></param>
+    //OOOOOooNEWooooooo!!!!
+    private void DisplayWinningCard(AnswerCard chosenCard)
+    {
+        if (chosenCard == null)
+        {
+            Debug.LogWarning("DisplayWinningCard called with null card.");
+            return;
+        }
+
+        if (winningCardDisplay != null)
+        {
+            winningCardDisplay.SetCard(chosenCard);
+            Debug.Log($"Winning card displayed: {chosenCard.title}");
+        }
+        else
+        {
+            Debug.LogWarning("WinningCardDisplay is not assigned in GameLoop.");
+        }
     }
 
     /// <summary>
