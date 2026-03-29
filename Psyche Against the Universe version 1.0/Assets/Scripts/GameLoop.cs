@@ -314,7 +314,9 @@ public class GameLoop : MonoBehaviour
                 {
                     case PsychePlayer humanPlayer:
                         humanHighlighter.StartFlashing(1f);
-
+                        HumanPlayerName.color = Color.gold;
+                        HumanPlayerName.fontStyle = FontStyles.Bold;
+                        
                         HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
@@ -361,7 +363,9 @@ public class GameLoop : MonoBehaviour
 
                             HandManager.Instance.PlayHandHide();
                             humanHighlighter.StopFlashing();
-
+                            HumanPlayerName.color = Color.white;
+                            HumanPlayerName.fontStyle = FontStyles.Normal;
+                           
                         }
                         else
                         {
@@ -396,7 +400,8 @@ public class GameLoop : MonoBehaviour
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
-
+                            HumanPlayerName.color = Color.white;
+                            HumanPlayerName.fontStyle = FontStyles.Normal;
                         }
 
                         HandManager.Instance.SetYOffset(false); // hide hand after human turn
@@ -406,7 +411,7 @@ public class GameLoop : MonoBehaviour
                         if (!CPUPlayer.isJudge())
                         {
                             HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
-
+                           
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
 
@@ -614,10 +619,31 @@ public class GameLoop : MonoBehaviour
         if (cpuPlayer == null)
         {
             cpu1Highlight.StopFlashing();
+            CPU1Name.color = Color.white;
+            CPU1Name.fontStyle = FontStyles.Normal;
+
             cpu2Highlight.StopFlashing();
-            if (cpu3Highlight != null) cpu3Highlight.StopFlashing();
-            if (cpu4Highlight != null) cpu4Highlight.StopFlashing();
-            if (cpu5Highlight != null) cpu5Highlight.StopFlashing();
+            CPU2Name.color = Color.white;
+            CPU2Name.fontStyle = FontStyles.Normal;
+
+            if (cpu3Highlight != null)
+            {
+                cpu3Highlight.StopFlashing();
+                CPU3Name.color = Color.white;
+                CPU3Name.fontStyle = FontStyles.Normal;
+            }
+            if (cpu4Highlight != null)
+            {
+                cpu4Highlight.StopFlashing();
+                CPU4Name.color = Color.white;
+                CPU4Name.fontStyle = FontStyles.Normal;
+            }
+            if (cpu5Highlight != null)
+            {
+                cpu5Highlight.StopFlashing();
+                CPU5Name.color = Color.white;
+                CPU5Name.fontStyle = FontStyles.Normal;
+            }
             return;
         }
 
@@ -632,22 +658,32 @@ public class GameLoop : MonoBehaviour
         if (cpuPlayer.Avatar_Name == CPU1Name.text)
         {
             cpu1Highlight.StartFlashing(2f);
+            CPU1Name.color = Color.gold;
+            CPU1Name.fontStyle = FontStyles.Bold;
         }
         else if (cpuPlayer.Avatar_Name == CPU2Name.text)
         {
             cpu2Highlight.StartFlashing(2f);
+            CPU2Name.color = Color.gold;
+            CPU2Name.fontStyle = FontStyles.Bold;
         }
         else if (CPU3Name != null && cpuPlayer.Avatar_Name == CPU3Name.text)
         {
             cpu3Highlight.StartFlashing(2f);
+            CPU3Name.color = Color.gold;
+            CPU3Name.fontStyle = FontStyles.Bold;
         }
         else if (CPU4Name != null && cpuPlayer.Avatar_Name == CPU4Name.text)
         {
             cpu4Highlight.StartFlashing(2f);
+            CPU4Name.color = Color.gold;
+            CPU4Name.fontStyle = FontStyles.Bold;
         }
         else if (CPU5Name != null && cpuPlayer.Avatar_Name == CPU5Name.text)
         {
             cpu5Highlight.StartFlashing(2f);
+            CPU5Name.color = Color.gold;
+            CPU5Name.fontStyle = FontStyles.Bold;
         }
 
     }
