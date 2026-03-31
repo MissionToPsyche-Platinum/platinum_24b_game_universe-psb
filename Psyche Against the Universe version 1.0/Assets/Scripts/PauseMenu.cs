@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject playPileDropZoneObject;
     [SerializeField] private GameObject uiPlayConfirmObject;
+    [SerializeField] private AudioSource audioSource;
     private HandManager handManager;
     private PlayPileDropZone ppdzScript;
     private UIPlayConfirm uiPlayConfirm;
@@ -43,6 +46,23 @@ public class PauseMenu : MonoBehaviour
     public void SettingsButton()
     {
         Debug.Log("Settings Button Pressed");
+        settingsPanel.SetActive(true);
+    }
+
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
+    }
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
+
+    public void CloseSettingsButton()
+    {
+        Debug.Log("Close Settings Button Pressed");
+        settingsPanel.SetActive(false);
     }
 
     public void ResumeButton()

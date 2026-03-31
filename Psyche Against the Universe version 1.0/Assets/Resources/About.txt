@@ -9,4 +9,5 @@ A digital version of the "Psyche Against the Universe" card game created by Niha
 
 The game aims to meet the intent of the original and provides a digital means of learning about the Psyche Mission as well as having fun.
 
-Sponsored by: Cassie Bowman, Arizona State Univerity through a partnership with NASA. Capstone Project for Penn State University, SWENG 480 and 481.
+Sponsor: NASA Psyche
+Co-ordinated with Cassie Bowman, Arizona State Univerity through a partnership with NASA. Capstone Project for Penn State University, SWENG 480 and 481.
