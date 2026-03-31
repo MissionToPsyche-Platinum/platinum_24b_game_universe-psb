@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
   title: Documentation
   description: Well, the answer's in the documentation somewhere, I'm sure. We did
-    make sure to document everything ... right?
+    make sure to document everything... right?
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
   WeightSerious: 19

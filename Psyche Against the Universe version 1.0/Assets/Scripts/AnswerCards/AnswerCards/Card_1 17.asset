@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Card_1 17
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
   title: The Egg Cracks
-  description: urns out Psyche wasn't just a metal asteroid-it was an egg, and whatever
-    just hatched is very interested in helping ... or at least really good at smashing
-    things.
+  description: Turns out Psyche wasn't just a metal asteroid - it was an egg, and
+    whatever just hatched is very interested in helping... or at least really good
+    at smashing things.
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
   WeightSerious: 5

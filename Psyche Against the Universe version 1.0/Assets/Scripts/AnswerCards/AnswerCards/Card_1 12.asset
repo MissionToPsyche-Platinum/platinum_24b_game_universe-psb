@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card_1 12
   m_EditorClassIdentifier: GameAssembly::ScriptableAnswerCard
   title: Reality Rewiring Ray
-  description: Adjusts the fundamental laws of physics ... for better or worse. Who
+  description: Adjusts the fundamental laws of physics... for better or worse. Who
     needs gravity all the time, anyway?
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
   artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
