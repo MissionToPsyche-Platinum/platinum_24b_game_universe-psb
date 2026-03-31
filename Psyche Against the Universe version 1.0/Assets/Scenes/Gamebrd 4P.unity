@@ -12070,7 +12070,7 @@ MonoBehaviour:
   CPU3ScoreField: {fileID: 1967462055}
   CPU4ScoreField: {fileID: 0}
   CPU5ScoreField: {fileID: 0}
-  HumanScoreField: {fileID: 0}
+  HumanScoreField: {fileID: 1680067499}
   humanHighlighter: {fileID: 1021715205}
   cpu1Highlight: {fileID: 334167602}
   cpu2Highlight: {fileID: 561047864}
@@ -14380,7 +14380,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466041580}
   m_HandleRect: {fileID: 466041578}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
