@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7bc61ff7477d64529a352f2b96aa14e1
+guid: d81fa4af78445425986ea6fcc12eb58d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1433233204730549904
-    second: HUMAN PLAYER_0
+      213: 8599657712263713710
+    second: funfacts 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HUMAN PLAYER_0
+      name: funfacts 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 507
-        height: 254
+        width: 1366
+        height: 768
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 079adbf6ef12c1ce0800000000000000
-      internalID: -1433233204730549904
+      spriteID: ea35d69502f185770800000000000000
+      internalID: 8599657712263713710
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HUMAN PLAYER_0: -1433233204730549904
+      funfacts 1_0: 8599657712263713710
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

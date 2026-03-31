@@ -17,7 +17,7 @@ MonoBehaviour:
     electric thrusters, ionizing xenon gas around you to create a shimmering plasma
     field. Does it actually make you invisible? No. '
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 9202113190364003600, guid: 60b588d2edd4cac46963a2f20f9500f6, type: 3}
+  artwork: {fileID: 5529886436784579953, guid: 72b911d8dedfa414f99d8ba385352957, type: 3}
   WeightSerious: 7
   WeightSciFi: 20
   WeightFunny: 16
