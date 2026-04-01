@@ -16,7 +16,7 @@ MonoBehaviour:
   description: With reckless ingenuity and no regard for orbital mechanics, Psyche
     hurls one of Jupiter's many moons straight at the threat.
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: 21300000, guid: 150a3b2ac33594a5db7d7eeab0a526d6, type: 3}
   WeightSerious: 3
   WeightSciFi: 14
   WeightFunny: 19

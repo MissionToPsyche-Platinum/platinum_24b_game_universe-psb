@@ -17,7 +17,7 @@ MonoBehaviour:
     Psyche - despite being millions of miles away. Maybe it's psychic? Maybe it's
     just wishful thinking?
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: 21300000, guid: cb483d7f93bc84c03a0451633685f16c, type: 3}
   WeightSerious: 4
   WeightSciFi: 18
   WeightFunny: 17
