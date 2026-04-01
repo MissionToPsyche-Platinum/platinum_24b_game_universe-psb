@@ -73,8 +73,8 @@ public class GameLoop : MonoBehaviour
     public PromptDeckManager deckManager;
 
     //win conditions
-    int NormWin = 3;
-    int SudWin = 2;
+    int NormWin = 6;
+    int SudWin = 3;
     int wincon;             //This gets set based on the activated norm or sudden win flag
                             // bool isWin = false;     //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
                             //the end routine
@@ -291,7 +291,7 @@ public class GameLoop : MonoBehaviour
         TestConsoleLog("Starting Game");
         PauseMenu.GameIsPaused = false; //ensure game is unpaused at start of loop
 
-        int totalRounds = 20;                                  //Round counter and round number
+        int totalRounds = 80;                                  //Round counter and round number
         int i = 0;
 
         while ( i < totalRounds)
