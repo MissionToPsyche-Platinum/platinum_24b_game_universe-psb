@@ -75,3 +75,7 @@ public class AnswerCard {
     //public string text; I don't know if this is neccesary or not, title might be enough
     // this will be filled in as the cards are developed
 }
+
+
+// NOTE: This script is most likely going to be scrapped, I've replaced it
+// But I didn't delete yet since a few other scripts reference this

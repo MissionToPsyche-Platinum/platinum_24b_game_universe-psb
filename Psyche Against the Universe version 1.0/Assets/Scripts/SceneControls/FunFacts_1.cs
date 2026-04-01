@@ -18,9 +18,11 @@ public class FunFacts_1 : MonoBehaviour
         //Debug.Log("Intermission Update running");
 
         // Press Enter
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        //if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.anyKeyDown)
+
         {
-            LoadMainMenu();
+                LoadMainMenu();
         }
 
 

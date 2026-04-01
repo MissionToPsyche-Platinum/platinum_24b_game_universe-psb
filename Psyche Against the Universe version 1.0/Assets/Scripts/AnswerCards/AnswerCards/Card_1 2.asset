@@ -15,7 +15,7 @@ MonoBehaviour:
   title: Redshift Accelerator
   description: By cleverly manipulating the spectrometer, Psyche amplifies an object's
     redshift, convincing the universe it's already in rapid retreat.
-  background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
+  background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
   artwork: {fileID: -2514180833417132314, guid: 4e6b8373390d6e748a6ff41331caee91, type: 3}
   WeightSerious: 8
   WeightSciFi: 20
