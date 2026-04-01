@@ -1,16 +1,31 @@
 fileFormatVersion: 2
-guid: 17bc4a00a9b1f4489830280aed8bc483
+guid: 60cbb5bb68efb7f49853676da432964c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6133993350907787194
-    second: Card28_0
+      213: -6001016967255518202
+    second: Card36alt_0
   - first:
-      213: -5316254092051773180
-    second: Card28_1
+      213: 3439274519107836664
+    second: Card36alt_1
   - first:
-      213: 8509881032561400084
-    second: Card28_2
+      213: 7895013252113464579
+    second: Card36alt_2
+  - first:
+      213: -7140676798706581029
+    second: Card36alt_3
+  - first:
+      213: -6257713297961741456
+    second: Card36alt_4
+  - first:
+      213: 4804742081318056649
+    second: Card36alt_5
+  - first:
+      213: -2104502689108678573
+    second: Card36alt_6
+  - first:
+      213: 7934590221853163967
+    second: Card36alt_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,33 +134,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card28_0
+      name: Card36alt_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 29
-        width: 89
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6488880fb8dafdaa0800000000000000
-      internalID: -6133993350907787194
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Card28_1
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 20
+        x: 5
+        y: 83
         width: 23
         height: 11
       alignment: 0
@@ -156,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 409898be11fd836b0800000000000000
-      internalID: -5316254092051773180
+      spriteID: 60494afecda18bca0800000000000000
+      internalID: -6001016967255518202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card28_2
+      name: Card36alt_1
       rect:
         serializedVersion: 2
-        x: 56
+        x: 8
         y: 23
-        width: 29
-        height: 38
+        width: 83
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +171,140 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41918aa36bb291670800000000000000
-      internalID: 8509881032561400084
+      spriteID: 8fa997cf3f1cabf20800000000000000
+      internalID: 3439274519107836664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 86
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30d793529b8b09d60800000000000000
+      internalID: 7895013252113464579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_3
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 5
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd18835d84837ec90800000000000000
+      internalID: -7140676798706581029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_4
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 5
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07390c809e22829a0800000000000000
+      internalID: -6257713297961741456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 5
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c27552677fdda240800000000000000
+      internalID: 4804742081318056649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_6
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 2
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358a2d254fd4bc2e0800000000000000
+      internalID: -2104502689108678573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card36alt_7
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 5
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb188db74c35d1e60800000000000000
+      internalID: 7934590221853163967
       vertices: []
       indices: 
       edges: []
@@ -198,9 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card28_0: -6133993350907787194
-      Card28_1: -5316254092051773180
-      Card28_2: 8509881032561400084
+      Card36alt_0: -6001016967255518202
+      Card36alt_1: 3439274519107836664
+      Card36alt_2: 7895013252113464579
+      Card36alt_3: -7140676798706581029
+      Card36alt_4: -6257713297961741456
+      Card36alt_5: 4804742081318056649
+      Card36alt_6: -2104502689108678573
+      Card36alt_7: 7934590221853163967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

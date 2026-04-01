@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8b90a2e7e8fbe426e892e692cee25310
+guid: 8858f4ce0f81ee849895f584ce2a9f5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8496427235996953880
-    second: Card25_0
-  - first:
-      213: -2974285680703136128
-    second: Card25_1
+      213: 474938890568520766
+    second: Card35_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,35 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card25_0
+      name: Card35_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 44
-        width: 73
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e29272e170a61a80800000000000000
-      internalID: -8496427235996953880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Card25_1
-      rect:
-        serializedVersion: 2
-        x: 38
+        x: 2
         y: 0
-        width: 58
-        height: 67
+        width: 92
+        height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08e982d8ee639b6d0800000000000000
-      internalID: -2974285680703136128
+      spriteID: e34da569762579600800000000000000
+      internalID: 474938890568520766
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card25_0: -8496427235996953880
-      Card25_1: -2974285680703136128
+      Card35_0: 474938890568520766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: 8b90a2e7e8fbe426e892e692cee25310
+guid: 29ffb7988711b4242b897980683415db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8496427235996953880
-    second: Card25_0
+      213: -1902384575390514300
+    second: Card33_0
   - first:
-      213: -2974285680703136128
-    second: Card25_1
+      213: 561336985524576114
+    second: Card33_1
+  - first:
+      213: -3728554705684337944
+    second: Card33_2
+  - first:
+      213: -373853892592187848
+    second: Card33_3
+  - first:
+      213: 8124476620114340686
+    second: Card33_4
+  - first:
+      213: -7022566233018255630
+    second: Card33_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card25_0
+      name: Card33_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 44
-        width: 73
-        height: 52
+        y: 11
+        width: 96
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e29272e170a61a80800000000000000
-      internalID: -8496427235996953880
+      spriteID: 4838aa5de4f5995e0800000000000000
+      internalID: -1902384575390514300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card25_1
+      name: Card33_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 0
-        width: 58
-        height: 67
+        x: 20
+        y: 77
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +165,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08e982d8ee639b6d0800000000000000
-      internalID: -2974285680703136128
+      spriteID: 27f1b75a3054ac700800000000000000
+      internalID: 561336985524576114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card33_2
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 71
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eae21aff33814cc0800000000000000
+      internalID: -3728554705684337944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card33_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 71
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 836452e8dddcfcaf0800000000000000
+      internalID: -373853892592187848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card33_4
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4ba1efc070ffb070800000000000000
+      internalID: 8124476620114340686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Card33_5
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 2
+        width: 20
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f63b4dd735da8e90800000000000000
+      internalID: -7022566233018255630
       vertices: []
       indices: 
       edges: []
@@ -173,8 +273,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Card25_0: -8496427235996953880
-      Card25_1: -2974285680703136128
+      Card33_0: -1902384575390514300
+      Card33_1: 561336985524576114
+      Card33_2: -3728554705684337944
+      Card33_3: -373853892592187848
+      Card33_4: 8124476620114340686
+      Card33_5: -7022566233018255630
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
