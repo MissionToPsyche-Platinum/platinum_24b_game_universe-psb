@@ -1317,7 +1317,6 @@ GameObject:
   m_Component:
   - component: {fileID: 234720147}
   - component: {fileID: 234720148}
-  - component: {fileID: 234720149}
   - component: {fileID: 234720150}
   m_Layer: 5
   m_Name: NormalCkbox
@@ -1390,25 +1389,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1222869006}
   toggleTransition: 0
   graphic: {fileID: 315766042}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 325345221}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &234720149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234720146}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c4a70e21c638f43a605980c478171f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModeToggleLogic
-  NormalCkbox: {fileID: 234720148}
-  SDeathCkBox: {fileID: 1416584478}
 --- !u!114 &234720150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2062,7 @@ GameObject:
   - component: {fileID: 325345219}
   - component: {fileID: 325345218}
   - component: {fileID: 325345220}
+  - component: {fileID: 325345221}
   m_Layer: 5
   m_Name: MenuImage
   m_TagString: Untagged
@@ -2181,6 +2167,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.28235295, b: 0, a: 0.5}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 1
+--- !u!114 &325345221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325345216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ToggleGroup
+  m_AllowSwitchOff: 0
 --- !u!1 &339869573
 GameObject:
   m_ObjectHideFlags: 0
@@ -9959,7 +9958,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1416584477}
   - component: {fileID: 1416584478}
-  - component: {fileID: 1416584479}
   - component: {fileID: 1416584480}
   m_Layer: 5
   m_Name: SDeathCkbox
@@ -10032,25 +10030,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 339869575}
   toggleTransition: 1
   graphic: {fileID: 394474866}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 325345221}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &1416584479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416584476}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c4a70e21c638f43a605980c478171f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModeToggleLogic
-  NormalCkbox: {fileID: 234720148}
-  SDeathCkBox: {fileID: 1416584478}
 --- !u!114 &1416584480
 MonoBehaviour:
   m_ObjectHideFlags: 0
