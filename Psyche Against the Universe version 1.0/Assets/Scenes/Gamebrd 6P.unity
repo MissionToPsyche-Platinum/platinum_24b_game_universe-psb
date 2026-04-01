@@ -2162,7 +2162,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.022601128, y: 0.011720717}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2172,7 +2172,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 9, y: 8}
+  m_Size: {x: 3.3949237, y: 2.632072}
   m_EdgeRadius: 0
 --- !u!212 &336431191
 SpriteRenderer:
@@ -3073,7 +3073,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2126773823}
   m_HandleRect: {fileID: 2126773821}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5420,8 +5420,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1310474022}
   m_HandleRect: {fileID: 1310474020}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9190,12 +9190,12 @@ RectTransform:
   - {fileID: 667921610}
   - {fileID: 327652993}
   - {fileID: 305940327}
-  - {fileID: 2013711545}
   - {fileID: 969419545}
-  - {fileID: 318038428}
   - {fileID: 708457463}
-  - {fileID: 926714633}
   - {fileID: 1677291189}
+  - {fileID: 318038428}
+  - {fileID: 2013711545}
+  - {fileID: 926714633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
