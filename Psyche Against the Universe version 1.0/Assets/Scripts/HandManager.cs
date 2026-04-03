@@ -5,12 +5,13 @@ public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
     [SerializeField] private List<PlayCard> cards = new List<PlayCard>();
-    public float cardSpacing = 2f;
-    public float yOffset = -4f;
-    public float hideYOffset = -8f;
-    public float judgeYOffset = -3.5f;
-    public float showYOffset = -4f;
-    public float resetOffset = -8f;
+    private float cardSpacing = 2f;
+    private float yOffset = -5f;
+    private float hideYOffset = -8f;
+    private float judgeYOffset = -5f;
+    private float showYOffset = -5f;
+    private float resetOffset = -8f;
+    private float hoverYOffset = -3f;
 
     [SerializeField] private Sprite[] sprites;
     private PlayCard draggingCard;
@@ -51,6 +52,11 @@ public class HandManager : MonoBehaviour
     public void ResetOffset()
     {
         yOffset = resetOffset;
+    }
+
+    public void PlayHandHover()
+    {
+        yOffset = hoverYOffset;
     }
 
     public void SetYOffset(bool isHumanPlayer)
