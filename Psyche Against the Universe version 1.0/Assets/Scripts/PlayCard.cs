@@ -16,9 +16,9 @@ public class PlayCard : MonoBehaviour,
     private Vector3 offset;
     private Vector3 targetPosition;
     private Vector3 baseScale;
-    private float hoverMultiplier = 1.2f;
+    private float hoverMultiplier = 1.65f;
     private float moveSpeed = 10f;
-    private bool isLockedToPlayPile = false;
+    [SerializeField] private bool isLockedToPlayPile = false;
 
     private HandManager handManager;
     private Camera mainCam;
@@ -149,7 +149,8 @@ public class PlayCard : MonoBehaviour,
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x * hoverMultiplier, 0.1f));
         //transform.localPosition += Vector3.up * (0.2f * baseScale.y); //2/16/
-        
+        if (!isLockedToPlayPile)
+            handManager.PlayHandHover();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -157,13 +158,15 @@ public class PlayCard : MonoBehaviour,
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x, 0.1f));
         //transform.localPosition -= Vector3.up * (0.2f * baseScale.y); //2/16
-        
+        handManager.PlayHandShow();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Card clicked: " + name);
         isDragging = true;
+
+        handManager.PlayHandShow();
 
         if (playPileZone != null)
             playPileZone.ShowZone();

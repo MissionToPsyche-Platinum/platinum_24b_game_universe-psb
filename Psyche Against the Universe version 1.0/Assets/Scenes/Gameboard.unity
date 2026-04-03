@@ -3998,12 +3998,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cards: []
-  cardSpacing: 2
-  yOffset: -4
-  hideYOffset: -8
-  judgeYOffset: -3.5
-  showYOffset: -4
-  resetOffset: -8
   sprites:
   - {fileID: 6969675125841911368, guid: 493cb054ae45c244d9e3e2b9ed4a51a6, type: 3}
   - {fileID: -4078080895987700266, guid: af11839e8b0232c489df42650b7f40d8, type: 3}
@@ -5511,7 +5505,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1158512777}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7006,8 +7000,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::PauseMenu
   pauseMenuUI: {fileID: 332596555}
+  settingsPanel: {fileID: 0}
   playPileDropZoneObject: {fileID: 336431188}
   uiPlayConfirmObject: {fileID: 667921609}
+  audioSource: {fileID: 0}
 --- !u!1 &1301997167
 GameObject:
   m_ObjectHideFlags: 0
