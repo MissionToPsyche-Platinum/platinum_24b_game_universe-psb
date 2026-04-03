@@ -15,8 +15,8 @@ MonoBehaviour:
   title: Solar Panel Nunchucks
   description: Fold 'em, snap 'em, and now Psyche's massive solar arrays are deadly
     in the right hands. Great for generating power and taking down space bandits.
-  background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
+  artwork: {fileID: 21300000, guid: bf261dc8b5beb463c8b620bf3248e0be, type: 3}
   WeightSerious: 3
   WeightSciFi: 14
   WeightFunny: 18
