@@ -75,9 +75,10 @@ public class GameLoop : MonoBehaviour
     //win conditions
     int NormWin = 6;
     int SudWin = 3;
-    int wincon;             //This gets set based on the activated norm or sudden win flag
-                            // bool isWin = false;     //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
-                            //the end routine
+    int wincon;                                         //This gets set based on the activated norm or sudden win flag
+                                                        // bool isWin = false;     
+                                                        //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
+                                                        //the end routine
 
     public float GameModeTransition = 5f;   //transition back to the Main Menu after game is complete
 
@@ -90,8 +91,8 @@ public class GameLoop : MonoBehaviour
 
     //Relevant objects for the game loop
     List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-    public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();  //holds the answer cards during the game round.
-                                                                     //emptied at the end of round. 
+    public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();         //holds the answer cards during the game round.
+                                                                            //emptied at the end of round. 
     string banterLine;
 
     //Create strategy objects for use by the CPU Players during thier respective turns
@@ -121,21 +122,21 @@ public class GameLoop : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "Gameboard")    //Will need to add code to address the other gameboard scenes, but it will be similar
+        if(scene.name == "Gameboard")               //Will need to add code to address the other gameboard scenes, but it will be similar
         {
-           StartCoroutine(StartGameLoop()); //allows for adding delays
+           StartCoroutine(StartGameLoop());         //allows for adding delays
         }
-        if (scene.name == "Gamebrd 4P")    //4 player game format
+        if (scene.name == "Gamebrd 4P")             //4 player game format
         {
-            StartCoroutine(StartGameLoop()); //allows for adding delays
+            StartCoroutine(StartGameLoop());        //allows for adding delays
         }
-        if (scene.name == "Gamebrd 5P")    //Initiate 5 player game format
+        if (scene.name == "Gamebrd 5P")             //Initiate 5 player game format
         {
-            StartCoroutine(StartGameLoop()); //allows for adding delays
+            StartCoroutine(StartGameLoop());        //allows for adding delays
         }
-        if (scene.name == "Gamebrd 6P")    //Initiate 5 player game format
+        if (scene.name == "Gamebrd 6P")             //Initiate 5 player game format
         {
-            StartCoroutine(StartGameLoop()); //allows for adding delays
+            StartCoroutine(StartGameLoop());        //allows for adding delays
         }
     }
     
@@ -157,8 +158,7 @@ public class GameLoop : MonoBehaviour
 
         //load player names from queue into the player name fields. Match by object type to place human '
         //player in the correct spot
-        //Refactor into a seperate method once game loop is proven.
-        //Will need to refactor once all game play fields are proven
+        
         int index = 0;
         foreach (var player in playerQueue)
         {
@@ -179,8 +179,8 @@ public class GameLoop : MonoBehaviour
                         
                         if (playerQueue.Count == 3)
                         {
-                            CPUJudge2.color = Color.red;              //Sets the last player in the queue as the first judge. Modified to check for additional players
-                            CPUplayer.judge = true;                     //sets the judge flag if three player game
+                            CPUJudge2.color = Color.red;                        //Sets the last player in the queue as the first judge. Modified to check for additional players
+                            CPUplayer.judge = true;                              //sets the judge flag if three player game
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
                     }
@@ -188,7 +188,7 @@ public class GameLoop : MonoBehaviour
                     {
                         CPU3Name.text = CPUplayer.Avatar_Name;
 
-                        if (playerQueue.Count == 4)                     //active if it is a four player game.
+                        if (playerQueue.Count == 4)                             //active if it is a four player game.
                         {
                             CPUJudge3.color = Color.red;
                             CPUplayer.judge = true;
@@ -200,7 +200,7 @@ public class GameLoop : MonoBehaviour
                     {
                         CPU4Name.text = CPUplayer.Avatar_Name;
 
-                        if (playerQueue.Count == 5)                     //active if it is a five  player game.
+                        if (playerQueue.Count == 5)                             //active if it is a five  player game.
                         {
                             CPUJudge4.color = Color.red;
                             CPUplayer.judge = true;
@@ -212,7 +212,7 @@ public class GameLoop : MonoBehaviour
                     {
                         CPU5Name.text = CPUplayer.Avatar_Name;
 
-                        if (playerQueue.Count == 6)                     //active if it is a six  player game.
+                        if (playerQueue.Count == 6)                             //active if it is a six  player game.
                         {
                             CPUJudge5.color = Color.red;
                             CPUplayer.judge = true;
@@ -226,23 +226,13 @@ public class GameLoop : MonoBehaviour
 
         }
 
-        /**************************************************************************************************************************/
-        //TEST OBJECTS TO DEVELOP GAME LOOP
-        //Deal cards. Currently simulated as a means to fill the list
-       // List<AnswerCard> testDeck = new List<AnswerCard>();                     //this is a testdeck. comment out when final
-
-          //comment out 2/15/26 to support integration
-       // testDeck = getTestCards();
-
         //Keep this section. round starts with the drawing of the prompt card. 
         string prompt = deckManager.DrawPrompt();
         activeCard.SetPrompt(prompt);
 
-
-                                                         //load a prompt into the scriptable object
-                                                         //PromptLoader.LoadPromptText(activeCard.cardData);
         //Add a delay to fill in an animation later.
         yield return new WaitForSeconds(1f);
+
         //flip the card
         activeCard.ShowPrompt();
 
@@ -254,9 +244,7 @@ public class GameLoop : MonoBehaviour
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
-        //comment out 2/15/26 to support integration
-        // DealHands(playerQueue, testDeck);
-
+        
         DealHands(playerQueue, AnswerDeckManager.Instance.deck);  // new line
 
         foreach (var player in playerQueue)
@@ -265,8 +253,8 @@ public class GameLoop : MonoBehaviour
         }
 
         /***************************************************************************************************************************/
-        // set the win condition
-        //if (gm.NormalCkbox.isOn)
+       // set the win condition
+     
         if (gm.enableNormMode)    
         {
             yield return new WaitForSeconds(1f);
@@ -289,18 +277,14 @@ public class GameLoop : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         TestConsoleLog("Starting Game");
-        PauseMenu.GameIsPaused = false; //ensure game is unpaused at start of loop
+        PauseMenu.GameIsPaused = false;                         //ensure game is unpaused at start of loop
 
-        int totalRounds = 80;                                  //Round counter and round number
+        int totalRounds = 80;                                   //Round counter and round number
         int i = 0;
 
         while ( i < totalRounds)
         {
-            
-
             yield return new WaitForSeconds(1f);
-
-            //if (!gm.IsHumanPlayerJudge()) HandManager.Instance.PlayHandShow(); // show play hand if human not judge
 
             foreach (var player in playerQueue)
             {
@@ -320,22 +304,16 @@ public class GameLoop : MonoBehaviour
                         HandManager.Instance.SetYOffset(true); // show hand for human player
                         if (!humanPlayer.isJudge())
                         {
-                            // switches to play hand view for human 2-15-26 next 4 lines remarked out for answer card integration. 
-                            // HandManager.Instance.ResetPlayHand();
-                            // yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            // HandManager.Instance.PlayCardSpriteReset();
-                            // HandManager.Instance.PlayHandShow();
-
-                            //Added 2/16/26 
                            // Clear old visual cards
-                            HandManager.Instance.ClearHand();//Added 2/16/26 
-                            Debug.Log($"[GameLoop] humanPlayer.Hand count: {humanPlayer.Hand.Count}");//Added 2/16/26 
-                            // Spawn new visual cards using the player's actual AnswerCard data
-                            foreach (AnswerCard cardData in humanPlayer.Hand)//Added 2/16/26 
-                            {
-                                Debug.Log($"[GameLoop] Spawning card: {cardData.title}");//Added 2/16/26 
+                            HandManager.Instance.ClearHand();
+                            Debug.Log($"[GameLoop] humanPlayer.Hand count: {humanPlayer.Hand.Count}");
 
-                                CardSpawner.Instance.Spawn(cardData);//Added 2/16/26 
+                            // Spawn new visual cards using the player's actual AnswerCard data
+                            foreach (AnswerCard cardData in humanPlayer.Hand)
+                            {
+                                Debug.Log($"[GameLoop] Spawning card: {cardData.title}");
+
+                                CardSpawner.Instance.Spawn(cardData);
                             }
 
                             // Smooth reveal timing
@@ -346,8 +324,6 @@ public class GameLoop : MonoBehaviour
 
                             // Show the hand
                             HandManager.Instance.PlayHandShow();//Added 2/16/26 
-
-
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
@@ -370,17 +346,12 @@ public class GameLoop : MonoBehaviour
                         else
                         {
                             TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
-                            // judge logic goes here. UI should display the played cards list as UI elements
 
-                            // switches to judge hand view for human
-                            //HandManager.Instance.UpdatePlayHand(playerQueue.Count);  //updates the hand to match player count  //remarked out 2/16
-                            HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  //2/16
+                            // switches to judge hand view for human                            
+                            HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  
 
-                            yield return new WaitForSeconds(1f); // specifically here to reset sprites and to make hand show smooth
-                            //HandManager.Instance.PlayCardSpriteReset();  //turned off 2/16
-                            //added 2/16
+                            yield return new WaitForSeconds(1f);                        // specifically here to reset sprites and to make hand show smooth                         
                             HandManager.Instance.ApplyPlayedCardsToUI(PlayedCards);
-
                             HandManager.Instance.PlayHandJudge();
 
                             // Enable confirm button for this player’s turn
@@ -397,6 +368,7 @@ public class GameLoop : MonoBehaviour
                             //and select the same way a card is played. For now, this will be auto
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
                             TestConsoleLog($"{PlayedCards[chosenIndex].title} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
@@ -404,13 +376,13 @@ public class GameLoop : MonoBehaviour
                             HumanPlayerName.fontStyle = FontStyles.Normal;
                         }
 
-                        HandManager.Instance.SetYOffset(false); // hide hand after human turn
+                        HandManager.Instance.SetYOffset(false);                         // hide hand after human turn
                         break;
 
                     case CPUPlayer CPUPlayer:
                         if (!CPUPlayer.isJudge())
                         {
-                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
+                            HighlightCPUPlayer(CPUPlayer);                               //triggers the CPU player highlight
                            
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
                             TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
@@ -431,41 +403,32 @@ public class GameLoop : MonoBehaviour
                             yield return new WaitForSeconds(audioSource.clip.length);
 
                             // Clear text
-                            DisplayBanter("", CPUPlayer);
-
-
-
-                            //banterLine = CpuView.PlayBanter(CPUPlayer);                          //for the banter manager to do its thing.
-                            // DisplayBanter(banterLine, CPUPlayer);
-                            //yield return new WaitForSeconds(2f);
-                            //DisplayBanter("", CPUPlayer);
+                            DisplayBanter("", CPUPlayer);                         
                             CPUPlayer.PlayCard(this);
                             CpuView.UpdateHand(CPUPlayer.Hand);
                             HighlightCPUPlayer(null);
-
-
                         }
                         else
                         {
-                            HighlightCPUPlayer(CPUPlayer);        //triggers the CPU player highlight
+                            HighlightCPUPlayer(CPUPlayer);                                                          //triggers the CPU player highlight
                             AnswerCard chosenCard;
                             TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judging cards.");
+
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
-                            chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );  //CPU logic will define this further later
+                            chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );                //CPU logic will define this further later
                             TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
+
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
                             yield return new WaitForSeconds(2F);
                             HighlightCPUPlayer(null);
-
                         }
                         break;
-
                 }
                 
                     Debug.Log("PlayedCards: " + string.Join(", ", PlayedCards.Select(c => c.PlayedBy)));
                 
-                yield return new WaitForSeconds(3f); // pause for observation
+                yield return new WaitForSeconds(3f);                                                                // pause for observation
             }
 
             if (isWin)
@@ -522,7 +485,6 @@ public class GameLoop : MonoBehaviour
             ReloadPlayerHands(playerQueue, playerview, CpuView);
             yield return new WaitForSeconds(1f);
 
-
             //discard and draw a new prompt card
             Debug.Log("discard and draw a new prompt card");
 
@@ -531,11 +493,9 @@ public class GameLoop : MonoBehaviour
             // Draw a new prompt from the deck
             string nextPrompt = deckManager.DrawPrompt();
             // Assign it to the card
-            activeCard.SetPrompt(nextPrompt);
-
-                                                     //PromptLoader.LoadPromptText(activeCard.cardData);
-                                                     //Add a delay to fill in an animation later.
+            activeCard.SetPrompt(nextPrompt);                                                    
             yield return new WaitForSeconds(2f);
+
             //flip the card
             activeCard.ShowPrompt();
 
@@ -546,7 +506,7 @@ public class GameLoop : MonoBehaviour
             {
 
                 i++;
-                TestConsoleLog("CLEAR");  //forces and auto clear to make more room
+                TestConsoleLog("CLEAR");                                    //forces and auto clear to make more room
             }
             else if(isFinalRound == true) 
             {
@@ -555,8 +515,7 @@ public class GameLoop : MonoBehaviour
                 {
                     break;
                 }
-                TestConsoleLog("Starting Final Round");
-                //i = totalRounds - 1;
+                TestConsoleLog("Starting Final Round");               
                 isWin = true;
                 Debug.Log(isWin);
                 
@@ -565,10 +524,10 @@ public class GameLoop : MonoBehaviour
 
         }
 
-
         //Debug.Log("End protoloop test");
         Debug.Log("End Protoloop test");
         TestConsoleLog("Game is over, thanks for playing");
+
         //return to main menu scene
         TestConsoleLog("Returning to Main Menu");
 
@@ -841,8 +800,6 @@ public class GameLoop : MonoBehaviour
     }
 }
 
-
-
     /// <summary>
     /// Helper method that ensures the correct banter display field is updated.
     /// Will need to get expanded to support additional players
@@ -884,14 +841,9 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-            //Comment out 2/16/26 to account for real deck integration
-            //while (player.Hand.Count < 5 && testDeck.Count > 0)
+        
             while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
-            {
-                //remark out these two lines 2/16/26 
-                //AnswerCard drawn = testDeck[0];         //pull from the top
-                //testDeck.RemoveAt(0);
-
+            {                
                 // Draw from the real deck
                 AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
                 AnswerDeckManager.Instance.deck.RemoveAt(0);
@@ -918,18 +870,14 @@ public class GameLoop : MonoBehaviour
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
     public void returnPlayedCards()
-    {
-       // testDeck.AddRange(PlayedCards); //remove 2/16 as there is no longer a test deck
+    {      
         AnswerDeckManager.Instance.deck.AddRange(PlayedCards);  //2/16  return cards to the actual deck
-
         PlayedCards.Clear();
         Debug.Log("PlayedCards has " + PlayedCards.Count + " cards.");
         //TestConsoleLog("PlayedCards has " + PlayedCards.Count + " cards.");
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    
     /// <param name="playerQueue"></param>
 
     private void TurnOnJudge(Queue<IPlayerCommon> playerQueue)
@@ -1017,14 +965,7 @@ public class GameLoop : MonoBehaviour
     /// <param name="message"></param>
     public void TestConsoleLog( string message)
     {
-        //Append a line to the console
-       // TestConsole.text += "\n" + message;
-
-       //  if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))  //clears the console when it gets full
-       //     {
-       //         TestConsole.text = string.Empty;
-       //         return;
-       //     }
+       
         if (message.Equals("CLEAR", StringComparison.OrdinalIgnoreCase))
         {
             autoScroll.AddMessage("");   // clears the UI through AutoScroll
@@ -1079,14 +1020,12 @@ public class GameLoop : MonoBehaviour
     private List<AnswerCard> getTestCards()
     {
         string[] titles = { "Card", "CardB", "CardC", "CardD" };
-       // string[] personalities = { "Chaotic", "Funny", "Serious", "Scify" };
-        //int[] weights = { 3, 5, 7, 2, 10, 12, 15, 1 };
+       
         var cards = new List<AnswerCard>();
 
         for (int i = 0; i < 40; i++)
         {
-            string title = titles[i % titles.Length];
-           // string personality = personalities[i % personalities.Length];
+            string title = titles[i % titles.Length];         
             int weightchao = UnityEngine.Random.Range(1, 21);
             int weightSer = UnityEngine.Random.Range(1, 21);
             int weightsci = UnityEngine.Random.Range(1, 21);

@@ -3145,8 +3145,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5824,7 +5824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.8138084, y: -3.351389}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 450, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &922615742
@@ -6320,12 +6320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cards: []
-  cardSpacing: 2
-  yOffset: -4
-  hideYOffset: -8
-  judgeYOffset: -3.5
-  showYOffset: -4
-  resetOffset: -8
   sprites:
   - {fileID: 6969675125841911368, guid: 493cb054ae45c244d9e3e2b9ed4a51a6, type: 3}
   - {fileID: -4078080895987700266, guid: af11839e8b0232c489df42650b7f40d8, type: 3}
@@ -8157,8 +8151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::PauseMenu
   pauseMenuUI: {fileID: 1691939462}
+  settingsPanel: {fileID: 0}
   playPileDropZoneObject: {fileID: 336431188}
   uiPlayConfirmObject: {fileID: 667921609}
+  audioSource: {fileID: 0}
 --- !u!1 &1244020896
 GameObject:
   m_ObjectHideFlags: 0
@@ -8264,8 +8260,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10402,8 +10398,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11868,7 +11864,7 @@ MonoBehaviour:
   - {fileID: 6132245501011200073, guid: 246c1a645e056b249a510feaa90c3c18, type: 3}
   - {fileID: -873335449523332223, guid: c5b2275100d2ed54ea96a2fadab5e33f, type: 3}
   - {fileID: -7994172648832495846, guid: ccf7437e4a2f3374aaa98c448dfce23f, type: 3}
-  interval: 30
+  interval: 45
   transition: 0.5
 --- !u!1 &1959131070
 GameObject:
@@ -12849,7 +12845,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1498662281}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13143,8 +13139,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -15,10 +15,7 @@ public class FunFacts_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Intermission Update running");
-
-        // Press Enter
-        //if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+       
         if (Input.anyKeyDown)
 
         {

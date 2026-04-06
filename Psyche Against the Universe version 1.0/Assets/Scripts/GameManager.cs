@@ -20,15 +20,13 @@ using UnityEngine.UI;
 /* 
  * 11/5/25 - Initial class build with initial fields and methods. 
  *  11/6/25 - 
- *  11/14/25 - Updated the debug statement to display the full personality array. With no 
+ *  11/14/25 - Updated the debug statement to display the full personality array. 
+ *  4/5/2026 - initial code cleanup, no refactor
  */
 public class GameManager : MonoBehaviour
 {
     //Main menu GUI objects
     public TMP_Text PlayText;  //this is where the players name is
-    //public TMP_Text NoPlayerNameTxt;
-   // public NoPlayerTextMessage noplayermessage;
-    //public NoCPUPlayerMessage nocpuplayermessage;
     public Toggle NormalCkbox;
     public Toggle SDeathCkbox;
     public Toggle HighContrastCkBox;
@@ -36,19 +34,20 @@ public class GameManager : MonoBehaviour
     public TMP_Text CPUNameText;
     public Button BtnStart;
 
-    public bool enableNormMode;         //True if normal checkbox is set. Win condition is 6 points
-    public bool enableSuddenWinMode;    //True if Sudden Win is set. Win condition is 3 points no rerun
-    public bool enableHighContrast;     //True if High Contrast is set
-    public bool enableTTSpeech;         //True if test to speech is set
+    public bool enableNormMode;                 //True if normal checkbox is set. Win condition is 6 points
+    public bool enableSuddenWinMode;            //True if Sudden Win is set. Win condition is 3 points no rerun
+    public bool enableHighContrast;             //True if High Contrast is set
+    public bool enableTTSpeech;                 //True if test to speech is set
     public bool CheckPlayerName = false;        //checks if the player name field is filled in. Set to false to force validation
     public bool CheckCPUChars = false;          //checks if the CPU players is blank. Set to false to force validation
 
-    public TMP_Dropdown NumOfPlayersDD;    //this is read to determine which gameboard to load
+    public TMP_Dropdown NumOfPlayersDD;         //this is read to determine which gameboard to load
 
     public float GameModeTransition = 3f;
 
-    public static bool ReturnToMenu = false;  //allows for the game to load from quit without doing the whole title sequence
+    public static bool ReturnToMenu = false;                 //allows for the game to load from quit without doing the whole title sequence
     public static string NextSceneAfterIntermission = null;  //allow for intermission scenes
+   
     //singleton object to allow decoupling and interface with the game loop
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -151,23 +150,11 @@ public class GameManager : MonoBehaviour
     IPlayerCommon HumanPlayer;
     Queue<IPlayerCommon> GamePlayerQueue = new Queue<IPlayerCommon> ();
 
-   /* void Start()
-    {
-        //create a listener
-        if (BtnStart != null)
-        {
-           BtnStart.onClick.AddListener(Startgame);
-       }
-
-    }*/
-
     // Startgame calls all the required setup methods contained in game manager to create the required objects
     //intentionally delayed to cause all menu objects to be loaded.
     
     public void Startgame()
     {
-
-        //TODO: Post alerts but for now this will work
         // Validate once
         try
         {
@@ -190,11 +177,9 @@ public class GameManager : MonoBehaviour
             return; // Exit early
         }
 
-
-
         //add additional critical validations here 
 
-        HumanPlayer = BuildHumanPlayer();   //returns a Psyche Player 
+        HumanPlayer = BuildHumanPlayer();                //returns a Psyche Player 
         enableNormMode = CheckNormMode();
         enableSuddenWinMode = CheckSudWinMode();
         enableHighContrast = CheckHighContrast();
@@ -203,7 +188,7 @@ public class GameManager : MonoBehaviour
         CreatePlayerController(HumanPlayer);
         CreatePlayerView();
         CreateCPUPlayerView();
-        StartCoroutine(loadGame());   //Tie this to the multiple game scenes for the player styles
+        StartCoroutine(loadGame());                     //Tie this to the multiple game scenes for the player styles
     }
 
     /// <summary>
@@ -242,10 +227,10 @@ public class GameManager : MonoBehaviour
 
     private void BuildPlayerQueue(IPlayerCommon _humanPlayer)
     {
-       GamePlayerQueue.Clear();                 //ensure the queue is clear of old data
+       GamePlayerQueue.Clear();                                          //ensure the queue is clear of old data
 
         //Add the human player to the queue
-        GamePlayerQueue.Enqueue(_humanPlayer);  //Enqueue the human player
+        GamePlayerQueue.Enqueue(_humanPlayer);                          //Enqueue the human player
         var cpuList = CPUPlayerSingleton.instance.CPUPlayers;
         Debug.Log($"Singleton has {cpuList.Count} CPU players");
 
@@ -370,7 +355,7 @@ public class GameManager : MonoBehaviour
         PsychePlayer _common = new PsychePlayer();
 
         //build player
-        _common.Avatar_Name = PlayText.text;     //Builds the human player object here and adds it to the player queue
+        _common.Avatar_Name = PlayText.text;                                     //Builds the human player object here and adds it to the player queue
         Debug.Log("GameManager PlayText object: " + PlayText.GetInstanceID());
 
         return _common;
@@ -394,36 +379,34 @@ public class GameManager : MonoBehaviour
 
         enableNormMode = NormalCkbox.isOn;
         enableSuddenWinMode = SDeathCkbox.isOn;
+
         //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
         if (GamePlayerQueue.Count == 4)
         {
             Debug.Log("4 player board");
-            //SceneManager.LoadScene("Gamebrd 4P");
             GameManager.NextSceneAfterIntermission = "Gamebrd 4P";
-            SceneManager.LoadScene("FunFacts3");   //go to intermission then go to gameboard
+            SceneManager.LoadScene("FunFacts3");                        //go to intermission then go to gameboard
         }
         else if (GamePlayerQueue.Count == 5)
         {
-            Debug.Log("5 player board");
-            //SceneManager.LoadScene("Gamebrd 5P");  //5 player game. 
+            Debug.Log("5 player board"); 
             GameManager.NextSceneAfterIntermission = "Gamebrd 5P";
-            SceneManager.LoadScene("FunFacts4");   //go to intermission then go to gameboard
+            SceneManager.LoadScene("FunFacts4");    
         }
         else if (GamePlayerQueue.Count == 6)
         {
             Debug.Log("6 player board");
-            //SceneManager.LoadScene("Gamebrd 6P");  //6 player game. 
             GameManager.NextSceneAfterIntermission = "Gamebrd 6P";
-            SceneManager.LoadScene("FunFacts6");   //go to intermission then go to gameboard
+            SceneManager.LoadScene("FunFacts6");    
         }
         else
         {
-             //SceneManager.LoadScene("Gameboard");            //default is always 2 additional players
-             
+            //default is always 2 additional players
             GameManager.NextSceneAfterIntermission = "Gameboard";
             SceneManager.LoadScene("FunFacts2");   //go to intermission then go to gameboard
         }
     }
+
     /// <summary>
     /// Method makes the private queue accessible by the gameloop script
     /// </summary>
@@ -461,9 +444,6 @@ public class GameManager : MonoBehaviour
     {
         return cpuPlayView;
     }
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
+    
+    
 }
