@@ -4124,8 +4124,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1747938262}
   m_HandleRect: {fileID: 1747938261}
   m_Direction: 2
-  m_Value: 0.5
-  m_Size: 0.5200998
+  m_Value: 0.49999997
+  m_Size: 0.3092665
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9549,7 +9549,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 461.40002}
+  m_SizeDelta: {x: 0, y: 1116.8401}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375338275
 MonoBehaviour:
@@ -9571,7 +9571,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "About Psyche Against the Universe\n\nCreated by: Timothy Burke\nAzaria
+  m_text: "About Psyche Against the Universe\n\nCreated by: Timothy Burke \nAzaria
     Mehanovic\nAbdur-Rahman Igram\nRijul Sudesh\n\nA digital version of the \"Psyche
     Against the Universe\" card game created by Nihah Shah as part of the Psyche
     Inspire Program.\n\nThe game aims to meet the intent of the original and provides
@@ -11673,8 +11673,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 528257217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.23995009}
-  m_AnchorMax: {x: 1, y: 0.76004994}
+  m_AnchorMin: {x: 0, y: 0.34536675}
+  m_AnchorMax: {x: 1, y: 0.6546333}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
