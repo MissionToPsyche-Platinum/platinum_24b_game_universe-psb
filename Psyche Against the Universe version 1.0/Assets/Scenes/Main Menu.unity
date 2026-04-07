@@ -9571,34 +9571,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'About Psyche Against the Universe
-
-
-    Created by: Timothy Burke
-
-    Azaria
-    Mehanovic
-
-    Abdur-Rahman Igram
-
-    Rijul Sudesh
-
-
-    A digital version of
-    the "Psyche Against the Universe" card game created by Nihah Shah as part of
-    the Psyche Inspire Program.
-
-
-    The game aims to meet the intent of the original
-    and provides a digital means of learning about the Psyche Mission as well as
-    having fun.
-
-
-    Sponsored by: Cassie Bowman, Arizona State Univerity through
-    a partnership with NASA. Capstone Project for
-
-    Penn State University, SWENG
-    480 and 481.'
+  m_text: "About Psyche Against the Universe\n\nCreated by: Timothy Burke\nAzaria
+    Mehanovic\nAbdur-Rahman Igram\nRijul Sudesh\n\nA digital version of the \"Psyche
+    Against the Universe\" card game created by Nihah Shah as part of the Psyche
+    Inspire Program.\n\nThe game aims to meet the intent of the original and provides
+    a digital means of learning about the Psyche Mission as well as having fun.\n\nThis
+    work was created in partial fulfillment of Pennsylvania State University Capstone
+    Course \"SWENG 480/481\". The work is a result of the Psyche Student Collaborations
+    component of NASA\u2019s Psyche Mission (https://psyche.ssl.berkeley.edu). \u201CPsyche:
+    A Journey to a Metal World\u201D [Contract number NNM16AA09C] is part of the
+    NASA Discovery Program mission to solar system targets. Trade names and trademarks
+    of ASU and NASA are used in this work for identification only. Their usage does
+    not constitute an official endorsement, either expressed or implied, by Arizona
+    State University or National Aeronautics and Space Administration. The content
+    is solely the responsibility of the authors and does not necessarily represent
+    the official views of ASU or NASA."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
