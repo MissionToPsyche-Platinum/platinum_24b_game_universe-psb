@@ -16,7 +16,7 @@ MonoBehaviour:
   description: If you throw enough computing power at a problem, it has to solve
     itself ... right? Just pray your processor doesn't melt.
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: 21300000, guid: 66ecdcd9e1875473981fadda8290b5aa, type: 3}
   WeightSerious: 20
   WeightSciFi: 10
   WeightFunny: 12

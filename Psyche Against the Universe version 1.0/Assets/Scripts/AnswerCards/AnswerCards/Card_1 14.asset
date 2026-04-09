@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Just tell any threats they're not allowed here. Maybe they'll respect
     space bureaucracy.
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: 21300000, guid: 48c7c13ca2c1d4f47b6e12dd898ef461, type: 3}
   WeightSerious: 9
   WeightSciFi: 12
   WeightFunny: 15

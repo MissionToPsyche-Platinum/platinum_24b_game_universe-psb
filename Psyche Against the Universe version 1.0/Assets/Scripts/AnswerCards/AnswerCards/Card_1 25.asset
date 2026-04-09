@@ -16,7 +16,7 @@ MonoBehaviour:
   description: NASA's Deep Space Optical Comm laser was built for high-bandwidth
     data transmission, but it also happens to be a great way to blind an enemy spacecraft
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: 21300000, guid: 8b90a2e7e8fbe426e892e692cee25310, type: 3}
   WeightSerious: 2
   WeightSciFi: 18
   WeightFunny: 6
