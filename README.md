@@ -91,11 +91,20 @@ Section 3.0: How to build
               1) Open the project in the editor
               2) Go to File -> Build Profiles-> on Left side, click on Web
               3) In the top Right, click on Player Settings
+
+<img width="732" height="607" alt="Screenshot 2026-04-09 180907" src="https://github.com/user-attachments/assets/88311f6c-6abb-4453-896a-0ecdf0c11c41" />
+
               4) In Player Settings on left -> Player Menu
+
+<img width="774" height="619" alt="Screenshot 2026-04-09 181454" src="https://github.com/user-attachments/assets/a5e65c34-3cac-4962-aeaf-59cdd5b3a20e" />
+
                   a. Under Resolution and Presentation, verify that settings are 1366X768
                   b. Under Publisher Settings, verify that Compression Format is disabled. 
                   (You can enable it, but this will lengthen the build process and may limit browser compatibilty)
                   c. Close Project Settings Window.
+                  
+<img width="729" height="314" alt="Screenshot 2026-04-09 181710" src="https://github.com/user-attachments/assets/f4c38ffc-0ebb-4b70-8e98-64dd9d2af982" />
+
               5) On the bottom you have the options to publish, build, or build and run.
                   a. Choose the option and the build process will proceed. For publish, you will need to provide the 
                     neccessary server information.
@@ -103,6 +112,9 @@ Section 3.0: How to build
                       start the build process. (This can take up to 10 minutes). 
                         1) When selected you will be asked to select a folder. If this is a first time build, you will need
                           to create a folder (name it what you wish). Otherwise you can use the created build profile folder.
+                          
+<img width="502" height="109" alt="Screenshot 2026-04-09 182036" src="https://github.com/user-attachments/assets/6614e280-797c-440d-82b8-cbc82ba3dd11" />
+      
                         2) When finished, the file browser window will be open highlighting your build package.
                   c. Click Build And Run
                         1) In the File Browser window, select your desired build package and hit select folder.
@@ -150,3 +162,18 @@ Section 3.0: How to build
             Do the same when it is your turn as judge to ensure you don't accidently give another player a winning chance.
 
   5.0: Game Screenshots
+        Title Screen
+<img width="1185" height="506" alt="Screenshot 2026-04-09 182634" src="https://github.com/user-attachments/assets/6408510d-ed76-41d1-b25d-cbadffb12256" />
+
+        Fun Fact Intermission Slide example
+<img width="1186" height="504" alt="Screenshot 2026-04-09 182933" src="https://github.com/user-attachments/assets/6719e504-86e3-4340-94a5-3ffecf9b7083" />
+
+        Main Menu Slide
+<img width="1185" height="502" alt="Screenshot 2026-04-09 183022" src="https://github.com/user-attachments/assets/3edee4c5-fa6e-4033-bd80-d0724180dfe6" />
+
+        Gameboard Example
+<img width="1183" height="506" alt="Screenshot 2026-04-09 183637" src="https://github.com/user-attachments/assets/7bf7ed79-efcc-449f-9f0b-174360a12592" />
+
+        Pause Menu Example
+<img width="279" height="246" alt="Screenshot 2026-04-09 184513" src="https://github.com/user-attachments/assets/bb6eceed-4223-4998-864c-ffd29dcf0a37" />
+
