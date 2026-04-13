@@ -1,5 +1,0 @@
-﻿<Solution>
-  <Project Path="GameAssembly.csproj" />
-  <Project Path="Assembly-CSharp-firstpass.csproj" />
-  <Project Path="Tests.csproj" />
-</Solution>
