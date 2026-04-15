@@ -177,6 +177,9 @@ public class GameManager : MonoBehaviour
             return; // Exit early
         }
 
+        //play start sound effect
+        AudioManager.Instance.PlaySFX("StartButton");
+
         //add additional critical validations here 
 
         HumanPlayer = BuildHumanPlayer();                //returns a Psyche Player 

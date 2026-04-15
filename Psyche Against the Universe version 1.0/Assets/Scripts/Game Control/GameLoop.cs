@@ -334,6 +334,9 @@ public class GameLoop : MonoBehaviour
                             // Verify the confirm button was clicked before proceeding.
                             yield return new WaitUntil(() => UIPlayConfirm.Instance.HasConfirmed);
 
+                            // play confirm sound
+                            AudioManager.Instance.PlaySFX("ConfirmButton");
+
                             //humanPlayer.PlayCard(this);
                             playerview.UpdateHand(humanPlayer.Hand);
 
