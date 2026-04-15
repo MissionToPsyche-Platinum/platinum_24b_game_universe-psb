@@ -34,6 +34,9 @@ public class PauseMenu : MonoBehaviour
         ppdzScript.TakeOutCard();
         playPileDropZoneObject.SetActive(false); // take down play pile zone
 
+        // play pause sound effect
+        AudioManager.Instance.PlaySFX("MenuButton");
+
 
         // hide hand during pause
         handManager.PlayHandHide();
@@ -68,6 +71,9 @@ public class PauseMenu : MonoBehaviour
     public void ResumeButton()
     {
         playPileDropZoneObject.SetActive(true); // bring back play pile zone
+
+        // play pause sound effect
+        AudioManager.Instance.PlaySFX("ResumeButton");
 
         // show hand again after pause
         handManager.ResetOffset();

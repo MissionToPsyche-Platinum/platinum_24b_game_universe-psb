@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void PlayMusic(string name)
     {
         Sound s = System.Array.Find(musicSounds, sound => sound.name == name);
@@ -40,5 +40,16 @@ public class AudioManager : MonoBehaviour
             return;
         }
         sfxSource.PlayOneShot(s.clip);
+    }
+
+    public void PlaySFX(string name, float volume)
+    {
+        Sound s = System.Array.Find(sfxSounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound: " + name + " not found!");
+            return;
+        }
+        sfxSource.PlayOneShot(s.clip, volume);
     }
 }

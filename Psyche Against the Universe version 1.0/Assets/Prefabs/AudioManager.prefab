@@ -181,8 +181,20 @@ MonoBehaviour:
   sfxSounds:
   - name: StartButton
     clip: {fileID: 8300000, guid: 22f80e3f2eb54fa499150e10eebd3cf1, type: 3}
+  - name: StartError
+    clip: {fileID: 8300000, guid: 7a86d6a94ad343149aeacc41e1f4f312, type: 3}
   - name: ConfirmButton
-    clip: {fileID: 8300000, guid: fd5024509f297de4c875e84400dbbbb0, type: 3}
+    clip: {fileID: 8300000, guid: 914a33cf1286ad24dadc013024c9dc59, type: 3}
+  - name: Translator
+    clip: {fileID: 8300000, guid: 16d428ca9ae09df4aaf6f3e56833dab6, type: 3}
+  - name: CardClick
+    clip: {fileID: 8300000, guid: f854a8083d6afa447a684012f016bc17, type: 3}
+  - name: CardHover
+    clip: {fileID: 8300000, guid: 85f742cfb7ade7b46946c365b285516c, type: 3}
+  - name: MenuButton
+    clip: {fileID: 8300000, guid: e66c13f84e9d2494b8be840566f5a798, type: 3}
+  - name: ResumeButton
+    clip: {fileID: 8300000, guid: 1a919be7269543644a7b97e7e46ce211, type: 3}
   musicSource: {fileID: 5184224078403196429}
   sfxSource: {fileID: 5360399970496571879}
 --- !u!1 &8681501648863596387

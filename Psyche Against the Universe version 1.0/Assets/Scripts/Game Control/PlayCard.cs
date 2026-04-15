@@ -151,6 +151,7 @@ public class PlayCard : MonoBehaviour,
         //transform.localPosition += Vector3.up * (0.2f * baseScale.y); //2/16/
         if (!isLockedToPlayPile)
             handManager.PlayHandHover();
+        AudioManager.Instance.PlaySFX("CardHover");
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -165,6 +166,8 @@ public class PlayCard : MonoBehaviour,
     {
         Debug.Log("Card clicked: " + name);
         isDragging = true;
+
+        AudioManager.Instance.PlaySFX("CardClick");
 
         handManager.PlayHandShow();
 
