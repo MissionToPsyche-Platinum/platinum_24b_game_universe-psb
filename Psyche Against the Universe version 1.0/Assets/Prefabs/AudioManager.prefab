@@ -194,7 +194,7 @@ MonoBehaviour:
   - name: MenuButton
     clip: {fileID: 8300000, guid: e66c13f84e9d2494b8be840566f5a798, type: 3}
   - name: ResumeButton
-    clip: {fileID: 8300000, guid: 1a919be7269543644a7b97e7e46ce211, type: 3}
+    clip: {fileID: 8300000, guid: 783fd6c1e004c58448332f604f911938, type: 3}
   musicSource: {fileID: 5184224078403196429}
   sfxSource: {fileID: 5360399970496571879}
 --- !u!1 &8681501648863596387

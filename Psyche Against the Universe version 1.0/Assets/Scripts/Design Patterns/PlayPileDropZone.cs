@@ -36,6 +36,15 @@ public class PlayPileDropZone : MonoBehaviour
         }
     }
 
+    public void Dim()
+    {
+        if (sr != null)
+        {
+            sr.color = new Color(1f, 1f, 1f, 0.2f); // dim
+            Debug.Log("Play pile dimmed!");
+        }
+    }
+
     public void HideZone()
     {
         sr.enabled = false;
