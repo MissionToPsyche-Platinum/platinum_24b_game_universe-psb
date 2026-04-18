@@ -82,7 +82,8 @@ public class GameLoop : MonoBehaviour
 
     public float GameModeTransition = 5f;   //transition back to the Main Menu after game is complete
 
-    
+    public bool isHumanJudge = false; // flag specifically to track for PsychePlayer class
+
     bool isFinalRound = false;
     bool isTie = false;
     bool isWin = false;
@@ -94,6 +95,10 @@ public class GameLoop : MonoBehaviour
     public List<AnswerCard> PlayedCards  = new List<AnswerCard> ();         //holds the answer cards during the game round.
                                                                             //emptied at the end of round. 
     string banterLine;
+    
+    // string tags
+    string fontOpen = "<font=\"Audiowide-Regular SDF\">";
+    string fontClose = "</font>";
 
     //Create strategy objects for use by the CPU Players during thier respective turns
     //The objects are called when required by thier personality
@@ -240,6 +245,7 @@ public class GameLoop : MonoBehaviour
         //Triggers the border flash and prompt to appear in the desingated banter field.
         TestConsoleLog("You take a chance to observe the other players");
         ProvideClue(playerQueue);
+        TestConsoleLog("CLEAR");
         yield return new WaitForSeconds(3f);     
         /***************************************************************************************************************************/
 
@@ -326,7 +332,7 @@ public class GameLoop : MonoBehaviour
                             HandManager.Instance.PlayHandShow();//Added 2/16/26 
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
-                            TestConsoleLog(humanPlayer.Avatar_Name + " Takes a turn");
+                            TestConsoleLog($"{fontOpen}{humanPlayer.Avatar_Name}{fontClose} Takes a turn");
 
                             // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
@@ -348,7 +354,10 @@ public class GameLoop : MonoBehaviour
                         }
                         else
                         {
-                            TestConsoleLog($"{humanPlayer.Avatar_Name} is Judge, judging cards");
+                            isHumanJudge = true; // set the flag to indicate the human is the judge
+                            
+                            TestConsoleLog("CLEAR");
+                            TestConsoleLog($"{fontOpen}{humanPlayer.Avatar_Name}{fontClose} is Judge, judging cards");
 
                             // switches to judge hand view for human                            
                             HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  
@@ -371,15 +380,17 @@ public class GameLoop : MonoBehaviour
 
                             HandManager.Instance.PlayHandHide();
 
-                            //and select the same way a card is played. For now, this will be auto
+                            // get the chosen card index from the UIPlayConfirm singleton and log the chosen card and player
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-                            TestConsoleLog($"{PlayedCards[chosenIndex].title} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
+                            TestConsoleLog($"{fontOpen}{PlayedCards[chosenIndex].title}{fontClose} was chosen. {fontOpen}{PlayedCards[chosenIndex].PlayedBy}{fontClose} scores a point");
 
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
                             HumanPlayerName.color = Color.white;
                             HumanPlayerName.fontStyle = FontStyles.Normal;
+
+                            isHumanJudge = false; // reset the flag after the human judge turn is complete
                         }
 
                         HandManager.Instance.SetYOffset(false);                         // hide hand after human turn
@@ -391,7 +402,7 @@ public class GameLoop : MonoBehaviour
                             HighlightCPUPlayer(CPUPlayer);                               //triggers the CPU player highlight
                            
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
-                            TestConsoleLog(CPUPlayer.Avatar_Name + " Takes a turn");
+                            TestConsoleLog($"{fontOpen}{CPUPlayer.Avatar_Name}{fontClose} Takes a turn");
 
                             BanterResult result = CpuView.PlayBanter(CPUPlayer);
 
@@ -421,11 +432,12 @@ public class GameLoop : MonoBehaviour
                         {
                             HighlightCPUPlayer(CPUPlayer);                                                          //triggers the CPU player highlight
                             AnswerCard chosenCard;
-                            TestConsoleLog($"{CPUPlayer.Avatar_Name} is Judge, judging cards.");
+                            TestConsoleLog("CLEAR");
+                            TestConsoleLog($"{fontOpen}{CPUPlayer.Avatar_Name}{fontClose} is Judge, judging cards.");
 
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );                //CPU logic will define this further later
-                            TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
+                            TestConsoleLog($"{fontOpen}{chosenCard.title}{fontClose} was chosen. {fontOpen}{chosenCard.PlayedBy}{fontClose} scores a point");
 
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
@@ -557,22 +569,22 @@ public class GameLoop : MonoBehaviour
                 //print the preset message based on personality match
                 if (trait == "Serious")
                 {
-                    TestConsoleLog(cpu.Avatar_Name + " makes a serious face");
+                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} makes a {fontOpen}serious face{fontClose}");
                     
                 }
                 else if (trait == "Sci_Fy")
                 {
-                    TestConsoleLog(cpu.Avatar_Name + " is wearing Vulcan Ears");
+                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is wearing {fontOpen}Vulcan Ears{fontClose}");
                    
                 }
                 else if (trait == "Funny")
                 {
-                    TestConsoleLog(cpu.Avatar_Name + " is making silly gestures");
+                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is making {fontOpen}silly gestures{fontClose}");
                     
                 }
                 else if (trait == "Chaotic")
                 {
-                    TestConsoleLog(cpu.Avatar_Name + " is giving a devious expression");
+                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is giving a {fontOpen}devious expression{fontClose}");
                    
                 }
             }
@@ -677,7 +689,7 @@ public class GameLoop : MonoBehaviour
 
         if (winner != null)
         {
-            TestConsoleLog($"Winner is {winner.Avatar_Name} with {highestScore} points!");
+            TestConsoleLog($"Winner is {fontOpen}{winner.Avatar_Name}{fontClose} with {highestScore} points!");
         }
         else
         {

@@ -25,7 +25,8 @@ public class PsychePlayer : AbsPsyPlayer
         
         var cardToPlay = Hand[Index];
         //gameLoop.TestConsoleLog($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
-        gameLoop.TestConsoleLog($"Card Played {cardToPlay.title}");
+        if (!gameLoop.isHumanJudge)
+            gameLoop.TestConsoleLog($"Card Played <font=\"Audiowide-Regular SDF\">{cardToPlay.title}</font>");
         // Debug.Log($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
 
         cardToPlay.PlayedBy = this.Avatar_Name;
