@@ -96,9 +96,15 @@ public class GameLoop : MonoBehaviour
                                                                             //emptied at the end of round. 
     string banterLine;
     
-    // string tags
-    string fontOpen = "<font=\"Audiowide-Regular SDF\">";
-    string fontClose = "</font>";
+    // TestConsoleLog string tags
+    const string fontOpen = "<font=\"Audiowide-Regular SDF\">";
+    const string fontClose = "</font>";
+    const string orangeOpen = "<color=#F1861E>";
+    const string purpleOpen = "<color=#543B5E>";
+    const string colorClose = "</color>";
+    const string avatarOpen = fontOpen + orangeOpen;
+    const string cardOpen = fontOpen + purpleOpen;
+    const string genClose = colorClose + fontClose;
 
     //Create strategy objects for use by the CPU Players during thier respective turns
     //The objects are called when required by thier personality
@@ -184,7 +190,7 @@ public class GameLoop : MonoBehaviour
                         
                         if (playerQueue.Count == 3)
                         {
-                            CPUJudge2.color = Color.red;                        //Sets the last player in the queue as the first judge. Modified to check for additional players
+                            CPUJudge2.alpha = 100;                        //Sets the last player in the queue as the first judge. Modified to check for additional players
                             CPUplayer.judge = true;                              //sets the judge flag if three player game
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -195,7 +201,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 4)                             //active if it is a four player game.
                         {
-                            CPUJudge3.color = Color.red;
+                            CPUJudge3.alpha = 100;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -207,7 +213,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 5)                             //active if it is a five  player game.
                         {
-                            CPUJudge4.color = Color.red;
+                            CPUJudge4.alpha = 100;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -219,7 +225,7 @@ public class GameLoop : MonoBehaviour
 
                         if (playerQueue.Count == 6)                             //active if it is a six  player game.
                         {
-                            CPUJudge5.color = Color.red;
+                            CPUJudge5.alpha = 100;
                             CPUplayer.judge = true;
                             Debug.Log("First Judge field" + CPUplayer.judge);
                         }
@@ -243,7 +249,7 @@ public class GameLoop : MonoBehaviour
 
         //Provide one round of clues. Each CPU player makes a statement based on thier dominant personality. 
         //Triggers the border flash and prompt to appear in the desingated banter field.
-        TestConsoleLog("You take a chance to observe the other players");
+        TestConsoleLog("You take a chance to observe the other players...");
         ProvideClue(playerQueue);
         TestConsoleLog("CLEAR");
         yield return new WaitForSeconds(3f);     
@@ -332,7 +338,7 @@ public class GameLoop : MonoBehaviour
                             HandManager.Instance.PlayHandShow();//Added 2/16/26 
 
                             //Debug.Log(humanPlayer.Avatar_Name + " Takes a turn");
-                            TestConsoleLog($"{fontOpen}{humanPlayer.Avatar_Name}{fontClose} Takes a turn");
+                            TestConsoleLog($"{avatarOpen}{humanPlayer.Avatar_Name}{genClose} Takes a turn");
 
                             // Enable confirm button for this player’s turn
                             UIPlayConfirm.Instance.PrepareForTurn(humanPlayer, this);
@@ -357,7 +363,7 @@ public class GameLoop : MonoBehaviour
                             isHumanJudge = true; // set the flag to indicate the human is the judge
                             
                             TestConsoleLog("CLEAR");
-                            TestConsoleLog($"{fontOpen}{humanPlayer.Avatar_Name}{fontClose} is Judge, judging cards");
+                            TestConsoleLog($"{avatarOpen}{humanPlayer.Avatar_Name}{genClose} is Judge, judging cards");
 
                             // switches to judge hand view for human                            
                             HandManager.Instance.UpdatePlayHand(PlayedCards.Count);  
@@ -382,7 +388,7 @@ public class GameLoop : MonoBehaviour
 
                             // get the chosen card index from the UIPlayConfirm singleton and log the chosen card and player
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-                            TestConsoleLog($"{fontOpen}{PlayedCards[chosenIndex].title}{fontClose} was chosen. {fontOpen}{PlayedCards[chosenIndex].PlayedBy}{fontClose} scores a point");
+                            TestConsoleLog($"{cardOpen}{PlayedCards[chosenIndex].title}{genClose} was chosen. {avatarOpen}{PlayedCards[chosenIndex].PlayedBy}{genClose} scores a point");
 
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
@@ -402,7 +408,7 @@ public class GameLoop : MonoBehaviour
                             HighlightCPUPlayer(CPUPlayer);                               //triggers the CPU player highlight
                            
                             //Debug.Log(CPUPlayer.Avatar_Name + " Takes a turn");
-                            TestConsoleLog($"{fontOpen}{CPUPlayer.Avatar_Name}{fontClose} Takes a turn");
+                            TestConsoleLog($"{avatarOpen}{CPUPlayer.Avatar_Name}{genClose} Takes a turn");
 
                             BanterResult result = CpuView.PlayBanter(CPUPlayer);
 
@@ -433,11 +439,11 @@ public class GameLoop : MonoBehaviour
                             HighlightCPUPlayer(CPUPlayer);                                                          //triggers the CPU player highlight
                             AnswerCard chosenCard;
                             TestConsoleLog("CLEAR");
-                            TestConsoleLog($"{fontOpen}{CPUPlayer.Avatar_Name}{fontClose} is Judge, judging cards.");
+                            TestConsoleLog($"{avatarOpen}{CPUPlayer.Avatar_Name}{genClose} is Judge, judging cards.");
 
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );                //CPU logic will define this further later
-                            TestConsoleLog($"{fontOpen}{chosenCard.title}{fontClose} was chosen. {fontOpen}{chosenCard.PlayedBy}{fontClose} scores a point");
+                            TestConsoleLog($"{cardOpen}{chosenCard.title}{genClose} was chosen. {avatarOpen}{chosenCard.PlayedBy}{genClose} scores a point");
 
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
@@ -569,22 +575,22 @@ public class GameLoop : MonoBehaviour
                 //print the preset message based on personality match
                 if (trait == "Serious")
                 {
-                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} makes a {fontOpen}serious face{fontClose}");
+                    TestConsoleLog($"{avatarOpen}{cpu.Avatar_Name}{genClose} makes a {fontOpen}serious face{fontClose}");
                     
                 }
                 else if (trait == "Sci_Fy")
                 {
-                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is wearing {fontOpen}Vulcan Ears{fontClose}");
+                    TestConsoleLog($"{avatarOpen}{cpu.Avatar_Name}{genClose} is wearing {fontOpen}Vulcan Ears{fontClose}");
                    
                 }
                 else if (trait == "Funny")
                 {
-                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is making {fontOpen}silly gestures{fontClose}");
+                    TestConsoleLog($"{avatarOpen}{cpu.Avatar_Name}{genClose} is making {fontOpen}silly gestures{fontClose}");
                     
                 }
                 else if (trait == "Chaotic")
                 {
-                    TestConsoleLog($"{fontOpen}{cpu.Avatar_Name}{fontClose} is giving a {fontOpen}devious expression{fontClose}");
+                    TestConsoleLog($"{avatarOpen}{cpu.Avatar_Name}{genClose} is giving a {fontOpen}devious expression{fontClose}");
                    
                 }
             }
@@ -783,13 +789,13 @@ public class GameLoop : MonoBehaviour
                         {
                             if (sudWinModeset)
                             {
-                                TestConsoleLog($"{player.Avatar_Name}" + "has winning score and won sudden win mode");
+                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score and won sudden win mode");
                                 isFinalRound = true;
                                 break;
                             }
                             isFinalRound = true;
                             Debug.Log(isFinalRound);
-                            TestConsoleLog($"{player.Avatar_Name}" + "has winning score, Final round flag is set");
+                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score, Final round flag is set");
                         }
 
                     break;
@@ -807,13 +813,13 @@ public class GameLoop : MonoBehaviour
                         {
                             if (sudWinModeset)
                             {
-                                TestConsoleLog($"{player.Avatar_Name}" + "has winning score and won sudden win mode");
+                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score and won sudden win mode");
                                 isFinalRound = true;
                                 break;
                             }
                             isFinalRound = true;
                             Debug.Log(isFinalRound);
-                            TestConsoleLog($"{player.Avatar_Name}" + "has winning score, Final round flag is set");
+                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score, Final round flag is set");
                         }
                     break;
             }
@@ -905,27 +911,27 @@ public class GameLoop : MonoBehaviour
     {
         if(playerQueue.Last().Avatar_Name == CPU1Name.text)
         {
-            CPUJudge1.color = Color.red;
+            CPUJudge1.alpha = 100;
         }
         else if (playerQueue.Last().Avatar_Name == CPU2Name.text)
         {
-            CPUJudge2.color = Color.red;
+            CPUJudge2.alpha = 100;
         }
         else if (CPU3Name != null && playerQueue.Last().Avatar_Name == CPU3Name.text)
         {
-            CPUJudge3.color = Color.red;
+            CPUJudge3.alpha = 100;
         }
         else if (CPU4Name != null && playerQueue.Last().Avatar_Name == CPU4Name.text)
         {
-            CPUJudge4.color = Color.red;
+            CPUJudge4.alpha = 100;
         }
         else if (CPU5Name != null && playerQueue.Last().Avatar_Name == CPU5Name.text)
         {
-            CPUJudge5.color = Color.red;
+            CPUJudge5.alpha = 100;
         }
         else if (playerQueue.Last().Avatar_Name == HumanPlayerName.text)
         {
-            JudgeLabel.color = Color.red;
+            JudgeLabel.alpha = 100;
         }
 
     }
