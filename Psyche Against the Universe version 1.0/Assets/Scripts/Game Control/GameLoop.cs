@@ -80,7 +80,7 @@ public class GameLoop : MonoBehaviour
                                                         //Flag that triggers when a player score reaches a win condition. Checked every round. breaks game loop and starts
                                                         //the end routine
 
-    public float GameModeTransition = 5f;   //transition back to the Main Menu after game is complete
+    public float GameModeTransition = 3f;   //transition back to the Main Menu after game is complete
 
     public bool isHumanJudge = false; // flag specifically to track for PsychePlayer class
 
@@ -252,7 +252,7 @@ public class GameLoop : MonoBehaviour
         TestConsoleLog("You take a chance to observe the other players...");
         ProvideClue(playerQueue);
         TestConsoleLog("CLEAR");
-        yield return new WaitForSeconds(3f);     
+        yield return new WaitForSeconds(1.5f);     
         /***************************************************************************************************************************/
 
         //Deal all players 5 cards from the test deck and decrement the list to simulate the deck being reduced
