@@ -174,8 +174,12 @@ public class GameManager : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"Validation failed: {ex.Message}");
+            AudioManager.Instance.PlaySFX("StartError"); //play error sound effect
             return; // Exit early
         }
+
+        //play start sound effect
+        AudioManager.Instance.PlaySFX("StartButton");
 
         //add additional critical validations here 
 

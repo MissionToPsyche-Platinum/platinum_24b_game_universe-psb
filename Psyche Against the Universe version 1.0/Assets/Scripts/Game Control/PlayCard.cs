@@ -151,6 +151,8 @@ public class PlayCard : MonoBehaviour,
         //transform.localPosition += Vector3.up * (0.2f * baseScale.y); //2/16/
         if (!isLockedToPlayPile)
             handManager.PlayHandHover();
+        AudioManager.Instance.PlaySFX("CardHover");
+        this.GetComponent<RectTransform>().SetAsLastSibling();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -165,6 +167,8 @@ public class PlayCard : MonoBehaviour,
     {
         Debug.Log("Card clicked: " + name);
         isDragging = true;
+
+        AudioManager.Instance.PlaySFX("CardClick");
 
         handManager.PlayHandShow();
 
@@ -206,8 +210,11 @@ public class PlayCard : MonoBehaviour,
                 // Lock card in place in the pile
                 transform.position = playPileZone.transform.position;
                
-               //handManager.UnregisterCard(this);
+                //handManager.UnregisterCard(this);
                 isLockedToPlayPile = true;
+
+                //dim play pile zone
+                playPileZone.Dim();
 
                 // Show confirm button and pass this card
                 UIPlayConfirm.Instance.ShowButton(this); //, Player, GameLoop);

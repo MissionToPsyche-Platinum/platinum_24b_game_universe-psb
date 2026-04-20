@@ -47,6 +47,7 @@ public class HandManager : MonoBehaviour
     public void PlayHandShow()
     {
         yOffset = showYOffset;
+        for (int i = 0; i < cards.Count; i++) cards[i].GetComponent<RectTransform>().SetSiblingIndex(i);
     }
 
     public void ResetOffset()
