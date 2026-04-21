@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public TMP_Dropdown NumOfPlayersDD;         //this is read to determine which gameboard to load
 
-    public float GameModeTransition = 3f;
+    public float GameModeTransition = 1.5f;
 
     public static bool ReturnToMenu = false;                 //allows for the game to load from quit without doing the whole title sequence
     public static string NextSceneAfterIntermission = null;  //allow for intermission scenes
@@ -182,7 +182,8 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("StartButton");
 
         //add additional critical validations here 
-
+        //lock out the start button to prevent a refresh
+        BtnStart.interactable = false;
         HumanPlayer = BuildHumanPlayer();                //returns a Psyche Player 
         enableNormMode = CheckNormMode();
         enableSuddenWinMode = CheckSudWinMode();
@@ -383,6 +384,8 @@ public class GameManager : MonoBehaviour
 
         enableNormMode = NormalCkbox.isOn;
         enableSuddenWinMode = SDeathCkbox.isOn;
+
+       
 
         //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
         if (GamePlayerQueue.Count == 4)
