@@ -5,7 +5,7 @@ public class HandManager : MonoBehaviour
 {
     public static HandManager Instance;
     [SerializeField] private List<PlayCard> cards = new List<PlayCard>();
-    private float cardSpacing = 2f;
+    private float cardSpacing = 1f;
     private float yOffset = -5f;
     private float hideYOffset = -8f;
     private float judgeYOffset = -5f;
@@ -46,6 +46,7 @@ public class HandManager : MonoBehaviour
     // call after judge round to show hand again
     public void PlayHandShow()
     {
+        cardSpacing = 1f;
         yOffset = showYOffset;
         for (int i = 0; i < cards.Count; i++) cards[i].GetComponent<RectTransform>().SetSiblingIndex(i);
     }
@@ -57,6 +58,7 @@ public class HandManager : MonoBehaviour
 
     public void PlayHandHover()
     {
+        cardSpacing = 2f;
         yOffset = hoverYOffset;
     }
 
