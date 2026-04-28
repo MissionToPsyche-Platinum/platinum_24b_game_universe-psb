@@ -382,7 +382,7 @@ public class GameLoop : MonoBehaviour
                             AudioManager.Instance.PlaySFX("ConfirmButton");
 
                             //humanPlayer.PlayCard(this);
-                            playerview.UpdateHand(humanPlayer.Hand);
+                            //playerview.UpdateHand(humanPlayer.Hand);
 
                             HandManager.Instance.PlayHandHide();
 

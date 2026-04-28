@@ -19,6 +19,7 @@ public class PyschePlayerView : MonoBehaviour
         //for now it just affects the count
         Debug.Log("hand Updated: " + cards.Count + "cards remaining");
         //expand later to redraw players card objects on UI
+
     }
     
     //incorporate additional methods as required.
