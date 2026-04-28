@@ -16,8 +16,8 @@ MonoBehaviour:
   description: When in doubt, throw a flowchart at it. With enough requirements,
     trade studies, and design reviews, even an alien invasion can be designed out
     of existence.
-  background: {fileID: 2557844099277031974, guid: d8f95dcc414d07043b30c2549db5b509, type: 3}
-  artwork: {fileID: 9202113190364003600, guid: 60b588d2edd4cac46963a2f20f9500f6, type: 3}
+  background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
+  artwork: {fileID: 21300000, guid: d79c4a684df484a619d43ef356ce8734, type: 3}
   WeightSerious: 20
   WeightSciFi: 9
   WeightFunny: 7
