@@ -71,6 +71,7 @@ public class GameLoop : MonoBehaviour
     //prompt card addition
     public PromptCardDisplay activeCard;
     public PromptDeckManager deckManager;
+    public AnswerCardDisplay winningCardDisplay;
 
     //win conditions
     int NormWin = 6;
@@ -443,6 +444,7 @@ public class GameLoop : MonoBehaviour
 
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );                //CPU logic will define this further later
+                            DisplayWinningCard(chosenCard);
                             TestConsoleLog($"{cardOpen}{chosenCard.title}{genClose} was chosen. {avatarOpen}{chosenCard.PlayedBy}{genClose} scores a point");
 
                             // Find the player in the queue by matching Avatar_Name
@@ -705,6 +707,27 @@ public class GameLoop : MonoBehaviour
 
     }
 
+
+    private void DisplayWinningCard(AnswerCard card)
+    {
+        if (winningCardDisplay == null || card == null)
+        {
+            Debug.LogError("Winning card display not set or card is null");
+            return;
+        }
+
+        winningCardDisplay.TitleText.text = card.title;
+        winningCardDisplay.DescriptionTxt.text = card.description;
+
+        winningCardDisplay.Background.sprite = card.background;
+        winningCardDisplay.ArtworkImage.sprite = card.artwork;
+
+        winningCardDisplay.seriousValueText.text = card.WeightSerious.ToString();
+        winningCardDisplay.scifiValueText.text = card.WeightSciFi.ToString();
+        winningCardDisplay.funnyValueText.text = card.WeightFunny.ToString();
+        winningCardDisplay.chaoticValueText.text = card.WeightChaotic.ToString();
+    }
+
     /// <summary>
     /// Simple method that simply counts to see how many players meet the win codition score. if
     /// greater than 1, a tie is found. Otherwise no tie is possible
@@ -868,26 +891,37 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-        
+            // Enforce maximum hand size first
+            if (player.Hand.Count > 5)
+            {
+                Debug.LogError($"{player.Avatar_Name} has more than 5 cards. Discarding extras.");
+
+                while (player.Hand.Count > 5)
+                {
+                    player.Hand.RemoveAt(player.Hand.Count - 1);
+                }
+            }
+
+            // Refill hands below 5 cards
             while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
-            {                
-                // Draw from the real deck
+            {
                 AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
                 AnswerDeckManager.Instance.deck.RemoveAt(0);
 
                 player.Hand.Add(drawn);
-                switch (player)
-                {
-                    case PsychePlayer humanPlayer:
-                        playerview.UpdateHand(humanPlayer.Hand);
-                        break;
-
-                    case CPUPlayer CPUplayer:
-                        cpuView.UpdateHand(CPUplayer.Hand);
-                        break;
-                }
             }
 
+            // Update the correct view once after enforcing/refilling
+            switch (player)
+            {
+                case PsychePlayer humanPlayer:
+                    playerview.UpdateHand(humanPlayer.Hand);
+                    break;
+
+                case CPUPlayer cpuPlayer:
+                    cpuView.UpdateHand(cpuPlayer.Hand);
+                    break;
+            }
         }
     }
 
