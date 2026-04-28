@@ -71,7 +71,6 @@ public class GameLoop : MonoBehaviour
     //prompt card addition
     public PromptCardDisplay activeCard;
     public PromptDeckManager deckManager;
-    public AnswerCardDisplay winningCardDisplay;
 
     //win conditions
     int NormWin = 6;
@@ -389,14 +388,8 @@ public class GameLoop : MonoBehaviour
 
                             // get the chosen card index from the UIPlayConfirm singleton and log the chosen card and player
                             int chosenIndex = UIPlayConfirm.Instance.ChosenCardIndex;
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/GameLoop.cs
-                            // display the selected winning card
-                            DisplayWinningCard(PlayedCards[chosenIndex]);
-                            TestConsoleLog($"{PlayedCards[chosenIndex].title} at index {chosenIndex} was chosen. {PlayedCards[chosenIndex].PlayedBy} scores a point");
-=======
                             TestConsoleLog($"{cardOpen}{PlayedCards[chosenIndex].title}{genClose} was chosen. {avatarOpen}{PlayedCards[chosenIndex].PlayedBy}{genClose} scores a point");
 
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/GameLoop.cs
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, PlayedCards[chosenIndex].PlayedBy);
                             humanHighlighter.StopFlashing();
@@ -449,16 +442,9 @@ public class GameLoop : MonoBehaviour
                             TestConsoleLog($"{avatarOpen}{CPUPlayer.Avatar_Name}{genClose} is Judge, judging cards.");
 
                             //TestConsoleLog($"{CPUPlayer.Avatar_Name} judges based on {CPUPlayer.Personality[0]}");
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/GameLoop.cs
-                            chosenCard = CPUPlayer.RunStrategy(CPUPlayer.Personality, PlayedCards);  //CPU logic will define this further later
-                            //display the CPU-selected winning card
-                            DisplayWinningCard(chosenCard);
-                            TestConsoleLog($"{chosenCard.title} was chosen. {chosenCard.PlayedBy} scores a point");
-=======
                             chosenCard =  CPUPlayer.RunStrategy(CPUPlayer.Personality,PlayedCards );                //CPU logic will define this further later
                             TestConsoleLog($"{cardOpen}{chosenCard.title}{genClose} was chosen. {avatarOpen}{chosenCard.PlayedBy}{genClose} scores a point");
 
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/GameLoop.cs
                             // Find the player in the queue by matching Avatar_Name
                             FindWinner(playerQueue, chosenCard.PlayedBy);
                             yield return new WaitForSeconds(2F);
@@ -718,29 +704,6 @@ public class GameLoop : MonoBehaviour
 
 
     }
-    /// <summary>
-    /// Displays the winning answer card to the user.
-    /// </summary>
-    /// <param name="chosenCard"></param>
-    //OOOOOooNEWooooooo!!!!
-    private void DisplayWinningCard(AnswerCard chosenCard)
-    {
-        if (chosenCard == null)
-        {
-            Debug.LogWarning("DisplayWinningCard called with null card.");
-            return;
-        }
-
-        if (winningCardDisplay != null)
-        {
-            winningCardDisplay.SetCard(chosenCard);
-            Debug.Log($"Winning card displayed: {chosenCard.title}");
-        }
-        else
-        {
-            Debug.LogWarning("WinningCardDisplay is not assigned in GameLoop.");
-        }
-    }
 
     /// <summary>
     /// Simple method that simply counts to see how many players meet the win codition score. if
@@ -905,48 +868,26 @@ public class GameLoop : MonoBehaviour
     {
         foreach (var player in playerQueue)
         {
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/GameLoop.cs
-            // Enforce maximum hand size of 5 first
-            if (player.Hand.Count > 5)
-            {
-                Debug.LogError($"{player.Avatar_Name} has more than 5 cards. Discarding extras.");
-
-                while (player.Hand.Count > 5)
-                {
-                    // Remove extra cards from the end of the hand
-                    AnswerCard extraCard = player.Hand[player.Hand.Count - 1];
-                    player.Hand.RemoveAt(player.Hand.Count - 1);
-
-                    // Return discarded extra card to the bottom of the deck
-                    AnswerDeckManager.Instance.deck.Add(extraCard);
-                }
-            }
-
-            // Refill hands below 5
-            while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
-            {
-=======
         
             while (player.Hand.Count < 5 && AnswerDeckManager.Instance.deck.Count > 0)
             {                
                 // Draw from the real deck
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/GameLoop.cs
                 AnswerCard drawn = AnswerDeckManager.Instance.deck[0];
                 AnswerDeckManager.Instance.deck.RemoveAt(0);
 
                 player.Hand.Add(drawn);
-
                 switch (player)
                 {
                     case PsychePlayer humanPlayer:
                         playerview.UpdateHand(humanPlayer.Hand);
                         break;
 
-                    case CPUPlayer cpuPlayer:
-                        cpuView.UpdateHand(cpuPlayer.Hand);
+                    case CPUPlayer CPUplayer:
+                        cpuView.UpdateHand(CPUplayer.Hand);
                         break;
                 }
             }
+
         }
     }
 

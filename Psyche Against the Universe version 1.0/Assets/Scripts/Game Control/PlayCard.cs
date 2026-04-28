@@ -56,11 +56,6 @@ public class PlayCard : MonoBehaviour,
     [SerializeField] private TMP_Text funnyText;
     [SerializeField] private TMP_Text chaoticText;
 
-    // Face-down support
-    [SerializeField] private Sprite faceDownSprite;
-    private Sprite originalBackgroundSprite;
-    public bool IsFaceDown { get; private set; }
-
     // The data this card represents
     private AnswerCard cardData;
 
@@ -80,7 +75,7 @@ public class PlayCard : MonoBehaviour,
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             originalSortingOrder = spriteRenderer.sortingOrder;
-
+        
         baseScale = transform.localScale; // store actual prefab scale
 
         // Get or add Rigidbody2D for collision detection
@@ -93,7 +88,7 @@ public class PlayCard : MonoBehaviour,
         rb2d.gravityScale = 0;
         rb2d.linearVelocity = Vector2.zero;
         rb2d.angularVelocity = 0;
-
+        
         Debug.Log("Card " + name + " has Rigidbody2D: " + (rb2d != null));
 
         if (handManager != null)
@@ -117,7 +112,7 @@ public class PlayCard : MonoBehaviour,
         {
             // While dragging, decay velocity when mouse stops moving
             currentMouseVelocity = Vector3.Lerp(currentMouseVelocity, Vector3.zero, Time.deltaTime * 5f);
-
+            
             // Apply sway rotation based on velocity
             ApplySway();
         }
@@ -130,24 +125,13 @@ public class PlayCard : MonoBehaviour,
         if (titleText != null) titleText.text = data.title;
         if (descriptionText != null) descriptionText.text = data.description;
 
-        if (backgroundImage != null)
-        {
-            backgroundImage.sprite = data.background;
-            originalBackgroundSprite = data.background;
-        }
-
-        if (artworkImage != null)
-        {
-            artworkImage.sprite = data.artwork;
-            artworkImage.enabled = true;
-        }
+        if (backgroundImage != null) backgroundImage.sprite = data.background;
+        if (artworkImage != null) artworkImage.sprite = data.artwork;
 
         if (seriousText != null) seriousText.text = data.WeightSerious.ToString();
         if (scifiText != null) scifiText.text = data.WeightSciFi.ToString();
         if (funnyText != null) funnyText.text = data.WeightFunny.ToString();
         if (chaoticText != null) chaoticText.text = data.WeightChaotic.ToString();
-
-        IsFaceDown = false;
     }
 
     // change card sprite
@@ -155,42 +139,6 @@ public class PlayCard : MonoBehaviour,
     {
         if (spriteRenderer != null)
             spriteRenderer.sprite = newSprite;
-    }
-
-    // helper method to show answer cards face down when played
-    public void ShowFaceDown()
-    {
-        if (titleText != null) titleText.text = string.Empty;
-        if (descriptionText != null) descriptionText.text = string.Empty;
-
-        if (seriousText != null) seriousText.text = string.Empty;
-        if (scifiText != null) scifiText.text = string.Empty;
-        if (funnyText != null) funnyText.text = string.Empty;
-        if (chaoticText != null) chaoticText.text = string.Empty;
-
-        if (artworkImage != null)
-            artworkImage.enabled = false;
-
-        if (backgroundImage != null && faceDownSprite != null)
-            backgroundImage.sprite = faceDownSprite;
-
-        IsFaceDown = true;
-    }
-
-    // helper method to restore card face-up visuals if needed
-    public void ShowFaceUp()
-    {
-        if (cardData == null) return;
-
-        SetCard(cardData);
-
-        if (artworkImage != null)
-            artworkImage.enabled = true;
-
-        if (backgroundImage != null)
-            backgroundImage.sprite = originalBackgroundSprite;
-
-        IsFaceDown = false;
     }
 
 
@@ -201,14 +149,10 @@ public class PlayCard : MonoBehaviour,
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x * hoverMultiplier, 0.1f));
         //transform.localPosition += Vector3.up * (0.2f * baseScale.y); //2/16/
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/PlayCard.cs
-
-=======
         if (!isLockedToPlayPile)
             handManager.PlayHandHover();
         AudioManager.Instance.PlaySFX("CardHover");
         this.GetComponent<RectTransform>().SetAsLastSibling();
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/PlayCard.cs
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -216,11 +160,7 @@ public class PlayCard : MonoBehaviour,
         StopAllCoroutines();
         StartCoroutine(ScaleTo(baseScale.x, 0.1f));
         //transform.localPosition -= Vector3.up * (0.2f * baseScale.y); //2/16
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/PlayCard.cs
-
-=======
         handManager.PlayHandShow();
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/PlayCard.cs
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -243,7 +183,7 @@ public class PlayCard : MonoBehaviour,
 
         offset = transform.position - GetMouseWorldPos(eventData);
         previousMousePos = GetMouseWorldPos(eventData);
-
+        
         // Kill any existing sway tween
         if (swayTween != null && swayTween.IsActive())
             swayTween.Kill();
@@ -269,21 +209,12 @@ public class PlayCard : MonoBehaviour,
             {
                 // Lock card in place in the pile
                 transform.position = playPileZone.transform.position;
-<<<<<<< HEAD:Psyche Against the Universe version 1.0/Assets/Scripts/PlayCard.cs
-
-                //handManager.UnregisterCard(this);
-                isLockedToPlayPile = true;
-
-                // played cards appear face down in the pile
-                ShowFaceDown();
-=======
                
                 //handManager.UnregisterCard(this);
                 isLockedToPlayPile = true;
 
                 //dim play pile zone
                 playPileZone.Dim();
->>>>>>> origin/main:Psyche Against the Universe version 1.0/Assets/Scripts/Game Control/PlayCard.cs
 
                 // Show confirm button and pass this card
                 UIPlayConfirm.Instance.ShowButton(this); //, Player, GameLoop);
@@ -354,10 +285,6 @@ public class PlayCard : MonoBehaviour,
         handManager.ReorderCard(this, transform.position.x);
         handManager.ClearDraggingCard();
         targetPosition = handManager.GetCardTargetPosition(this);
-
-        // restore face-up view if the card leaves the play pile
-        ShowFaceUp();
-
         // Reset rotation with DOTween
         if (swayTween != null && swayTween.IsActive())
             swayTween.Kill();
@@ -376,15 +303,15 @@ public class PlayCard : MonoBehaviour,
     {
         // Calculate sway angle based on horizontal velocity
         float swayAmount = Mathf.Clamp(-currentMouseVelocity.x * 0.8f, -maxSwayRotation, maxSwayRotation);
-
+        
         // If velocity is very small, reset to 0
         if (Mathf.Abs(currentMouseVelocity.x) < 0.1f)
             swayAmount = 0f;
-
+        
         // Kill existing tween and create new smooth sway
         if (swayTween != null && swayTween.IsActive())
             swayTween.Kill();
-
+        
         swayTween = transform.DOLocalRotate(new Vector3(0, 0, swayAmount), swaySmoothing);
     }
 
