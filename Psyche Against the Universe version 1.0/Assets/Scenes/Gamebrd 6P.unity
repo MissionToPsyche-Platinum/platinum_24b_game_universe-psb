@@ -12570,14 +12570,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98499d4661d6cbe46b30eb538472a4e9, type: 3}
   - {fileID: 8300000, guid: 0b07a5a5ff62cfd449800648d74c0fb7, type: 3}
   chaoticClips:
-  - {fileID: 8300000, guid: 4edb4a049a2ae30418d7c623760c746c, type: 3}
-  - {fileID: 8300000, guid: 3d5b36a6642ec3a4a9b85af3a25345fc, type: 3}
-  - {fileID: 8300000, guid: aeea0e6069faa234a81a737892835917, type: 3}
-  - {fileID: 8300000, guid: e0c149d88d9b72246be963f3de44bd38, type: 3}
-  - {fileID: 8300000, guid: c64e4d818409edc4bb9aa4bae86464d9, type: 3}
-  - {fileID: 8300000, guid: d1d5db3200077ea4fbe37f87500ce940, type: 3}
-  - {fileID: 8300000, guid: e79675c327658234b8c07b5ce21797d7, type: 3}
-  - {fileID: 8300000, guid: b4c74b98374e1c8489db928a70163c8b, type: 3}
+  - {fileID: 8300000, guid: 69fb5a18bfc41499c989918a26caaba9, type: 3}
+  - {fileID: 8300000, guid: c68a24a4666574351903997004614ad7, type: 3}
+  - {fileID: 8300000, guid: 8d584d1a0fc7840ab84aab844f73967f, type: 3}
+  - {fileID: 8300000, guid: 3869bfa13a66a48038adccb84c17058d, type: 3}
+  - {fileID: 8300000, guid: 5a434679c9ced4265baff5837769e8d8, type: 3}
+  - {fileID: 8300000, guid: 4adccd0858bf04a04a69af299cb55f7d, type: 3}
+  - {fileID: 8300000, guid: 4f2c576f6fbde498786caf5235793f6a, type: 3}
+  - {fileID: 8300000, guid: e16a16fee84eb41c0afe822a2079d987, type: 3}
   sciFiClips:
   - {fileID: 8300000, guid: d2676937a24762f49a3f9b9fb09a74fc, type: 3}
   - {fileID: 8300000, guid: dea2c60e33009494a9f83dfaf842bf57, type: 3}
@@ -14617,10 +14617,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1490570329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: 0}
-  m_SizeDelta: {x: 440, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2060444448
 GameObject:
