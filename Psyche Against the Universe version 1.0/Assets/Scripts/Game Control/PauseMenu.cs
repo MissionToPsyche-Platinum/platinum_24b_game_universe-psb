@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
 
         // play pause sound effect
         AudioManager.Instance.PlaySFX("MenuButton");
-
+        AudioManager.Instance.UpdateMusicVolume("MainTheme", 0.1f);
 
         // hide hand during pause
         handManager.PlayHandHide();
@@ -74,6 +74,7 @@ public class PauseMenu : MonoBehaviour
 
         // play pause sound effect
         AudioManager.Instance.PlaySFX("ResumeButton");
+        AudioManager.Instance.UpdateMusicVolume("MainTheme", 0.3f);
 
         // show hand again after pause
         handManager.ResetOffset();
