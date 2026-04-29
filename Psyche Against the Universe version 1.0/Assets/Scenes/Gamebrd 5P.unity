@@ -11643,14 +11643,14 @@ MonoBehaviour:
   cpu4Highlight: {fileID: 764929373}
   cpu5Highlight: {fileID: 0}
   funnyClips:
-  - {fileID: 8300000, guid: 0fe3faaebee02c1468c4ba8e1b1d3a98, type: 3}
-  - {fileID: 8300000, guid: 50448e241d2f0984495e15463b219a9b, type: 3}
-  - {fileID: 8300000, guid: 8ecec11b601319f4d92b501dc65b9360, type: 3}
-  - {fileID: 8300000, guid: f2098021453225c4ca3419215ef54b3e, type: 3}
-  - {fileID: 8300000, guid: fd5bb9bed5e36c249b00f50050274c51, type: 3}
-  - {fileID: 8300000, guid: 6d146ef4242af4e4b9f3b5621574bd7b, type: 3}
-  - {fileID: 8300000, guid: 717b05011e1edda4a94d63ecd1a1b7d3, type: 3}
-  - {fileID: 8300000, guid: 65069698dfba13e4688e3898b93a5584, type: 3}
+  - {fileID: 8300000, guid: f4e4608e4e2430346af49809547b5364, type: 3}
+  - {fileID: 8300000, guid: 3c3d1d12e244a6446a47c1d15995803a, type: 3}
+  - {fileID: 8300000, guid: 5e6ffb9b43c93ae4da24ba9507857031, type: 3}
+  - {fileID: 8300000, guid: 12ef57f796b57ca4caad7d6fb0c47737, type: 3}
+  - {fileID: 8300000, guid: e5a991f8a2726a744aa2004e29ab138f, type: 3}
+  - {fileID: 8300000, guid: badd8bb55fa714c4880084cd2a1e9404, type: 3}
+  - {fileID: 8300000, guid: c4ff5e6f2878f2949a66c093fdf87f36, type: 3}
+  - {fileID: 8300000, guid: 597b649eac9d4f640afca9765f33e9b4, type: 3}
   seriousClips:
   - {fileID: 8300000, guid: ef9af378ab12fc3419989d707d05ce27, type: 3}
   - {fileID: 8300000, guid: 1f4966615c87cf2408f57c2beea5830d, type: 3}
