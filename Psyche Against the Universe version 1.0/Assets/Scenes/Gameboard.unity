@@ -190,17 +190,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Goal: The goal of the game is to guide the player through the solar system
-    who is on its way to asteroid Psyche-16. However the journey is not as empty
-    as space may seem. The player will encounter unusual scenerios, and the solution
-    they provide may provide them the boost the need to succeed.
+
+    on
+    their way to asteroid Psyche-16. However, the journey is not as empty as space
+    may seem. The player will encounter unusual scenarios, and the solution they
+    invent may provide them the boost the need to succeed.
 
 
-
-    Set-Up: The
-    user (You) selects an avatar to be you on this journey. After which, determine
-    which game mode you want to play. Select the number of CPU players whom you wish
-    to be challenged against. At this time also select any quality of life features
-    you may want to use. When ready to begin your journey, press Start.'
+    Set-Up: The user
+    (you) selects an avatar to be on this journey. After this, determine which game
+    mode you want to play. Select the number of CPU players whom you wish to be challenged
+    against. At this time, also select any quality of life features you may want
+    to use. When ready to begin your journey, press START.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2216,7 +2217,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2239,7 +2240,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2991,7 +2992,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3014,7 +3015,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3187,7 +3188,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 100, y: 40}
+  m_SizeDelta: {x: 115, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &524647935
 MonoBehaviour:
@@ -3210,11 +3211,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_HighlightedColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_PressedColor: {r: 0.6981132, g: 0.38672993, b: 0.14159843, a: 1}
+    m_SelectedColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_DisabledColor: {r: 0.69803923, g: 0.3882353, b: 0.14509805, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3895,7 +3896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Close
+  m_text: CLOSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3905,7 +3906,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3928,7 +3929,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5088,7 +5089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.7381185, b: 0.7381185, a: 1}
+  m_Color: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5403,24 +5404,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gameplay: Each player is dealt 5 answer cards containing a possible solution
-    to a problem.
-
-
-    Each turn the game will present a situation (Prompt Card)
-    that each player will need to provide a solution too. Once player each turn will
-    act as the judge and evaluate which players chosen solution (Answer Card) is
-    the best.
-
-
-    Play rotates to the left of the judge, with each player playing
-    an answer card facedown. Once the judge has chosen a card, the player who played
-    it scores a point.
-
-
-    Afterwards, each player who played a card gets a new
-    answer card for thier hand, and the judge rotates to the next player to the left.
-    A new prompt card is played begining the new round.'
+  m_text: "Gameplay: Each player is dealt 5 answer cards containing a possible solution
+    to a problem. \n\nEach turn the game will present a situation (Prompt Card) that
+    each player will need to provide a solution to. One player each turn will act
+    as the judge and evaluate which player's chosen solution (Answer Card) is the
+    best.\n\nPlay rotates to the left of the judge, with each player playing an answer
+    card facedown. Once the judge has chosen a card, the player who played it scores
+    a point.\n\nAfterwards, each player who played a card gets a new answer card
+    for their hand, and the judge rotates to the next player to the left. A new prompt
+    card is played, beginning the new round."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6651,21 +6643,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Strategy: As the human player, you need to convince the judge that you
-    deserve the best. This means you need to read into the other players personalites
-    to determine how they are going to play. Each Answer card contains a list of
-    4 personality traits.
-
-
-    Through observation, you may be able to determine
-    which type of card personality a player will use, and then play a card of that
-    type to influence them when they are the judge.
-
-
-
-    Do the same when it is
-    your turn as judge to ensure you don''t accidently give another player a winning
-    chance.'
+  m_text: "Strategy: As the human player, you need to convince the judge that you
+    deserve the best. This means you need to read into the other players' personalities
+    to determine how they are going to play. Each Answer Card contains a list of
+    4 personality traits. \n\nThrough observation, you may be able to determine which
+    type of card personality a player will use, and then play a card of that type
+    to influence them when they are the judge.\n\nDo the same when it is your turn
+    as judge to ensure you don't accidently give another player a winning chance."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7824,7 +7808,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7847,7 +7831,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9049,7 +9033,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9490196, g: 0.9490196, b: 0.9490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9072,7 +9056,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10154,13 +10138,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Win: Play continues until a player reaches 7 points (normal) or 3 points
-    (Sudden Win). \n\r\nNormal Mode: At 7 points a winner is declared. Play continues
+  m_text: "Win: Play continues until a player reaches 7 points (Normal) or 3 points
+    (Sudden Win). \n\nNormal Mode: At 7 points a winner is declared. Play continues
     for one additional round to allow the current judge to get an even amount of
-    play rounds. If a tie is not reached, the game ends with the winner declared.
-    In the case of a tie, an additional round is played to break the tie.\r\n\r\nSudden
-    Win: Extra booster rockets have accelerated the journey to Psyche 16. First player
-    to 3 points, regardless of ties or rounds played wins."
+    play rounds. If a tie is not reached, the game ends with the  winner declared.
+    In the case of a tie, an additional round is played to break the tie.\n\nSudden
+    Win: Extra booster rockets have accelerated the journey to Psyche-16. First player
+    to 3 points, regardless of ties or rounds played, wins."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
