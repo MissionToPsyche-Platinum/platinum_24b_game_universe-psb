@@ -21,6 +21,7 @@ public class TitleTransition : MonoBehaviour
     //general method to bring up the main menu screen
     IEnumerator loadMenu()
     {
+        AudioManager.Instance.PlaySFX("TitleScreen", 0.3f); // play sfx during title screen
         yield return new WaitForSeconds(delayTransistion);
         //SceneManager.LoadScene("Main Menu");
         SceneManager.LoadScene("FunFacts1");  //transition to intermission scene

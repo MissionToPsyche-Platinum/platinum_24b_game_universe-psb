@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 158877300}
   - component: {fileID: 158877299}
   - component: {fileID: 158877298}
+  - component: {fileID: 158877301}
   m_Layer: 0
   m_Name: ContinueBtn
   m_TagString: Untagged
@@ -300,6 +301,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158877296}
   m_CullTransparentMesh: 1
+--- !u!114 &158877301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158877296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &205173880
 GameObject:
   m_ObjectHideFlags: 0

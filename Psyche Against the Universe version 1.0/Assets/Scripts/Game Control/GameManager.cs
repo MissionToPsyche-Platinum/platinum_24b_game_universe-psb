@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             HighContrastCkBox = GameObject.Find("HighContrastCkBox")?.GetComponent<Toggle>(); 
             TxttoSpeechCkBx = GameObject.Find("TxttoSpeechCkBx")?.GetComponent<Toggle>();
 
-            
+            AudioManager.Instance.PlayMusic("MainTheme", 0.3f); //play music
             // Add others as needed...
 
             if (BtnStart != null)
@@ -385,7 +385,7 @@ public class GameManager : MonoBehaviour
         enableNormMode = NormalCkbox.isOn;
         enableSuddenWinMode = SDeathCkbox.isOn;
 
-       
+        AudioManager.Instance.UpdateMusicVolume("MainTheme", 0.1f); // turn down music volume for transition
 
         //Determine which gameboard to load based on the value in the # players DD. There are no more than 6 players. 
         if (GamePlayerQueue.Count == 4)

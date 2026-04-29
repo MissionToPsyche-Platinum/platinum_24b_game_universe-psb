@@ -633,7 +633,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1920, y: 0}
-  m_SizeDelta: {x: 250, y: 80}
+  m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &140392154
 MonoBehaviour:
@@ -1320,6 +1320,7 @@ GameObject:
   - component: {fileID: 234720147}
   - component: {fileID: 234720148}
   - component: {fileID: 234720150}
+  - component: {fileID: 234720151}
   m_Layer: 5
   m_Name: NormalCkbox
   m_TagString: Untagged
@@ -1409,6 +1410,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: Normal Game
+--- !u!114 &234720151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234720146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &235392606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,6 +1862,7 @@ GameObject:
   - component: {fileID: 302252029}
   - component: {fileID: 302252028}
   - component: {fileID: 302252031}
+  - component: {fileID: 302252032}
   m_Layer: 5
   m_Name: Tab
   m_TagString: Untagged
@@ -1977,6 +1991,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   toggle: {fileID: 302252028}
   imageToKeepFocusActive: {fileID: 279712865}
+--- !u!114 &302252032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302252026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &315766040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 350, y: 75}
+  m_AnchoredPosition: {x: 350, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &403879145
@@ -3748,6 +3774,7 @@ GameObject:
   - component: {fileID: 626065457}
   - component: {fileID: 626065456}
   - component: {fileID: 626065455}
+  - component: {fileID: 626065459}
   m_Layer: 5
   m_Name: Tab (2)
   m_TagString: Untagged
@@ -3876,6 +3903,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626065453}
   m_CullTransparentMesh: 1
+--- !u!114 &626065459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626065453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &626832991
 GameObject:
   m_ObjectHideFlags: 0
@@ -4124,9 +4163,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1747938262}
   m_HandleRect: {fileID: 1747938261}
   m_Direction: 2
-  m_Value: 0.49999997
-  m_Size: 0.3092665
-  m_NumberOfSteps: 0
+  m_Value: 1
+  m_Size: 0.30926654
+  m_NumberOfSteps: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4181,6 +4220,7 @@ GameObject:
   - component: {fileID: 635118725}
   - component: {fileID: 635118724}
   - component: {fileID: 635118723}
+  - component: {fileID: 635118727}
   m_Layer: 5
   m_Name: Tab (1)
   m_TagString: Untagged
@@ -4309,6 +4349,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635118721}
   m_CullTransparentMesh: 1
+--- !u!114 &635118727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635118721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &637806228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4533,6 +4585,7 @@ GameObject:
   - component: {fileID: 665143804}
   - component: {fileID: 665143803}
   - component: {fileID: 665143802}
+  - component: {fileID: 665143806}
   m_Layer: 5
   m_Name: Tab (3)
   m_TagString: Untagged
@@ -4661,6 +4714,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665143800}
   m_CullTransparentMesh: 1
+--- !u!114 &665143806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665143800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &675000773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4673,6 +4738,7 @@ GameObject:
   - component: {fileID: 675000777}
   - component: {fileID: 675000776}
   - component: {fileID: 675000775}
+  - component: {fileID: 675000778}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -4782,6 +4848,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675000773}
   m_CullTransparentMesh: 1
+--- !u!114 &675000778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675000773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &675733663
 GameObject:
   m_ObjectHideFlags: 0
@@ -6409,7 +6487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manual
+  m_text: Rules
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6974,6 +7052,7 @@ GameObject:
   - component: {fileID: 988273671}
   - component: {fileID: 988273673}
   - component: {fileID: 988273670}
+  - component: {fileID: 988273674}
   m_Layer: 5
   m_Name: BtnStart
   m_TagString: Untagged
@@ -7097,6 +7176,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: "Starts the game. Make sure you add players first \nor the game will not
     start."
+--- !u!114 &988273674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988273668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1006045950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7247,6 +7338,7 @@ GameObject:
   - component: {fileID: 1013318531}
   - component: {fileID: 1013318534}
   - component: {fileID: 1013318535}
+  - component: {fileID: 1013318536}
   m_Layer: 5
   m_Name: BtnAbout
   m_TagString: Untagged
@@ -7396,6 +7488,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: Learn about the project.
+--- !u!114 &1013318536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013318529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1013560152
 GameObject:
   m_ObjectHideFlags: 0
@@ -8025,6 +8129,7 @@ GameObject:
   - component: {fileID: 1123013946}
   - component: {fileID: 1123013949}
   - component: {fileID: 1123013950}
+  - component: {fileID: 1123013951}
   m_Layer: 5
   m_Name: BtnQuit
   m_TagString: Untagged
@@ -8160,6 +8265,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: Leave the game.
+--- !u!114 &1123013951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123013944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1123120801
 GameObject:
   m_ObjectHideFlags: 0
@@ -8400,6 +8517,7 @@ GameObject:
   - component: {fileID: 1196560607}
   - component: {fileID: 1196560610}
   - component: {fileID: 1196560611}
+  - component: {fileID: 1196560612}
   m_Layer: 5
   m_Name: BtnCreate
   m_TagString: Untagged
@@ -8537,6 +8655,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: Click to generate list of CPU Players
+--- !u!114 &1196560612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196560605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1200737549
 GameObject:
   m_ObjectHideFlags: 0
@@ -9080,63 +9210,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222869004}
   m_CullTransparentMesh: 1
---- !u!1001 &1237872805
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00389
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.67071
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128405346719926928, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7250120182952672623, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fe69b37ea71fad4cab7c01dc22cfab7, type: 3}
 --- !u!1 &1263226521
 GameObject:
   m_ObjectHideFlags: 0
@@ -9605,7 +9678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -558.4201}
   m_SizeDelta: {x: 0, y: 1116.8401}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375338275
@@ -9628,21 +9701,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "About Psyche Against the Universe\n\nCreated by: Timothy Burke \nAzaria
-    Mehanovic\nAbdur-Rahman Igram\nRijul Sudesh\n\nA digital version of the \"Psyche
-    Against the Universe\" card game created by Nihah Shah as part of the Psyche
-    Inspire Program.\n\nThe game aims to meet the intent of the original and provides
-    a digital means of learning about the Psyche Mission as well as having fun.\n\nThis
-    work was created in partial fulfillment of Pennsylvania State University Capstone
-    Course \"SWENG 480/481\". The work is a result of the Psyche Student Collaborations
-    component of NASA\u2019s Psyche Mission (https://psyche.ssl.berkeley.edu). \u201CPsyche:
-    A Journey to a Metal World\u201D [Contract number NNM16AA09C] is part of the
-    NASA Discovery Program mission to solar system targets. Trade names and trademarks
-    of ASU and NASA are used in this work for identification only. Their usage does
-    not constitute an official endorsement, either expressed or implied, by Arizona
-    State University or National Aeronautics and Space Administration. The content
-    is solely the responsibility of the authors and does not necessarily represent
-    the official views of ASU or NASA."
+  m_text: "<b>About Psyche Against the Universe</b>\n\nCreated by: Timothy Burke
+    \nAzaria Mehanovic\nAbdur-Rahman Igram\nRijul Sudesh\n\nA digital version of
+    the \"Psyche Against the Universe\" card game created by Nihah Shah as part of
+    the Psyche Inspire Program.\n\nThe game aims to meet the intent of the original
+    and provides a digital means of learning about the Psyche Mission as well as
+    having fun.\n\nThis work was created in partial fulfillment of Pennsylvania State
+    University Capstone Course \"SWENG 480/481\". The work is a result of the Psyche
+    Student Collaborations component of NASA\u2019s Psyche Mission (https://psyche.ssl.berkeley.edu).
+    \u201CPsyche: A Journey to a Metal World\u201D [Contract number NNM16AA09C] is
+    part of the NASA Discovery Program mission to solar system targets. Trade names
+    and trademarks of ASU and NASA are used in this work for identification only.
+    Their usage does not constitute an official endorsement, either expressed or
+    implied, by Arizona State University or National Aeronautics and Space Administration.
+    The content is solely the responsibility of the authors and does not necessarily
+    represent the official views of ASU or NASA."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10005,6 +10078,7 @@ GameObject:
   - component: {fileID: 1416584477}
   - component: {fileID: 1416584478}
   - component: {fileID: 1416584480}
+  - component: {fileID: 1416584481}
   m_Layer: 5
   m_Name: SDeathCkbox
   m_TagString: Untagged
@@ -10094,6 +10168,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: First player to 3 points Wins!!
+--- !u!114 &1416584481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416584476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1430133627
 GameObject:
   m_ObjectHideFlags: 0
@@ -10776,6 +10862,7 @@ GameObject:
   - component: {fileID: 1624385973}
   - component: {fileID: 1624385976}
   - component: {fileID: 1624385977}
+  - component: {fileID: 1624385978}
   m_Layer: 5
   m_Name: BtnManual
   m_TagString: Untagged
@@ -10925,6 +11012,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameAssembly::TooltipTrigger
   message: View the Game Manual and Rules.
+--- !u!114 &1624385978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624385971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1627806125
 GameObject:
   m_ObjectHideFlags: 0
@@ -11417,6 +11516,8 @@ GameObject:
   - component: {fileID: 1711885829}
   - component: {fileID: 1711885828}
   - component: {fileID: 1711885830}
+  - component: {fileID: 1711885832}
+  - component: {fileID: 1711885831}
   m_Layer: 5
   m_Name: ToolTipText
   m_TagString: Untagged
@@ -11440,8 +11541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: -20, y: -20}
+  m_AnchoredPosition: {x: 9.99984, y: -10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1711885828
 MonoBehaviour:
@@ -11473,7 +11574,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11490,12 +11591,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
+  m_fontSize: 22
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 20
-  m_fontSizeMax: 26
+  m_fontSizeMin: 16
+  m_fontSizeMax: 22
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -11562,6 +11663,46 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1711885831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711885826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
+--- !u!114 &1711885832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711885826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 8
+    m_Right: 8
+    m_Top: 8
+    m_Bottom: 8
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1713701213
 GameObject:
   m_ObjectHideFlags: 0
@@ -11730,8 +11871,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 528257217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.34536675}
-  m_AnchorMax: {x: 1, y: 0.6546333}
+  m_AnchorMin: {x: 0, y: 0.6907335}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12435,6 +12576,7 @@ GameObject:
   - component: {fileID: 1928054108}
   - component: {fileID: 1928054107}
   - component: {fileID: 1928054106}
+  - component: {fileID: 1928054110}
   m_Layer: 5
   m_Name: ManCloseButton
   m_TagString: Untagged
@@ -12544,6 +12686,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1928054110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65dca12aaacbcb4e85e45722b6b09fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameAssembly::ButtonHoverSound
 --- !u!1 &1963417452
 GameObject:
   m_ObjectHideFlags: 0
@@ -13154,4 +13308,3 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1019410085}
   - {fileID: 740479834}
-  - {fileID: 1237872805}
