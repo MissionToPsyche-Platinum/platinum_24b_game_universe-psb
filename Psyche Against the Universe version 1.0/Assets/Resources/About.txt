@@ -16,3 +16,11 @@ The work is a result of the Psyche Student Collaborations component of NASA's Ps
 Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement,
 either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. 
 The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.
+
+Assets Provided:
+Music by Joth from opengameart.org/users/joth Used under OFL / CC-BY 3.0
+SFX from https://www.weloveindies.com/ Used under OFL / CC-BY 3.0
+Fonts from https://fonts.google.com/ Used under OFL / CC-BY 3.0
+
+---
+Assets used under their respective licenses. See linked sources for full license details.
