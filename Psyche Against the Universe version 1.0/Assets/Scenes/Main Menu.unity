@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2553,7 +2553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.010000001, y: 0.00674052}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -2.9999084}
+  m_AnchoredPosition: {x: -10, y: -2.999878}
   m_SizeDelta: {x: 20, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &395639471
@@ -4156,8 +4156,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1747938261}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.30926654
-  m_NumberOfSteps: 1
+  m_Size: 0.22005948
+  m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4911,14 +4911,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
+  m_sharedMaterial: {fileID: -1831427813690073302, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4936,13 +4936,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5047,14 +5047,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
+  m_sharedMaterial: {fileID: -1831427813690073302, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -5072,13 +5072,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5915,7 +5915,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -7551,14 +7551,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Win
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
+  m_sharedMaterial: {fileID: -1831427813690073302, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -7576,13 +7576,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9388,14 +9388,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Think
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
+  m_sharedMaterial: {fileID: -1831427813690073302, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -9413,13 +9413,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9661,8 +9661,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -558.4201}
-  m_SizeDelta: {x: 0, y: 1116.8401}
+  m_AnchoredPosition: {x: 0, y: -886.1451}
+  m_SizeDelta: {x: 0, y: 1772.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375338275
 MonoBehaviour:
@@ -9684,21 +9684,26 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>About Psyche Against the Universe</b>\n\nCreated by: \nTimothy Burke
-    \nAzaria Mehanovic\nAbdur-Rahman Igram\nRijul Sudesh\n\nA digital version of
-    the \"Psyche Against the Universe\" card game created by Nidhi Shah as part of
-    the Psyche Inspired Program.\n\nThe game aims to meet the intent of the original
-    and provides a digital means of learning about the Psyche Mission as well as
-    having fun.\n\nThis work was created in partial fulfillment of Pennsylvania State
-    University Capstone Course \"SWENG 480/481\". The work is a result of the Psyche
-    Student Collaborations component of NASA\u2019s Psyche Mission (https://psyche.ssl.berkeley.edu).
-    \u201CPsyche: A Journey to a Metal World\u201D [Contract number NNM16AA09C] is
-    part of the NASA Discovery Program mission to solar system targets. Trade names
-    and trademarks of ASU and NASA are used in this work for identification only.
-    Their usage does not constitute an official endorsement, either expressed or
-    implied, by Arizona State University or National Aeronautics and Space Administration.
-    The content is solely the responsibility of the authors and does not necessarily
-    represent the official views of ASU or NASA."
+  m_text: "<b>About Psyche Against the Universe</b>\r\n\r\nCreated by: \r\nTimothy
+    Burke\r\nAzaria Mehanovic\r\nAbdur-Rahman Igram\r\nRijul Sudesh\r\n\r\nA digital
+    version of the \"Psyche Against the Universe\" card game created by Nihah Shah
+    as part of the Psyche Inspire Program.\r\n\r\nThe game aims to meet the intent
+    of the original and provides a digital means of learning about the Psyche Mission
+    as well as having fun.\r\n\r\nThis work was created in partial fulfillment of
+    Pennsylvania State University Capstone Course \"SWENG 480/481\". \r\nThe work
+    is a result of the Psyche Student Collaborations component of NASA's Psyche Mission
+    (https://psyche.ssl.berkeley.edu).\r\n\"Psyche: A Journey to a Metal World\"
+    [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to
+    solar system targets. \r\nTrade names and trademarks of ASU and NASA are used
+    in this work for identification only. Their usage does not constitute an official
+    endorsement,\r\neither expressed or implied, by Arizona State University or National
+    Aeronautics and Space Administration. \r\nThe content is solely the responsibility
+    of the authors and does not necessarily represent the official views of ASU or
+    NASA.\r\n\r\nAssets Provided:\r\nMusic by Joth from opengameart.org/users/joth
+    Used under OFL / CC-BY 3.0\r\nSFX from https://www.weloveindies.com/ Used under
+    OFL / CC-BY 3.0\r\nFonts from https://fonts.google.com/ Used under OFL / CC-BY
+    3.0\r\n\r\n---\r\nAssets used under their respective licenses. See linked sources
+    for full license details."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11853,7 +11858,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 528257217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.6907335}
+  m_AnchorMin: {x: 0, y: 0.7799405}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -13205,7 +13210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.010000001, y: 0.00674052}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -2.9999084}
+  m_AnchoredPosition: {x: -10, y: -2.999878}
   m_SizeDelta: {x: 20, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2114220181

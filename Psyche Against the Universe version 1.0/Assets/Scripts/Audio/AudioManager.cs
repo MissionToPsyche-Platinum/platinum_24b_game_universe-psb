@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource, sfxSource;
 
     private const float MUSIC_VOLUME = 0.13f;
+    private const float HALF_MUSIC_VOLUME = 0.07f;
     void Awake()    
     {
         if (Instance == null)
@@ -47,7 +48,7 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void UpdateMusicVolume(string name, float volume)
+    public void UpdateMusicVolume(string name)
     {
         Sound s = System.Array.Find(musicSounds, sound => sound.name == name);
         if (s == null)
@@ -56,6 +57,17 @@ public class AudioManager : MonoBehaviour
             return;
         }
         musicSource.volume = MUSIC_VOLUME;
+    }
+
+    public void UpdateMusicVolume(string name, float volume)
+    {
+        Sound s = System.Array.Find(musicSounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound: " + name + " not found!");
+            return;
+        }
+        musicSource.volume = HALF_MUSIC_VOLUME;
     }
 
     public void PauseMusic(string name)
