@@ -11031,14 +11031,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98499d4661d6cbe46b30eb538472a4e9, type: 3}
   - {fileID: 8300000, guid: 0b07a5a5ff62cfd449800648d74c0fb7, type: 3}
   chaoticClips:
-  - {fileID: 8300000, guid: 69fb5a18bfc41499c989918a26caaba9, type: 3}
-  - {fileID: 8300000, guid: c68a24a4666574351903997004614ad7, type: 3}
-  - {fileID: 8300000, guid: 8d584d1a0fc7840ab84aab844f73967f, type: 3}
-  - {fileID: 8300000, guid: 3869bfa13a66a48038adccb84c17058d, type: 3}
-  - {fileID: 8300000, guid: 5a434679c9ced4265baff5837769e8d8, type: 3}
-  - {fileID: 8300000, guid: 4adccd0858bf04a04a69af299cb55f7d, type: 3}
-  - {fileID: 8300000, guid: 4f2c576f6fbde498786caf5235793f6a, type: 3}
-  - {fileID: 8300000, guid: e16a16fee84eb41c0afe822a2079d987, type: 3}
+  - {fileID: 8300000, guid: be44d8c9791a443eb92b4b9b5d6ac5f3, type: 3}
+  - {fileID: 8300000, guid: 9cc46381350a2422eb71c1380e8a5c38, type: 3}
+  - {fileID: 8300000, guid: 272a1ec87533b4b8ba1e47e86a940438, type: 3}
+  - {fileID: 8300000, guid: 97883239b489840a4a60e9a802c0d09c, type: 3}
+  - {fileID: 8300000, guid: 8715d357dabed4ed7af3578ee024916e, type: 3}
+  - {fileID: 8300000, guid: 4d2cced8dc58641ebbb09892864d2191, type: 3}
+  - {fileID: 8300000, guid: 17eac9a06f59c4fa0bc7d315238bf81a, type: 3}
+  - {fileID: 8300000, guid: 2ceee6625fde44d63833a9ad63e111cd, type: 3}
   sciFiClips:
   - {fileID: 8300000, guid: d2676937a24762f49a3f9b9fb09a74fc, type: 3}
   - {fileID: 8300000, guid: dea2c60e33009494a9f83dfaf842bf57, type: 3}
@@ -12860,7 +12860,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466041580}
   m_HandleRect: {fileID: 466041578}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

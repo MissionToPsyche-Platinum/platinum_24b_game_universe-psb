@@ -24,3 +24,9 @@ Fonts from https://fonts.google.com/ Used under OFL / CC-BY 3.0
 
 ---
 Assets used under their respective licenses. See linked sources for full license details.
+
+---
+Background images are covered under CC0 1.0 Public Domain https://creativecommons.org/publicdomain/zero/1.0/. 
+Character images and gameboard assets created by Azaria Mehanovi and Abdur-Rhaman Igram.
+Card Sprites created by Abdur-Rhaman Igram and Rijul Sudesh
+Nasa specific images are fro the NASA Psyche Mission website https://psyche.ssl.berkeley.edu
