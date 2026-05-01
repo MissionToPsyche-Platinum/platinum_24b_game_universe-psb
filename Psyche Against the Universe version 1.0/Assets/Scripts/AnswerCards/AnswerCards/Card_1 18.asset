@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Who needs fuel when you can just bend spacetime? Engage the warp bubble,
     break physics, and hope the universe doesn't notice.
   background: {fileID: 5253651943266011384, guid: fe70d7fd948294a3c9fbb2251f42fbd3, type: 3}
-  artwork: {fileID: 6990105782497991074, guid: c22bd06eae4d6734dab69d9af87acef2, type: 3}
+  artwork: {fileID: -1844920368449725413, guid: 1df5e90a0f27341cf8632979341e0c00, type: 3}
   WeightSerious: 4
   WeightSciFi: 18
   WeightFunny: 15

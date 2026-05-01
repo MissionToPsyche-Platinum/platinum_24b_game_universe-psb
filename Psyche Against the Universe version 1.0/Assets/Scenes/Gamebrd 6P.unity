@@ -2553,7 +2553,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Close
+  m_text: CLOSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 0.99215686, g: 0.99215686, b: 0.99215686, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2586,7 +2586,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2797,7 +2797,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2805,7 +2805,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9843137, b: 0.9843137, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2822,8 +2822,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2863,7 +2863,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &448685313
@@ -2912,7 +2912,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 100, y: 40}
+  m_SizeDelta: {x: 115, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &455326425
 MonoBehaviour:
@@ -2935,11 +2935,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_HighlightedColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_PressedColor: {r: 0.6415094, g: 0.36547533, b: 0.099857606, a: 1}
+    m_SelectedColor: {r: 0.9411765, g: 0.5254902, b: 0.1254902, a: 1}
+    m_DisabledColor: {r: 0.6431373, g: 0.36078432, b: 0.09803922, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4639,17 +4639,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Goal: The goal of the game is to guide the player through the solar system
-    who is on its way to asteroid Psyche-16. However the journey is not as empty
-    as space may seem. The player will encounter unusual scenerios, and the solution
-    they provide may provide them the boost the need to succeed.
+
+    on
+    their way to asteroid Psyche-16. However, the journey is not as empty as space
+    may seem. The player will encounter unusual scenarios, and the solution they
+    invent may provide them the boost the need to succeed.
 
 
-
-    Set-Up: The
-    user (You) selects an avatar to be you on this journey. After which, determine
-    which game mode you want to play. Select the number of CPU players whom you wish
-    to be challenged against. At this time also select any quality of life features
-    you may want to use. When ready to begin your journey, press Start.'
+    Set-Up: The user
+    (you) selects an avatar to be on this journey. After this, determine which game
+    mode you want to play. Select the number of CPU players whom you wish to be challenged
+    against. At this time, also select any quality of life features you may want
+    to use. When ready to begin your journey, press START.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4798,24 +4799,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gameplay: Each player is dealt 5 answer cards containing a possible solution
-    to a problem.
-
-
-    Each turn the game will present a situation (Prompt Card)
-    that each player will need to provide a solution too. Once player each turn will
-    act as the judge and evaluate which players chosen solution (Answer Card) is
-    the best.
-
-
-    Play rotates to the left of the judge, with each player playing
-    an answer card facedown. Once the judge has chosen a card, the player who played
-    it scores a point.
-
-
-    Afterwards, each player who played a card gets a new
-    answer card for thier hand, and the judge rotates to the next player to the left.
-    A new prompt card is played begining the new round.'
+  m_text: "Gameplay: Each player is dealt 5 answer cards containing a possible solution
+    to a problem. \n\nEach turn the game will present a situation (Prompt Card) that
+    each player will need to provide a solution to. One player each turn will act
+    as the judge and evaluate which player's chosen solution (Answer Card) is the
+    best.\n\nPlay rotates to the left of the judge, with each player playing an answer
+    card facedown. Once the judge has chosen a card, the player who played it scores
+    a point.\n\nAfterwards, each player who played a card gets a new answer card
+    for their hand, and the judge rotates to the next player to the left. A new prompt
+    card is played, beginning the new round."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5914,7 +5906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.7381185, b: 0.7381185, a: 1}
+  m_Color: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7175,10 +7167,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.425, g: 0.34283334, b: 0.34, a: 1}
-    m_HighlightedColor: {r: 0.737, g: 0.5945133, b: 0.58959997, a: 1}
-    m_PressedColor: {r: 0.674, g: 0.5436933, b: 0.5392, a: 1}
-    m_SelectedColor: {r: 0.5882353, g: 0.47450984, b: 0.47058827, a: 1}
+    m_NormalColor: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
+    m_HighlightedColor: {r: 0.5357962, g: 0.39529192, b: 0.5943396, a: 1}
+    m_PressedColor: {r: 0.7830189, g: 0.58322185, b: 0.38781595, a: 1}
+    m_SelectedColor: {r: 0.7882353, g: 0.43137255, b: 0.08235294, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -8502,7 +8494,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Think
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8510,7 +8502,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.99215686, g: 0.99215686, b: 0.99215686, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8527,8 +8519,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8568,7 +8560,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1221455184
@@ -9608,10 +9600,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.425, g: 0.34283334, b: 0.34, a: 1}
-    m_HighlightedColor: {r: 0.737, g: 0.5945133, b: 0.58959997, a: 1}
-    m_PressedColor: {r: 0.674, g: 0.5436933, b: 0.5392, a: 1}
-    m_SelectedColor: {r: 0.5882353, g: 0.47450984, b: 0.47058827, a: 1}
+    m_NormalColor: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
+    m_HighlightedColor: {r: 0.51970565, g: 0.4085084, b: 0.5660378, a: 1}
+    m_PressedColor: {r: 0.8301887, g: 0.6064772, b: 0.38768244, a: 1}
+    m_SelectedColor: {r: 0.7882353, g: 0.43137255, b: 0.08235294, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -10958,13 +10950,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Win: Play continues until a player reaches 7 points (normal) or 3 points
-    (Sudden Win). \n\r\nNormal Mode: At 7 points a winner is declared. Play continues
+  m_text: "Win: Play continues until a player reaches 7 points (Normal) or 3 points
+    (Sudden Win). \n\nNormal Mode: At 7 points a winner is declared. Play continues
     for one additional round to allow the current judge to get an even amount of
-    play rounds. If a tie is not reached, the game ends with the winner declared.
-    In the case of a tie, an additional round is played to break the tie.\r\n\r\nSudden
-    Win: Extra booster rockets have accelerated the journey to Psyche 16. First player
-    to 3 points, regardless of ties or rounds played wins."
+    play rounds. If a tie is not reached, the game ends with the  winner declared.
+    In the case of a tie, an additional round is played to break the tie.\n\nSudden
+    Win: Extra booster rockets have accelerated the journey to Psyche-16. First player
+    to 3 points, regardless of ties or rounds played, wins."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11729,10 +11721,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.425, g: 0.34283334, b: 0.34, a: 1}
-    m_HighlightedColor: {r: 0.737, g: 0.5945133, b: 0.58959997, a: 1}
-    m_PressedColor: {r: 0.674, g: 0.5436933, b: 0.5392, a: 1}
-    m_SelectedColor: {r: 0.5882353, g: 0.47450984, b: 0.47058827, a: 1}
+    m_NormalColor: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
+    m_HighlightedColor: {r: 0.51028216, g: 0.3764685, b: 0.5660378, a: 1}
+    m_PressedColor: {r: 0.8207547, g: 0.58784187, b: 0.36004803, a: 1}
+    m_SelectedColor: {r: 0.7882353, g: 0.43137255, b: 0.08235294, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -11865,7 +11857,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -11873,7 +11865,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9843137, b: 0.9843137, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11890,8 +11882,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11931,7 +11923,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1636369093
@@ -12560,14 +12552,14 @@ MonoBehaviour:
   cpu4Highlight: {fileID: 764929372}
   cpu5Highlight: {fileID: 417729032}
   funnyClips:
-  - {fileID: 8300000, guid: 0fe3faaebee02c1468c4ba8e1b1d3a98, type: 3}
-  - {fileID: 8300000, guid: 50448e241d2f0984495e15463b219a9b, type: 3}
-  - {fileID: 8300000, guid: 8ecec11b601319f4d92b501dc65b9360, type: 3}
-  - {fileID: 8300000, guid: f2098021453225c4ca3419215ef54b3e, type: 3}
-  - {fileID: 8300000, guid: fd5bb9bed5e36c249b00f50050274c51, type: 3}
-  - {fileID: 8300000, guid: 6d146ef4242af4e4b9f3b5621574bd7b, type: 3}
-  - {fileID: 8300000, guid: 717b05011e1edda4a94d63ecd1a1b7d3, type: 3}
-  - {fileID: 8300000, guid: 65069698dfba13e4688e3898b93a5584, type: 3}
+  - {fileID: 8300000, guid: f4e4608e4e2430346af49809547b5364, type: 3}
+  - {fileID: 8300000, guid: 3c3d1d12e244a6446a47c1d15995803a, type: 3}
+  - {fileID: 8300000, guid: 5e6ffb9b43c93ae4da24ba9507857031, type: 3}
+  - {fileID: 8300000, guid: 12ef57f796b57ca4caad7d6fb0c47737, type: 3}
+  - {fileID: 8300000, guid: e5a991f8a2726a744aa2004e29ab138f, type: 3}
+  - {fileID: 8300000, guid: badd8bb55fa714c4880084cd2a1e9404, type: 3}
+  - {fileID: 8300000, guid: c4ff5e6f2878f2949a66c093fdf87f36, type: 3}
+  - {fileID: 8300000, guid: 597b649eac9d4f640afca9765f33e9b4, type: 3}
   seriousClips:
   - {fileID: 8300000, guid: ef9af378ab12fc3419989d707d05ce27, type: 3}
   - {fileID: 8300000, guid: 1f4966615c87cf2408f57c2beea5830d, type: 3}
@@ -12578,14 +12570,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98499d4661d6cbe46b30eb538472a4e9, type: 3}
   - {fileID: 8300000, guid: 0b07a5a5ff62cfd449800648d74c0fb7, type: 3}
   chaoticClips:
-  - {fileID: 8300000, guid: 4edb4a049a2ae30418d7c623760c746c, type: 3}
-  - {fileID: 8300000, guid: 3d5b36a6642ec3a4a9b85af3a25345fc, type: 3}
-  - {fileID: 8300000, guid: aeea0e6069faa234a81a737892835917, type: 3}
-  - {fileID: 8300000, guid: e0c149d88d9b72246be963f3de44bd38, type: 3}
-  - {fileID: 8300000, guid: c64e4d818409edc4bb9aa4bae86464d9, type: 3}
-  - {fileID: 8300000, guid: d1d5db3200077ea4fbe37f87500ce940, type: 3}
-  - {fileID: 8300000, guid: e79675c327658234b8c07b5ce21797d7, type: 3}
-  - {fileID: 8300000, guid: b4c74b98374e1c8489db928a70163c8b, type: 3}
+  - {fileID: 8300000, guid: 69fb5a18bfc41499c989918a26caaba9, type: 3}
+  - {fileID: 8300000, guid: c68a24a4666574351903997004614ad7, type: 3}
+  - {fileID: 8300000, guid: 8d584d1a0fc7840ab84aab844f73967f, type: 3}
+  - {fileID: 8300000, guid: 3869bfa13a66a48038adccb84c17058d, type: 3}
+  - {fileID: 8300000, guid: 5a434679c9ced4265baff5837769e8d8, type: 3}
+  - {fileID: 8300000, guid: 4adccd0858bf04a04a69af299cb55f7d, type: 3}
+  - {fileID: 8300000, guid: 4f2c576f6fbde498786caf5235793f6a, type: 3}
+  - {fileID: 8300000, guid: e16a16fee84eb41c0afe822a2079d987, type: 3}
   sciFiClips:
   - {fileID: 8300000, guid: d2676937a24762f49a3f9b9fb09a74fc, type: 3}
   - {fileID: 8300000, guid: dea2c60e33009494a9f83dfaf842bf57, type: 3}
@@ -12980,21 +12972,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Strategy: As the human player, you need to convince the judge that you
-    deserve the best. This means you need to read into the other players personalites
-    to determine how they are going to play. Each Answer card contains a list of
-    4 personality traits.
-
-
-    Through observation, you may be able to determine
-    which type of card personality a player will use, and then play a card of that
-    type to influence them when they are the judge.
-
-
-
-    Do the same when it is
-    your turn as judge to ensure you don''t accidently give another player a winning
-    chance.'
+  m_text: "Strategy: As the human player, you need to convince the judge that you
+    deserve the best. This means you need to read into the other players' personalities
+    to determine how they are going to play. Each Answer Card contains a list of
+    4 personality traits. \n\nThrough observation, you may be able to determine which
+    type of card personality a player will use, and then play a card of that type
+    to influence them when they are the judge.\n\nDo the same when it is your turn
+    as judge to ensure you don't accidently give another player a winning chance."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13440,10 +13424,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.425, g: 0.34283334, b: 0.34, a: 1}
-    m_HighlightedColor: {r: 0.737, g: 0.5945133, b: 0.58959997, a: 1}
-    m_PressedColor: {r: 0.674, g: 0.5436933, b: 0.5392, a: 1}
-    m_SelectedColor: {r: 0.5882353, g: 0.47450984, b: 0.47058827, a: 1}
+    m_NormalColor: {r: 0.32941177, g: 0.23529412, b: 0.36862746, a: 1}
+    m_HighlightedColor: {r: 0.5357962, g: 0.39529192, b: 0.5943396, a: 1}
+    m_PressedColor: {r: 0.8018868, g: 0.5972754, b: 0.39716092, a: 1}
+    m_SelectedColor: {r: 0.7882353, g: 0.43137255, b: 0.08235294, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -15212,7 +15196,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Win
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cb8b185ba8d266c49b8dd138190fb2a0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -15220,7 +15204,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -15237,8 +15221,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15278,7 +15262,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2145588018

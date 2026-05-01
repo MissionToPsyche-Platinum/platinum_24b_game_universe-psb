@@ -16,7 +16,7 @@ public static class PersonalityParseextention
         if (v.Contains("scifi")) return PersonalityParse.SciFi;
         if (v.Contains("sci")) return PersonalityParse.SciFi;
         if (v.Contains("fun")) return PersonalityParse.Funny;
-        if(v.Contains("chaot") || v.Contains("chaos")) return PersonalityParse.Chaotic;
+        if (v.Contains("chao")) return PersonalityParse.Chaotic;
         if (v.Contains("seri")) return PersonalityParse.Serious;
         return fallback;
     }

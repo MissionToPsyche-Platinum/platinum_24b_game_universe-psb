@@ -163,7 +163,7 @@ public class GameLoop : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.Instance.UpdateMusicVolume("MainTheme", 0.3f); // ensure music volume is set for game
+        AudioManager.Instance.UpdateMusicVolume("MainTheme"); // ensure music volume is set for game
 
         //pull manager objects
         Queue <IPlayerCommon> playerQueue = gm.GetPlayerQueue();
