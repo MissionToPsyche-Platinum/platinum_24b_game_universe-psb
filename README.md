@@ -40,6 +40,18 @@ Section 1.0.2: Development Information
 Section 1.1: Version Information
 
            Current build of the program is 2.0.
+           -LATEST UPDATES-
+             -Improved Audio added. Each player personality type is voiced by a different person.
+             -background music
+             -tool tip resolution has been standardized
+             -Main menu and game menu graphical improvements
+             -About screen and game rules updated and grammatical improvements applied
+             -General color scheme adjusted to provide maximum contrast 
+             -Removed minor personality bugs from the system 
+             -improved card transparencies and added improved sprites
+             -General text display improvements to the human interface
+             -sound effects added to various features
+             -start button locks out on successful transition to gamestate. This prevents reloads
 
 Section 1.2: Disclaimer
 
@@ -49,14 +61,16 @@ Section 1.2: Disclaimer
             Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, 
             either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. 
             The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.
+            
+Section 1.3: Screen Resolution Information
+
+          The new version of Unity WebGl will automatically adjust game resolution to fit your screen. This can vary based on the brower used. 
+          The game is built using standard 16:9 resolution families and is optimized at 1366X768.
+          For some browser and specifically macOS, full screen will provide the best view for players.
 
 Section 2.0: Current Bugs
 
             As of 4/8/26 the current bugs exist in the system but do not critically impact gameplay:
-            1) Random Card name displayed on human-machine interface when human player judges.
-                      The card played is random and is not counted during the game. This is due to a redundant call while the game loop 
-                      is transistion and changing state. The properly selected card is displayed immediately in the translator window.
-
             2) Double deal for human player. 
                       The human player is given two cards each turn vice one to replace the played card. All other cards not played by
                       the human player are preserved. This is suspected to be a redundant call and related to the random Card name bug described above.
