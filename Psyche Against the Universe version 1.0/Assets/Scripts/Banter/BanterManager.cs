@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-///
-/// Loads banter lines from Resources and serves them by personality/topic.
-/// 
-/// Expected files in Assets/Resources/:
-///   "Serious_Banter.txt"
-///   "SciFi_Banter.txt"
-///   "Funny_Banter.txt"
-///   "Chaotic_Banter.txt"
-///
+
 public class BanterManager
 {
     private static BanterManager _instance;

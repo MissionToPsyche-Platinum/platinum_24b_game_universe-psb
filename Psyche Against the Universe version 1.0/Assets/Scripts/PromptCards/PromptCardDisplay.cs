@@ -19,7 +19,7 @@ public class PromptCardDisplay : MonoBehaviour
     //Load a prompt line from the file into the scriptable object
     void Start()
     {
-       // PromptLoader.LoadPromptText(cardData);
+       
 
         // Make sure the card starts on the front
         PromptCard.SetActive(true);
@@ -38,8 +38,7 @@ public class PromptCardDisplay : MonoBehaviour
         PromptText.text = cardData.promptText;
         StartCoroutine(FlipCard());
 
-        //PromptCard.SetActive (false);           //flip the card
-        //PromptCard_Flip.SetActive (true);
+        
     }
 
     //Method to reset or "flip" back to the front at end of turn
@@ -84,10 +83,6 @@ public class PromptCardDisplay : MonoBehaviour
         //reset the cards rotation so it isnt backwards
         transform.localRotation = Quaternion.Euler(0f,0f,0f);
     }
-    /// <summary>
-    /// Creates a smoother card transition back to the front. This simulates the 
-    /// action that a deck of cards is being flipped.
-    /// </summary>
-    /// <returns></returns>
+    
     
 }

@@ -13,8 +13,7 @@ public class AnswerCards : MonoBehaviour
     #region Fields and Properties
 
     [field: SerializeField] public ScriptableCard CardData {get; private set;}
-    //[SerializeField] private ScriptableCard _cardData;
-    //public ScriptableCard CardData => _cardData;
+    
 
     #endregion
 

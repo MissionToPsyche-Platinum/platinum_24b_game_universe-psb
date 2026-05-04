@@ -10,7 +10,6 @@ using UnityEngine;
  */
 public class PsychePlayer : AbsPsyPlayer
 {
-    //public List<AnswerCard> Hand { get; set; } = new List<AnswerCard>();
 
     public override void PlayCard(GameLoop gameLoop, int Index)
     {
@@ -24,7 +23,7 @@ public class PsychePlayer : AbsPsyPlayer
          }
         
         var cardToPlay = Hand[Index];
-        //gameLoop.TestConsoleLog($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
+        
         if (!gameLoop.isHumanJudge)
             gameLoop.TestConsoleLog($"Card Played <font=\"Audiowide-Regular SDF\"><color=#543B5E>{cardToPlay.title}</color></font>");
         // Debug.Log($"Card Played {cardToPlay.title} | serious {cardToPlay.WeightSerious}, sci {cardToPlay.WeightSciFi}, fun {cardToPlay.WeightFunny}, chao {cardToPlay.WeightChaotic}");
@@ -36,23 +35,7 @@ public class PsychePlayer : AbsPsyPlayer
 
         // remove the selected card from hand
         Hand.RemoveAt(Index);
-
-// unremark for auto choice// 
-       // if (Hand.Count > 0)
-        //{
-        //    Debug.Log("Card Played " + Hand[0].title + "serious " + Hand[0].WeightSerious + "Sci " + Hand[0].WeightSciFi + "fun " + Hand[0].WeightFunny +
-        //        "chao " + Hand[0].WeightChaotic);
-
-        //    Hand[0].PlayedBy = this.Avatar_Name;
-
-            //add to the played cards list in the gameloop
-       //     gameLoop.RegisterPlayedCard(Hand[0]);
-
-        //    Hand.RemoveAt(0); //top card is sufficent
-       // }
-        
+  
     }
-    /*
-     * Additional methods will go here, or the previous methods can be overridden
-     */
+    
 }

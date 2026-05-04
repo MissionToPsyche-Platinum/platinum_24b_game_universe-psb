@@ -75,10 +75,6 @@ public class UIPlayConfirm : MonoBehaviour
             }
 
 
-            /*
-            TO DO: Add additional logic for playing card for the round.
-            */
-
             // Destroy the locked card
             Destroy(lockedCard.gameObject);
             lockedCard = null;

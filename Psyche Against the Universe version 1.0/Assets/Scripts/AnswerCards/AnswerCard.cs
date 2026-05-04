@@ -16,7 +16,7 @@ public class AnswerCard {
     public Sprite artwork;     //any card specific artwork
 
     //public string personality;
-    //public int weight;    //we can remove this since we have the trait scores
+    
 
     public PersonalityParse PersonalityTag; // For Answer cards; Scenario can ignore
 
@@ -77,5 +77,3 @@ public class AnswerCard {
 }
 
 
-// NOTE: This script is most likely going to be scrapped, I've replaced it
-// But I didn't delete yet since a few other scripts reference this

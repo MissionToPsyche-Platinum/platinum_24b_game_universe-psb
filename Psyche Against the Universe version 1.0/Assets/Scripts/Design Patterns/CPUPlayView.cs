@@ -12,19 +12,10 @@ using static BanterManager;
  */
 public class CPUPlayView : MonoBehaviour
 {
-    //audio support
-    //public AudioClip[] funnyClips;
-    //public AudioClip[] seriousClips;
-    //public AudioClip[] chaoticClips;
-    //public AudioClip[] sciFiClips;
-
-    //public AudioSource audioSource;
-
+    
     public void UpdateScore(int score)
     {
-        
-
-        
+         
     }
     public void UpdateHand(List<AnswerCard> cards)
     {
@@ -53,25 +44,5 @@ public class CPUPlayView : MonoBehaviour
 
         return result;
     }
-
-    
-    
-
-
-    /*  public string PlayBanter(CPUPlayer cpuplayer)
-      {
-          //access the first personality. This is the CPU players dominant personality type
-          string banter = cpuplayer.Personality[0];
-          Debug.Log("CPU personality is" + banter);
-
-          //integrating the banter manager into the CPU view
-          PersonalityParse personality = PersonalityParseextention.FromString(banter);
-
-          string banterline = BanterManager.Instance.GetBanterLine(personality);
-
-          Debug.Log(banterline);
-          return banterline;
-      }
-  */
 
 }

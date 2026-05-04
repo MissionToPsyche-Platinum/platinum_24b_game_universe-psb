@@ -6,14 +6,12 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using TMPro;
-
 using Unity.Collections;
 using Unity.VisualScripting;
-//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static BanterManager;
-//using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class GameLoop : MonoBehaviour
 {
@@ -550,7 +548,6 @@ public class GameLoop : MonoBehaviour
                 
             }
            
-
         }
 
         //Debug.Log("End protoloop test");
@@ -697,7 +694,7 @@ public class GameLoop : MonoBehaviour
 
         if (winner != null)
         {
-            TestConsoleLog($"Winner is {fontOpen}{winner.Avatar_Name}{fontClose} with {highestScore} points!");
+            TestConsoleLog($"Winner is  {fontOpen}{winner.Avatar_Name}{fontClose} with {highestScore} points!");
         }
         else
         {
@@ -791,13 +788,13 @@ public class GameLoop : MonoBehaviour
                         {
                             if (sudWinModeset)
                             {
-                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score and won sudden win mode");
+                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + " has winning score and won sudden win mode");
                                 isFinalRound = true;
                                 break;
                             }
                             isFinalRound = true;
                             Debug.Log(isFinalRound);
-                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score, Final round flag is set");
+                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + " has winning score, Final round flag is set");
                         }
 
                     break;
@@ -815,13 +812,13 @@ public class GameLoop : MonoBehaviour
                         {
                             if (sudWinModeset)
                             {
-                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score and won sudden win mode");
+                                TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + " has winning score and won sudden win mode");
                                 isFinalRound = true;
                                 break;
                             }
                             isFinalRound = true;
                             Debug.Log(isFinalRound);
-                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + "has winning score, Final round flag is set");
+                            TestConsoleLog($"{avatarOpen}{player.Avatar_Name}{genClose}" + " has winning score, Final round flag is set");
                         }
                     break;
             }
